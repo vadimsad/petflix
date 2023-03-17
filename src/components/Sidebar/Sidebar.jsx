@@ -12,7 +12,7 @@ const Sidebar = () => {
 		<aside
 			className={`${
 				showSidebar ? 'xl:w-[20rem] lg:w-[16rem] w-[13rem]' : 'w-0'
-			} md:relative fixed h-full rounded-tr-[20px] bg-dark dark:bg-light text-light dark:text-dark transition-colors transition-[width]`}
+			} md:relative fixed h-full rounded-tr-[20px] bg-dark dark:bg-light text-light dark:text-dark transition-[width]`}
 		>
 			<div
 				className={`sidebar-content overflow-hidden ${
