@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	height: 100vh;
+	font-family: 'Source Sans Pro';
+	color: #0d1b2a;
+}
+
+#root {
+	height: 100%;
+}
