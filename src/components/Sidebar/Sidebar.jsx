@@ -1,8 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
-	const [showSidebar, setShowSidebar] = useState(false);
+	const [darkTheme, setDarkTheme] = useState(false);
+
+	useEffect(() => {
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			setDarkTheme(true);
+		} else {
+			setDarkTheme(false);
+		}
+	}, []);
+
+	useEffect(() => {
+		if (darkTheme) {
+			document.documentElement.classList.add('dark');
+		} else {
+			document.documentElement.classList.remove('dark');
+		}
+	}, [darkTheme]);
+
+	function toggleDarkTheme() {
+		setDarkTheme(() => !darkTheme);
+	}
+
+	const [showSidebar, setShowSidebar] = useState(true);
 
 	const onShowSidebar = () => {
 		setShowSidebar(() => !showSidebar);
@@ -19,6 +41,13 @@ const Sidebar = () => {
 					showSidebar ? 'p-5' : 'p-0'
 				} transition-[padding]`}
 			>
+				<button
+					onClick={toggleDarkTheme}
+					tabIndex={`${showSidebar ? '' : '-1'}`}
+					type='button'
+				>
+					Toggle theme
+				</button>
 				<ul>
 					<li>Menu 1</li>
 					<li>Menu 2</li>
