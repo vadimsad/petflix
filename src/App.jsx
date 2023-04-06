@@ -5,9 +5,9 @@ import Sidebar from './components/Sidebar/Sidebar';
 
 const App = () => {
 	return (
-		<div className='wrapper flex flex-row h-full'>
+		<div className='wrapper min-h-full flex flex-row'>
 			<Sidebar />
-			<div className='content-wrapper flex flex-col flex-1 bg-light dark:bg-dark transition-colors'>
+			<div className='xl:pl-[20rem] md:pl-[15rem] pl-0 flex flex-col flex-1 bg-light dark:bg-dark transition-colors'>
 				<Header />
 				<Main />
 				<Footer />

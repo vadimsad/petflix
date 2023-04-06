@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	height: 100%;
+	/* defer to OS preference */
+	color-scheme: dark light;
+	&.dark {
+		color-scheme: dark;
+	}
+	&:not(.dark) {
+		color-scheme: light;
+	}
+}
+
+body {
+	height: 100%;
+	font-family: 'Source Sans Pro';
+	color: #0d1b2a;
+}
+
+#root {
+	height: 100%;
+}
+
+// html.dark body {
+// 	--scrollbarBG: #dceaf0;
+// 	--thumbBG: #112439;
+// }
+
+// html.dark aside {
+// 	--scrollbarBG: #112439;
+// 	--thumbBG: #dceaf0;
+// }
+
+.scroll-container {
+	--scrollbarBG: #112439;
+	--thumbBG: #dceaf0;
+}
+
+html.dark .scroll-container {
+	--scrollbarBG: #dceaf0;
+	--thumbBG: #112439;
+}
+
+// @media (prefers-color-scheme: dark) {
+// 	.scroll-container {
+// 		--scrollbarBG: #dceaf0;
+// 		--thumbBG: #112439;
+// 	}
+
+// 	html.dark .scroll-container {
+// 		--scrollbarBG: #112439;
+// 		--thumbBG: #dceaf0;
+// 	}
+// }
+
+@media (pointer: fine) {
+	.scroll-container {
+		scrollbar-width: thin;
+		scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+		&::-webkit-scrollbar {
+			width: 9px;
+		}
+		&::-webkit-scrollbar-track {
+			background: var(--scrollbarBG);
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--thumbBG);
+			border-radius: 6px;
+			border: 2px solid var(--scrollbarBG);
+		}
+	}
+}
+
+// body {
+// 	--scrollbarBG: #112439;
+// 	--thumbBG: #dceaf0;
+
+// 	scrollbar-width: thin;
+// 	scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+// 	&::-webkit-scrollbar {
+// 		width: 9px;
+// 	}
+// 	&::-webkit-scrollbar-track {
+// 		background: var(--scrollbarBG);
+// 	}
+// 	&::-webkit-scrollbar-thumb {
+// 		background-color: var(--thumbBG);
+// 		border-radius: 6px;
+// 		border: 2px solid var(--scrollbarBG);
+// 	}
+// }
+
+// aside {
+// 	--scrollbarBG: #dceaf0;
+// 	--thumbBG: #112439;
+
+// 	&::-webkit-scrollbar {
+// 		width: 9px;
+// 	}
+// 	&::-webkit-scrollbar-track {
+// 		background: var(--scrollbarBG);
+// 	}
+// 	&::-webkit-scrollbar-thumb {
+// 		background-color: var(--thumbBG);
+// 		border-radius: 6px;
+// 		border: 2px solid var(--scrollbarBG);
+// 	}
+// }
