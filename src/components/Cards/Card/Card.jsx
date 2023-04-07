@@ -11,8 +11,8 @@ const Card = ({ imagesrc, alt, name, rating, year, genres }) => {
 						alt={alt}
 						className='w-full h-full absolute inset-0'
 					/>
-					<div className='absolute bg-lightTransparent dark:bg-darkTransparent -translate-x-1/2 w-full h-[30%] left-1/2 -bottom-[30%] opacity-0 p-2 group-hover:bottom-0 group-hover:opacity-100 transition-[bottom, opacity] duration-300'>
-						<div className='font-serif flex justify-between'>
+					<div className='absolute bg-lightTransparent dark:bg-darkTransparent -translate-x-1/2 w-full lg:h-[30%] h-[40%] left-1/2 -bottom-[30%] opacity-0 lg:p-2 py-1 px-2 group-hover:bottom-0 group-hover:opacity-100 transition-[bottom, opacity] duration-300'>
+						<div className='font-serif lg:text-sm text-xs flex justify-between'>
 							<div className='flex'>
 								<div className='w-[16px] h-[16px] self-center'>
 									<RatingStar fill='#FFDC74' />
@@ -21,7 +21,7 @@ const Card = ({ imagesrc, alt, name, rating, year, genres }) => {
 							</div>
 							<span>{year}</span>
 						</div>
-						<div className='font-serif text-sm'>
+						<div className='font-serif lg:text-sm text-xs'>
 							<span>
 								{genres.map((genre, index) =>
 									index + 1 === genres.length ? genre.genre : genre.genre + ', '
@@ -30,7 +30,7 @@ const Card = ({ imagesrc, alt, name, rating, year, genres }) => {
 						</div>
 					</div>
 				</div>
-				<figcaption className='mt-auto font-serif whitespace-nowrap text-ellipsis overflow-hidden'>
+				<figcaption className='lg:text-base text-xs mt-auto whitespace-nowrap text-ellipsis overflow-hidden'>
 					{name}
 				</figcaption>
 			</figure>

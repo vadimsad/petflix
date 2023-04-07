@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
 
 import useDidMountEffect from '../hooks/useDidMountEffect/useDidMountEffect';
 
@@ -7,10 +9,16 @@ import Card from '../components/Cards/Card/Card';
 import MainCardLoader from '../components/Cards/MainCard/MainCardLoader';
 import CardLoader from '../components/Cards/Card/CardLoader';
 
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+
 const HEADERS = {
 	'X-API-KEY': '290a29e5-6a38-41ae-a8bf-f1708456187d',
 	'Content-Type': 'application/json',
 };
+
+const minorFilmsQuantity = 13;
 
 const Home = () => {
 	const [minorFilms, setMinorFilms] = useState([]);
@@ -32,7 +40,7 @@ const Home = () => {
 			.then((res) => res.json())
 			.then((json) => {
 				let mainFilm = json.films.slice(0, 1)[0];
-				let minorFilms = json.films.slice(1, 6);
+				let minorFilms = json.films.slice(1, minorFilmsQuantity + 1);
 
 				setMainFilmId(mainFilm.filmId);
 				setMinorFilms(minorFilms);
@@ -75,7 +83,7 @@ const Home = () => {
 					<MainCardLoader />
 				</div>
 			) : (
-				<div className='h-[400px] w-full relative mb-[20px] rounded-[50px] overflow-hidden pb-[40%]'>
+				<div className='lg:h-[400px] h-[360px] w-full relative mb-[20px] lg:rounded-[50px] rounded-[30px] overflow-hidden pb-[40%]'>
 					<MainCard
 						name={mainFilmName}
 						imagesrc={mainFilmImage}
@@ -84,20 +92,32 @@ const Home = () => {
 					/>
 				</div>
 			)}
-			<div className='grid grid-cols-5 grid-rows-1 gap-[15px]'>
-				{isLoading
-					? [...Array(5)].map((_, index) => <CardLoader key={index} />)
-					: minorFilms.map((film, index) => (
-							<Card
-								key={index}
-								name={film.nameRu}
-								imagesrc={film.posterUrl}
-								rating={film.rating}
-								year={film.year}
-								genres={film.genres}
-								alt='Постер'
-							/>
-					  ))}
+			<div className=''>
+				{isLoading ? (
+					[...Array(5)].map((_, index) => <CardLoader key={index} />)
+				) : (
+					<Swiper
+						spaceBetween={15}
+						slidesPerView={5}
+						slidesPerGroup={4}
+						modules={[Navigation]}
+						navigation={true}
+					>
+						{minorFilms.map((film, index) => (
+							<SwiperSlide key={index}>
+								<Card
+									key={index}
+									name={film.nameRu}
+									imagesrc={film.posterUrl}
+									rating={film.rating}
+									year={film.year}
+									genres={film.genres}
+									alt='Постер'
+								/>
+							</SwiperSlide>
+						))}
+					</Swiper>
+				)}
 			</div>
 		</div>
 	);

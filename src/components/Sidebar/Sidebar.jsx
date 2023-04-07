@@ -10,7 +10,6 @@ const Sidebar = () => {
 
 	const [darkTheme, setDarkTheme] = useState(false);
 	const [isShown, setIsShown] = useState(true);
-	console.log(isTablet);
 
 	useEffect(() => {
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -38,9 +37,9 @@ const Sidebar = () => {
 
 	return (
 		<aside
-			className={`${isTouchscreen && 'rounded-tr-[15px]'} ${
-				isShown ? '' : '-left-full'
-			} scroll-container xl:w-[20rem] w-[15rem] fixed inset-0 z-10 inset-0 right-auto overflow-y-auto bg-dark dark:bg-light text-light dark:text-dark transition-[left]`}
+			className={`${isTouchscreen ? 'rounded-tr-[15px]' : ''}${
+				isShown ? '' : ' -left-full'
+			} scroll-container xl:w-[20rem] w-[15rem] fixed inset-0 z-20 inset-0 right-auto overflow-y-auto bg-dark dark:bg-light text-light dark:text-dark transition-[left]`}
 		>
 			<div className={`sidebar-content p-5`}>
 				<button onClick={toggleDarkTheme} type='button'>

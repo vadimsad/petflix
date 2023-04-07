@@ -24,16 +24,6 @@ body {
 	height: 100%;
 }
 
-// html.dark body {
-// 	--scrollbarBG: #dceaf0;
-// 	--thumbBG: #112439;
-// }
-
-// html.dark aside {
-// 	--scrollbarBG: #112439;
-// 	--thumbBG: #dceaf0;
-// }
-
 .scroll-container {
 	--scrollbarBG: #112439;
 	--thumbBG: #dceaf0;
@@ -43,18 +33,6 @@ html.dark .scroll-container {
 	--scrollbarBG: #dceaf0;
 	--thumbBG: #112439;
 }
-
-// @media (prefers-color-scheme: dark) {
-// 	.scroll-container {
-// 		--scrollbarBG: #dceaf0;
-// 		--thumbBG: #112439;
-// 	}
-
-// 	html.dark .scroll-container {
-// 		--scrollbarBG: #112439;
-// 		--thumbBG: #dceaf0;
-// 	}
-// }
 
 @media (pointer: fine) {
 	.scroll-container {
@@ -74,38 +52,35 @@ html.dark .scroll-container {
 	}
 }
 
-// body {
-// 	--scrollbarBG: #112439;
-// 	--thumbBG: #dceaf0;
+html.dark .swiper {
+	--swiper-navigation-color: #dceaf0;
+	--navigation-bg-color: rgba(17, 36, 57, 0.8);
+}
 
-// 	scrollbar-width: thin;
-// 	scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-// 	&::-webkit-scrollbar {
-// 		width: 9px;
-// 	}
-// 	&::-webkit-scrollbar-track {
-// 		background: var(--scrollbarBG);
-// 	}
-// 	&::-webkit-scrollbar-thumb {
-// 		background-color: var(--thumbBG);
-// 		border-radius: 6px;
-// 		border: 2px solid var(--scrollbarBG);
-// 	}
-// }
-
-// aside {
-// 	--scrollbarBG: #dceaf0;
-// 	--thumbBG: #112439;
-
-// 	&::-webkit-scrollbar {
-// 		width: 9px;
-// 	}
-// 	&::-webkit-scrollbar-track {
-// 		background: var(--scrollbarBG);
-// 	}
-// 	&::-webkit-scrollbar-thumb {
-// 		background-color: var(--thumbBG);
-// 		border-radius: 6px;
-// 		border: 2px solid var(--scrollbarBG);
-// 	}
-// }
+.swiper {
+	--swiper-navigation-size: 35px;
+	--swiper-navigation-top-offset: 50%;
+	--swiper-navigation-sides-offset: 10px;
+	--swiper-navigation-color: #112439;
+	--navigation-bg-color: rgba(220, 234, 240, 0.8);
+	.swiper-button-next,
+	.swiper-button-prev {
+		padding: 25px 20px;
+		border-radius: 6px;
+		background-color: var(--navigation-bg-color);
+		transition: opacity 0.3s ease-in-out, transform 0.15s ease-in-out;
+		&::after {
+			transform: scale(0.6);
+		}
+		&:hover {
+			transform: scale(1.15);
+		}
+		@media (max-width: 1024px) {
+			padding: 18px 14px;
+		}
+	}
+	.swiper-button-next.swiper-button-disabled,
+	.swiper-button-prev.swiper-button-disabled {
+		opacity: 0;
+	}
+}
