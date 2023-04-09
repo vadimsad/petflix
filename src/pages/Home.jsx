@@ -18,6 +18,7 @@ const HEADERS = {
 	'Content-Type': 'application/json',
 };
 
+const slidesPerView = window.innerWidth <= 1024 ? 4 : 5;
 const minorFilmsQuantity = 13;
 
 const Home = () => {
@@ -77,13 +78,13 @@ const Home = () => {
 	}, [mainFilmId]);
 
 	return (
-		<div className='p-5'>
+		<div className='xsm:p-5 p-3'>
 			{isLoading ? (
-				<div className='w-full relative mb-[20px] rounded-[50px] overflow-hidden'>
+				<div className='w-full relative sm:mb-[20px] mb-[10px] rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden'>
 					<MainCardLoader />
 				</div>
 			) : (
-				<div className='lg:h-[400px] h-[360px] w-full relative mb-[20px] lg:rounded-[50px] rounded-[30px] overflow-hidden pb-[40%]'>
+				<div className='lg:h-[400px] md:h-[300px] h-auto w-full relative sm:mb-[20px] mb-[10px] lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden md:pb-[40%] pb-0'>
 					<MainCard
 						name={mainFilmName}
 						imagesrc={mainFilmImage}
@@ -92,16 +93,27 @@ const Home = () => {
 					/>
 				</div>
 			)}
-			<div className=''>
+			<div className='flex gap-[15px]'>
 				{isLoading ? (
-					[...Array(5)].map((_, index) => <CardLoader key={index} />)
+					[...Array(slidesPerView)].map((_, index) => (
+						<CardLoader key={index} />
+					))
 				) : (
 					<Swiper
-						spaceBetween={15}
-						slidesPerView={5}
-						slidesPerGroup={4}
+						spaceBetween={10}
+						slidesPerView={4}
+						slidesPerGroup={3}
 						modules={[Navigation]}
 						navigation={true}
+						breakpoints={{
+							1024: {
+								slidesPerView: 5,
+								slidesPerGroup: 4,
+							},
+							640: {
+								spaceBetween: 15,
+							},
+						}}
 					>
 						{minorFilms.map((film, index) => (
 							<SwiperSlide key={index}>

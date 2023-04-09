@@ -5,7 +5,7 @@ const Card = ({ imagesrc, alt, name, rating, year, genres }) => {
 	return (
 		<a href='#' className='relative group'>
 			<figure className='flex flex-col h-full'>
-				<div className='relative pt-[142%] rounded-[20px] overflow-hidden'>
+				<div className='relative pt-[142%] mb-1 sm:rounded-[20px] rounded-[10px] overflow-hidden'>
 					<img
 						src={imagesrc}
 						alt={alt}

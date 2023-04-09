@@ -78,6 +78,12 @@ html.dark .swiper {
 		@media (max-width: 1024px) {
 			padding: 18px 14px;
 		}
+		@media (max-width: 640px) {
+			padding: 14px 10px;
+			&::after {
+				transform: scale(0.5);
+			}
+		}
 	}
 	.swiper-button-next.swiper-button-disabled,
 	.swiper-button-prev.swiper-button-disabled {

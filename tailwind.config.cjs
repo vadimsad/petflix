@@ -19,6 +19,9 @@ module.exports = {
 			container: {
 				center: true,
 			},
+			screens: {
+				xsm: '460px',
+			},
 			keyframes: {
 				appear: {
 					'0%': {
