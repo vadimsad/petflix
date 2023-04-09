@@ -101,8 +101,8 @@ const Home = () => {
 				) : (
 					<Swiper
 						spaceBetween={10}
-						slidesPerView={4}
-						slidesPerGroup={3}
+						slidesPerView={3}
+						slidesPerGroup={2}
 						modules={[Navigation]}
 						navigation={true}
 						breakpoints={{
@@ -111,6 +111,8 @@ const Home = () => {
 								slidesPerGroup: 4,
 							},
 							640: {
+								slidesPerView: 4,
+								slidesPerGroup: 3,
 								spaceBetween: 15,
 							},
 						}}
