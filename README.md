@@ -1,3 +1,3 @@
 # Movie streaming service
 
-**[Demo](https://chic-gumdrop-71af36.netlify.app)**
+**[Demo](https://dancing-unicorn-c8393e.netlify.app/)**
