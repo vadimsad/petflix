@@ -4,6 +4,7 @@ import { Navigation } from 'swiper';
 
 import useDidMountEffect from '../hooks/useDidMountEffect/useDidMountEffect';
 
+import { api } from '../api/API';
 import MainCard from '../components/Cards/MainCard/MainCard';
 import Card from '../components/Cards/Card/Card';
 import MainCardLoader from '../components/Cards/MainCard/MainCardLoader';
@@ -18,7 +19,8 @@ const HEADERS = {
 	'Content-Type': 'application/json',
 };
 
-const slidesPerView = window.innerWidth <= 1024 ? 4 : 5;
+const slidesPerView =
+	window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 3 : 4) : 5;
 const minorFilmsQuantity = 13;
 
 const Home = () => {
@@ -31,50 +33,34 @@ const Home = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		fetch(
-			'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1',
-			{
-				method: 'GET',
-				headers: HEADERS,
-			}
-		)
-			.then((res) => res.json())
-			.then((json) => {
-				let mainFilm = json.films.slice(0, 1)[0];
-				let minorFilms = json.films.slice(1, minorFilmsQuantity + 1);
+		api
+			.getPopular(1)
+			.then((res) => {
+				let mainFilm = res.films.slice(0, 1)[0];
+				let minorFilms = res.films.slice(1, minorFilmsQuantity + 1);
 
 				setMainFilmId(mainFilm.filmId);
 				setMinorFilms(minorFilms);
-			});
+			})
+			.catch(console.log);
 	}, []);
 
 	useDidMountEffect(() => {
-		let FilmIdPromise = fetch(
-			`https://kinopoiskapiunofficial.tech/api/v2.2/films/${mainFilmId}`,
-			{
-				method: 'GET',
-				headers: HEADERS,
-			}
-		)
-			.then((res) => res.json())
-			.then((json) => {
-				setMainFilmName(json.nameRu);
-				setMainFilmDescription(json.description);
-			});
-		let FilmCoverPromise = fetch(
-			`https://kinopoiskapiunofficial.tech/api/v2.2/films/${mainFilmId}/images?type=STILL&page=1`,
-			{
-				method: 'GET',
-				headers: HEADERS,
-			}
-		)
-			.then((res) => res.json())
-			.then((json) => {
-				setMainFilmImage(json.items[0].imageUrl);
-			});
-		Promise.all([FilmIdPromise, FilmCoverPromise]).then(() => {
-			setIsLoading(false);
-		});
+		api
+			.getFilmById(mainFilmId)
+			.then((res) => {
+				setMainFilmName(res.nameRu);
+				setMainFilmDescription(res.description);
+				isLoading && setIsLoading(false);
+			})
+			.catch(console.log);
+		api
+			.getFilmImages(mainFilmId, 'STILL', 1)
+			.then((res) => {
+				setMainFilmImage(res.items[0].imageUrl);
+				isLoading && setIsLoading(false);
+			})
+			.catch(console.log);
 	}, [mainFilmId]);
 
 	return (
