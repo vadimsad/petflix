@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { api } from '../api/API';
-import CatalogCard from '../components/Cards/CatalogCard/CatalogCard';
-
-const { items: films } = await api.getFilms();
-console.log(films);
+import CardBlock from '../components/CardBlock/CardBlock';
 
 const Catalog = () => {
+	const [films, setFilms] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		api.getFilms().then(({ items }) => {
+			setFilms(items);
+			isLoading && setIsLoading(false);
+		});
+	}, []);
+
 	return (
-		<div className='grid grid-cols-5 grid-rows-4 gap-[10px]'>
-			{films.map((film) => (
-				<CatalogCard
-					key={film.kinopoiskId}
-					imgSrc={film.posterUrl}
-					alt={film.nameRu && film.nameOriginal}
-				/>
-			))}
+		<div className='grid sm:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] sm:gap-6 gap-4 p-6'>
+			<CardBlock isLoading={isLoading} films={films} />
 		</div>
 	);
 };

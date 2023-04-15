@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 
 export const api = {
 	async getFilms() {
-		const res = await axiosInstance.get(`films/`);
+		const res = await axiosInstance.get(`films/?order=NUM_VOTE`);
 		return res.data;
 	},
 	async getPopular(pageNumber) {

@@ -9,6 +9,7 @@ module.exports = {
 				sans: ['Source Sans Pro', 'sans-serif'],
 			},
 			colors: {
+				notsodark: '#12263b',
 				dark: '#0D1B2A',
 				darker: '#00171F',
 				darkTransparent: 'rgba(13, 27, 42, 0.8)',
@@ -18,6 +19,9 @@ module.exports = {
 			},
 			container: {
 				center: true,
+			},
+			gridTemplateColumns: {
+				catalog: 'repeat(auto-fit, minmax(250px, 1fr))',
 			},
 			screens: {
 				xsm: '460px',
