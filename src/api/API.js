@@ -11,8 +11,15 @@ const axiosInstance = axios.create({
 });
 
 export const api = {
-	async getFilms() {
-		const res = await axiosInstance.get(`films/?order=NUM_VOTE`);
+	async getFilms(genre, country, page) {
+		let params = [];
+		genre && params.push(`genres=${genre}`);
+		country && params.push(`countries=${country}`);
+		page && params.push(`countries=${page}`);
+
+		const query = params.length ? `?${params.join('&')}` : '';
+
+		const res = await axiosInstance.get(`films/${query}`);
 		return res.data;
 	},
 	async getPopular(pageNumber) {
@@ -29,6 +36,10 @@ export const api = {
 		const res = await axiosInstance.get(
 			`films/${filmId}/images?type=${imageType}&page=${pageNumber}`
 		);
+		return res.data;
+	},
+	async getFilters() {
+		const res = await axiosInstance.get(`films/filters`);
 		return res.data;
 	},
 };

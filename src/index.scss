@@ -90,3 +90,36 @@ html.dark .swiper {
 		opacity: 0;
 	}
 }
+
+.themed-select-container .themed-select__control {
+	@apply bg-notsolight dark:bg-notsodark border-2 border-blue hover:border-dark dark:hover:border-light cursor-pointer;
+}
+
+.themed-select-container .themed-select__control--is-focused {
+	@apply border-dark dark:border-light shadow-none;
+}
+
+.themed-select-container .themed-select__menu {
+	@apply bg-light dark:bg-dark border-2 border-dark dark:border-light;
+}
+
+.themed-select-container .themed-select__option {
+	@apply text-dark dark:text-light bg-light dark:bg-dark hover:bg-notsolight dark:hover:bg-notsodark cursor-pointer;
+}
+/* .themed-select-container .themed-select__option--is-focused {
+	  @apply bg-neutral-200 dark:bg-neutral-800;
+	} */
+
+.themed-select-container .themed-select__indicator-separator {
+	@apply bg-dark dark:bg-light;
+}
+
+.themed-select-container .themed-select__dropdown-indicator {
+	@apply text-dark dark:text-light hover:text-blue;
+}
+
+.themed-select-container .themed-select__input-container,
+.themed-select-container .themed-select__placeholder,
+.themed-select-container .themed-select__single-value {
+	@apply text-dark dark:text-light;
+}
