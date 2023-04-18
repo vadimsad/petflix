@@ -15,7 +15,7 @@ export const api = {
 		let params = [];
 		genre && params.push(`genres=${genre}`);
 		country && params.push(`countries=${country}`);
-		page && params.push(`countries=${page}`);
+		page && params.push(`page=${page}`);
 
 		const query = params.length ? `?${params.join('&')}` : '';
 

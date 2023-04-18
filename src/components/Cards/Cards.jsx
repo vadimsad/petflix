@@ -5,17 +5,28 @@ import Card from './Card/Card';
 const Cards = ({ films }) => {
 	return (
 		<>
-			{films.map((film) => (
-				<Card
-					key={film.kinopoiskId}
-					imagesrc={film.posterUrl}
-					name={film.nameRu || film.nameEn || film.nameOriginal}
-					rating={film.ratingKinopoisk}
-					year={film.year}
-					genres={film.genres}
-					alt={'Постер ' + film.nameRu || film.nameEn || film.nameOriginal}
-				/>
-			))}
+			{films.map(
+				({
+					kinopoiskId,
+					posterUrl,
+					nameRu,
+					nameEn,
+					nameOriginal,
+					ratingKinopoisk,
+					year,
+					genres,
+				}) => (
+					<Card
+						key={kinopoiskId}
+						imagesrc={posterUrl}
+						name={nameRu || nameEn || nameOriginal}
+						rating={ratingKinopoisk}
+						year={year}
+						genres={genres}
+						alt={'Постер ' + nameRu || nameEn || nameOriginal}
+					/>
+				)
+			)}
 		</>
 	);
 };

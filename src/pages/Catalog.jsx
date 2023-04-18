@@ -18,17 +18,42 @@ const Catalog = () => {
 		api
 			.getFilms(filters.genres, filters.countries, currentPage)
 			.then(({ totalPages, items }) => {
-				if (currentPage === 1) {
-					setFilms(items);
-				} else {
-					setFilms((previous) => [...previous, ...items]);
-				}
+				const newFilms = [...films, ...items];
+
+				setFilms(removeDuplicates(newFilms));
 				setIsLoading(false);
 				setTotalPages(totalPages);
 			});
-	}, [filters, currentPage]);
+	}, [currentPage]);
 
-	const handleClick = () => {
+	useEffect(() => {
+		setFilms([]);
+		setCurrentPage(1);
+		setIsLoading(true);
+
+		api
+			.getFilms(filters.genres, filters.countries, currentPage)
+			.then(({ totalPages, items }) => {
+				setFilms(items);
+				setIsLoading(false);
+				setTotalPages(totalPages);
+			});
+	}, [filters]);
+
+	const removeDuplicates = (array) => {
+		const seen = new Set();
+
+		return array.filter((item) => {
+			const serializedItem = JSON.stringify(item);
+			if (seen.has(serializedItem)) {
+				return false;
+			}
+			seen.add(serializedItem);
+			return true;
+		});
+	};
+
+	const loadMoreFilms = () => {
 		setCurrentPage((prevPage) => prevPage + 1);
 	};
 
@@ -39,7 +64,7 @@ const Catalog = () => {
 				<CardBlock isLoading={isLoading} films={films} />
 			</div>
 			{currentPage < totalPages && (
-				<Button onclick={handleClick}>Показать еще</Button>
+				<Button onclick={loadMoreFilms}>Показать еще</Button>
 			)}
 		</>
 	);
