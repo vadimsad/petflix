@@ -60,7 +60,7 @@ const Catalog = () => {
 	return (
 		<>
 			<Filters filters={filters} setFilters={setFilters} />
-			<div className='grid sm:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] sm:gap-6 gap-4 p-5'>
+			<div className='grid sm:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] sm:gap-6 gap-4 sm:p-5'>
 				<CardBlock isLoading={isLoading} films={films} />
 			</div>
 			{currentPage < totalPages && (

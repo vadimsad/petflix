@@ -4,7 +4,7 @@ import SelectBlock from '../SelectBlock/SelectBlock';
 
 const Filters = ({ filters, setFilters }) => {
 	return (
-		<div className='flex gap-5 p-5'>
+		<div className='flex gap-5 sm:p-5 sm:mb-0 mb-4'>
 			<div className='flex-1'>
 				<SelectBlock
 					type='genres'
