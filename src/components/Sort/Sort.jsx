@@ -13,7 +13,7 @@ const Sort = ({ sortType, setSortType, options }) => {
 	};
 
 	return (
-		<div className='relative p-5'>
+		<div className='relative sm:px-5 px-0 sm:mb-0 mb-4'>
 			<span>Сортировать по: </span>
 			<button
 				type='button'
@@ -25,7 +25,7 @@ const Sort = ({ sortType, setSortType, options }) => {
 			<ul
 				className={`${
 					isShown ? '' : 'hidden'
-				} absolute z-30 top-[45px] left-[120px] py-1 rounded bg-dark dark:bg-light text-light dark:text-dark`}
+				} absolute z-30 top-[25px] sm:left-[120px] left-[100px] py-1 rounded bg-dark dark:bg-light text-light dark:text-dark`}
 			>
 				{options.map((option) => (
 					<li key={option.value}>

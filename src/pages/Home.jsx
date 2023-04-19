@@ -43,7 +43,7 @@ const Home = () => {
 	}, [mainFilmId]);
 
 	return (
-		<div className='xsm:p-5 p-0'>
+		<div className='sm:p-5 p-0'>
 			<MainCardBlock
 				isLoading={isLoading}
 				mainFilmName={mainFilmName}

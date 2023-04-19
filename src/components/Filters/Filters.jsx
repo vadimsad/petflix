@@ -1,7 +1,6 @@
 import React from 'react';
 
 import AsyncSelectBlock from '../AsyncSelectBlock/AsyncSelectBlock';
-import Button from '../Button/Button';
 import SelectBlock from '../SelectBlock/SelectBlock';
 
 const Filters = ({ filters, setFilters }) => {
@@ -93,8 +92,8 @@ const Filters = ({ filters, setFilters }) => {
 	];
 
 	return (
-		<div className='flex gap-5 sm:p-5 sm:mb-0 mb-4'>
-			<div className='flex-1'>
+		<div className='grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] sm:gap-5 gap-3 sm:p-5 sm:mb-0 mb-4'>
+			<div>
 				<AsyncSelectBlock
 					type='genres'
 					placeholder='Жанр'
@@ -102,7 +101,7 @@ const Filters = ({ filters, setFilters }) => {
 					setFilters={setFilters}
 				/>
 			</div>
-			<div className='flex-1'>
+			<div>
 				<AsyncSelectBlock
 					type='countries'
 					placeholder='Страна'
@@ -110,7 +109,7 @@ const Filters = ({ filters, setFilters }) => {
 					setFilters={setFilters}
 				/>
 			</div>
-			<div className='flex-1'>
+			<div>
 				<SelectBlock
 					type='type'
 					placeholder='Тип'
@@ -119,7 +118,7 @@ const Filters = ({ filters, setFilters }) => {
 					options={typeOptions}
 				/>
 			</div>
-			<div className='flex-1'>
+			<div>
 				<SelectBlock
 					type='ratingFrom'
 					placeholder='Рейтинг'
@@ -128,7 +127,7 @@ const Filters = ({ filters, setFilters }) => {
 					options={ratingOptions}
 				/>
 			</div>
-			<div className='flex-1'>
+			<div>
 				<SelectBlock
 					type='yearFrom'
 					placeholder='Годы'

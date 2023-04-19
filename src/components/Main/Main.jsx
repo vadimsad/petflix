@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 const Main = () => {
 	return (
 		<main className='flex-1'>
-			<div className='xl:container px-4 text-dark dark:text-light'>
+			<div className='xl:container px-4 sm:mt-0 mt-4 text-dark dark:text-light'>
 				<Outlet />
 			</div>
 		</main>

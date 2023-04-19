@@ -48,6 +48,7 @@ const AsyncSelectBlock = ({ type, placeholder, filters, setFilters }) => {
 			defaultOptions
 			placeholder={placeholder}
 			onChange={onChangeHandle}
+			noOptionsMessage={() => 'Ничего не найдено :('}
 		/>
 	);
 };
