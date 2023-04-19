@@ -13,6 +13,7 @@ const Cards = ({ films }) => {
 					nameEn,
 					nameOriginal,
 					ratingKinopoisk,
+					ratingImdb,
 					year,
 					genres,
 				}) => (
@@ -20,7 +21,7 @@ const Cards = ({ films }) => {
 						key={kinopoiskId}
 						imagesrc={posterUrl}
 						name={nameRu || nameEn || nameOriginal}
-						rating={ratingKinopoisk}
+						rating={ratingKinopoisk || '-'}
 						year={year}
 						genres={genres}
 						alt={'Постер ' + nameRu || nameEn || nameOriginal}

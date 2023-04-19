@@ -11,31 +11,44 @@ const axiosInstance = axios.create({
 });
 
 export const api = {
-	async getFilms(genre, country, page) {
-		let params = [];
-		genre && params.push(`genres=${genre}`);
-		country && params.push(`countries=${country}`);
-		page && params.push(`page=${page}`);
+	async getFilms(genres, countries, type, ratingFrom, yearFrom, order, page) {
+		const config = {
+			params: {
+				genres,
+				countries,
+				type,
+				ratingFrom,
+				yearFrom,
+				order,
+				page,
+			},
+		};
 
-		const query = params.length ? `?${params.join('&')}` : '';
-
-		const res = await axiosInstance.get(`films/${query}`);
+		const res = await axiosInstance.get('films', config);
 		return res.data;
 	},
-	async getPopular(pageNumber) {
-		const res = await axiosInstance.get(
-			`films/top?type=TOP_100_POPULAR_FILMS&page=${pageNumber}`
-		);
+	async getPopular(page) {
+		const config = {
+			params: {
+				type: 'TOP_100_POPULAR_FILMS',
+				page,
+			},
+		};
+		const res = await axiosInstance.get('films/top', config);
 		return res.data;
 	},
 	async getFilmById(filmId) {
 		const res = await axiosInstance.get(`films/${filmId}`);
 		return res.data;
 	},
-	async getFilmImages(filmId, imageType, pageNumber) {
-		const res = await axiosInstance.get(
-			`films/${filmId}/images?type=${imageType}&page=${pageNumber}`
-		);
+	async getFilmImages(filmId, type, page) {
+		const config = {
+			params: {
+				type,
+				page,
+			},
+		};
+		const res = await axiosInstance.get(`films/${filmId}/images`, config);
 		return res.data;
 	},
 	async getFilters() {
