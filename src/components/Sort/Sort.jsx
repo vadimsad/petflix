@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import useClickOutside from '../../hooks/useClickOutside/useClickOutside';
 
 const Sort = ({ sortType, setSortType, options }) => {
 	const [isShown, setIsShown] = useState(false);
@@ -12,6 +13,9 @@ const Sort = ({ sortType, setSortType, options }) => {
 		setIsShown(false);
 	};
 
+	const sortRef = useRef(null);
+	useClickOutside(sortRef, () => setIsShown(false));
+
 	return (
 		<div className='relative sm:px-5 px-0 sm:mb-0 mb-4'>
 			<span>Сортировать по: </span>
@@ -23,6 +27,7 @@ const Sort = ({ sortType, setSortType, options }) => {
 				{sortType.label}
 			</button>
 			<ul
+				ref={sortRef}
 				className={`${
 					isShown ? '' : 'hidden'
 				} absolute z-30 top-[25px] sm:left-[120px] left-[100px] py-1 rounded bg-dark dark:bg-light text-light dark:text-dark`}

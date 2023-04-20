@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 
+import Search from '../Search/Search';
+
 const Header = () => {
 	return (
 		<header>
-			<div className='container px-4 text-dark dark:text-light flex justify-between'>
-				<ul className='flex flex-wrap gap-2'>
+			<div className='container px-4 py-6 text-dark dark:text-light flex justify-between lg:text-xl text-lg'>
+				<ul className='flex flex-wrap gap-x-4 items-center'>
 					<li>
 						<Link to={'/'}>Главная</Link>
 					</li>
@@ -16,8 +18,10 @@ const Header = () => {
 					</li>
 					<li>Что посмотреть</li>
 				</ul>
-				<ul className='flex flex-wrap gap-2'>
-					<li>Поиск</li>
+				<ul className='flex flex-wrap gap-x-4 items-center'>
+					<li>
+						<Search />
+					</li>
 					<li>Войти</li>
 				</ul>
 			</div>

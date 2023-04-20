@@ -92,7 +92,7 @@ const Filters = ({ filters, setFilters }) => {
 	];
 
 	return (
-		<div className='grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] sm:gap-5 gap-3 sm:p-5 sm:mb-0 mb-4'>
+		<div className='grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] sm:gap-5 gap-3 sm:p-5 sm:pt-0 sm:mb-0 mb-4'>
 			<div>
 				<AsyncSelectBlock
 					type='genres'
