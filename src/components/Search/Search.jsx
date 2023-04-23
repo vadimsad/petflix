@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
-const Search = ({ inputValue, setInputValue }) => {
+import { context } from '../../context/context';
+
+const Search = () => {
+	const { searchText, setSearchText, setSearchQuery } = useContext(context);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setSearchQuery(searchText);
+	};
+
 	return (
-		<form action=''>
+		<form onSubmit={handleSubmit}>
 			<label className='relative flex border-2 rounded-xl border-dark dark:border-blue bg-light dark:bg-dark focus-within:border-blue dark:focus-within:border-light overflow-hidden transition-colors'>
 				<div className='relative w-[20px] h-auto left-[10px]'>
 					<svg
@@ -20,8 +29,8 @@ const Search = ({ inputValue, setInputValue }) => {
 					type='search'
 					placeholder='Поиск фильмов'
 					id='search'
-					value={inputValue}
-					onChange={(e) => setInputValue(e.target.value)}
+					value={searchText}
+					onChange={(e) => setSearchText(e.target.value)}
 					className='text-ellipsis text-dark dark:text-light xsm:px-4 pl-5 px-2 xsm:py-1 py-0 bg-light dark:bg-dark transition-all lg:w-[200px] outline-none xl:focus:w-[300px] sm:focus:w-[200px] xsm:w-[200px] w-full xsm:text-left text-center'
 				/>
 			</label>

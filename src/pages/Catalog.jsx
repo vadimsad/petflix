@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { api } from '../api/API';
 import Button from '../components/Button/Button';
 import CardBlock from '../components/CardBlock/CardBlock';
 import Filters from '../components/Filters/Filters';
 import Sort from '../components/Sort/Sort';
+import { context } from '../context/context';
 
 const Catalog = () => {
+	const { searchQuery } = useContext(context);
+
 	const sortOptions = [
 		{
 			value: 'RATING',
@@ -41,6 +44,7 @@ const Catalog = () => {
 				filters.ratingFrom,
 				filters.yearFrom,
 				sortType.value,
+				searchQuery,
 				currentPage
 			)
 			.then(({ totalPages, items }) => {
@@ -65,6 +69,7 @@ const Catalog = () => {
 				filters.ratingFrom,
 				filters.yearFrom,
 				sortType.value,
+				searchQuery,
 				currentPage
 			)
 			.then(({ totalPages, items }) => {
@@ -72,7 +77,7 @@ const Catalog = () => {
 				setIsLoading(false);
 				setTotalPages(totalPages);
 			});
-	}, [filters, sortType]);
+	}, [filters, sortType, searchQuery]);
 
 	const removeDuplicates = (array) => {
 		const uniqueFilms = [...new Set(array.map((item) => JSON.stringify(item)))];

@@ -14,7 +14,16 @@ const axiosInstance = axios.create({
 });
 
 export const api = {
-	async getFilms(genres, countries, type, ratingFrom, yearFrom, order, page) {
+	async getFilms(
+		genres,
+		countries,
+		type,
+		ratingFrom,
+		yearFrom,
+		order,
+		keyword,
+		page
+	) {
 		const config = {
 			params: {
 				genres,
@@ -23,6 +32,7 @@ export const api = {
 				ratingFrom,
 				yearFrom,
 				order,
+				keyword,
 				page,
 			},
 		};
