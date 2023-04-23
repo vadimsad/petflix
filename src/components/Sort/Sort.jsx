@@ -17,7 +17,7 @@ const Sort = ({ sortType, setSortType, options }) => {
 	useClickOutside(sortRef, () => setIsShown(false));
 
 	return (
-		<div className='relative sm:px-5 px-0 sm:mb-0 mb-4'>
+		<div className='relative'>
 			<span>Сортировать по: </span>
 			<button
 				type='button'
@@ -30,7 +30,7 @@ const Sort = ({ sortType, setSortType, options }) => {
 				ref={sortRef}
 				className={`${
 					isShown ? '' : 'hidden'
-				} absolute z-30 top-[25px] sm:left-[120px] left-[100px] py-1 rounded bg-dark dark:bg-light text-light dark:text-dark`}
+				} absolute z-30 top-[25px] left-[100px] py-1 rounded bg-dark dark:bg-light text-light dark:text-dark`}
 			>
 				{options.map((option) => (
 					<li key={option.value}>

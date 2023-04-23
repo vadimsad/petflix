@@ -13,7 +13,7 @@ module.exports = {
 				dark: '#0D1B2A',
 				darker: '#00171F',
 				darkTransparent: 'rgba(13, 27, 42, 0.8)',
-				notsolight: '#f2f5f7',
+				notsolight: '#b8d4e0',
 				light: '#DCEAF0',
 				lightTransparent: 'rgba(220, 234, 240, 0.8);',
 				yellow: '#F8DB2F',

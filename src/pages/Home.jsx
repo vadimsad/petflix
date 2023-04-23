@@ -43,21 +43,26 @@ const Home = () => {
 	}, [mainFilmId]);
 
 	return (
-		<div className='sm:p-5 p-0'>
-			<MainCardBlock
-				isLoading={isLoading}
-				mainFilmName={mainFilmName}
-				mainFilmImage={mainFilmImage}
-				mainFilmDescription={mainFilmDescription}
-			/>
-			<div className='flex gap-[15px]'>
-				<FilmSlider
+		<>
+			<h1 className='sm:p-5 pb-5 pt-5 xl:text-4xl sm:text-3xl text-2xl font-serif text-dark dark:text-light transition-colors'>
+				Популярно сейчас:
+			</h1>
+			<div className='sm:p-5 sm:pt-0 p-0'>
+				<MainCardBlock
 					isLoading={isLoading}
-					slidesPerView={slidesPerView}
-					minorFilms={minorFilms}
+					mainFilmName={mainFilmName}
+					mainFilmImage={mainFilmImage}
+					mainFilmDescription={mainFilmDescription}
 				/>
+				<div className='flex gap-[15px]'>
+					<FilmSlider
+						isLoading={isLoading}
+						slidesPerView={slidesPerView}
+						minorFilms={minorFilms}
+					/>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

@@ -3,7 +3,7 @@ import React from 'react';
 import AsyncSelectBlock from '../AsyncSelectBlock/AsyncSelectBlock';
 import SelectBlock from '../SelectBlock/SelectBlock';
 
-const Filters = ({ filters, setFilters }) => {
+const Filters = ({ filters, setFilters, isLoading }) => {
 	const typeOptions = [
 		{
 			value: 'ALL',
@@ -92,13 +92,14 @@ const Filters = ({ filters, setFilters }) => {
 	];
 
 	return (
-		<div className='grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] sm:gap-5 gap-3 sm:p-5 sm:pt-0 sm:mb-0 mb-4'>
+		<div className='grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] xl:gap-5 md:gap-3 gap-2'>
 			<div>
 				<AsyncSelectBlock
 					type='genres'
 					placeholder='Жанр'
 					filters={filters}
 					setFilters={setFilters}
+					isLoading={isLoading}
 				/>
 			</div>
 			<div>
@@ -107,6 +108,7 @@ const Filters = ({ filters, setFilters }) => {
 					placeholder='Страна'
 					filters={filters}
 					setFilters={setFilters}
+					isLoading={isLoading}
 				/>
 			</div>
 			<div>
@@ -116,6 +118,7 @@ const Filters = ({ filters, setFilters }) => {
 					filters={filters}
 					setFilters={setFilters}
 					options={typeOptions}
+					isLoading={isLoading}
 				/>
 			</div>
 			<div>
@@ -125,6 +128,7 @@ const Filters = ({ filters, setFilters }) => {
 					filters={filters}
 					setFilters={setFilters}
 					options={ratingOptions}
+					isLoading={isLoading}
 				/>
 			</div>
 			<div>
@@ -134,6 +138,7 @@ const Filters = ({ filters, setFilters }) => {
 					filters={filters}
 					setFilters={setFilters}
 					options={yearOptions}
+					isLoading={isLoading}
 				/>
 			</div>
 		</div>

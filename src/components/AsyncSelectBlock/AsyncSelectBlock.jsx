@@ -4,7 +4,13 @@ import AsyncSelect from 'react-select/async';
 import { api } from '../../api/API';
 import useCapitalize from '../../hooks/useCapitalize/useCapitalize';
 
-const AsyncSelectBlock = ({ type, placeholder, filters, setFilters }) => {
+const AsyncSelectBlock = ({
+	type,
+	placeholder,
+	filters,
+	setFilters,
+	isLoading,
+}) => {
 	let optionItem = null;
 	if (type) {
 		switch (type) {
@@ -49,6 +55,9 @@ const AsyncSelectBlock = ({ type, placeholder, filters, setFilters }) => {
 			placeholder={placeholder}
 			onChange={onChangeHandle}
 			noOptionsMessage={() => 'Ничего не найдено :('}
+			loadingMessage={() => 'Загрузка...'}
+			isDisabled={isLoading}
+			isLoading={isLoading}
 		/>
 	);
 };

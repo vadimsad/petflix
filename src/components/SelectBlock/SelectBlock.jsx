@@ -1,6 +1,13 @@
 import React from 'react';
 import Select from 'react-select';
-const SelectBlock = ({ type, placeholder, filters, setFilters, options }) => {
+const SelectBlock = ({
+	type,
+	placeholder,
+	filters,
+	setFilters,
+	options,
+	isLoading,
+}) => {
 	const onChangeHandle = (option) => {
 		setFilters({ ...filters, [type]: option.value });
 	};
@@ -11,6 +18,9 @@ const SelectBlock = ({ type, placeholder, filters, setFilters, options }) => {
 			options={options}
 			placeholder={placeholder}
 			onChange={onChangeHandle}
+			noOptionsMessage={() => 'Ничего не найдено :('}
+			isDisabled={isLoading}
+			isLoading={isLoading}
 		/>
 	);
 };
