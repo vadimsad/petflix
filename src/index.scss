@@ -92,7 +92,7 @@ html.dark .swiper {
 }
 
 .themed-select-container .themed-select__control {
-	@apply bg-notsolight dark:bg-notsodark border-2 rounded-2xl border-blue hover:border-dark dark:hover:border-light cursor-pointer;
+	@apply bg-notsolight dark:bg-notsodark border-2 rounded-xl border-blue hover:border-dark dark:hover:border-light cursor-pointer;
 }
 
 .themed-select-container .themed-select__control--is-focused {
@@ -100,7 +100,7 @@ html.dark .swiper {
 }
 
 .themed-select-container .themed-select__menu {
-	@apply bg-light dark:bg-dark border-2 border-dark dark:border-light;
+	@apply bg-light dark:bg-dark border-2 rounded-xl overflow-hidden border-dark dark:border-light;
 }
 
 .themed-select-container .themed-select__option {

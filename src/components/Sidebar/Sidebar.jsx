@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import useClickOutside from '../../hooks/useClickOutside/useClickOutside';
 import Burger from '../Header/Burger/Burger';
 
 const Sidebar = () => {
-	const isTouchscreen = window.matchMedia(
-		'(hover: none) and (pointer: coarse)'
-	).matches;
+	// const isTouchscreen = window.matchMedia(
+	// 	'(hover: none) and (pointer: coarse)'
+	// ).matches;
 	const isSmallDevice = window.matchMedia('(max-width:768px)').matches;
 
 	const [darkTheme, setDarkTheme] = useState(false);
 	const [isShown, setIsShown] = useState(!isSmallDevice);
+
+	const ref = useRef(null);
 
 	useEffect(() => {
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -26,6 +29,8 @@ const Sidebar = () => {
 		}
 	}, [darkTheme]);
 
+	useClickOutside(ref, () => setIsShown(false));
+
 	function toggleDarkTheme() {
 		setDarkTheme((prevState) => !prevState);
 	}
@@ -36,14 +41,13 @@ const Sidebar = () => {
 
 	return (
 		<div
+			ref={ref}
 			className={`${
 				isShown ? '' : '-left-[15rem]'
-			} fixed z-30 inset-0 right-auto overflow-y-auto transition-[left]`}
+			} scroll-container fixed z-30 inset-0 right-auto overflow-y-auto transition-[left]`}
 		>
 			<aside
-				className={`${
-					isTouchscreen ? 'rounded-tr-[15px]' : ''
-				} scroll-container xl:w-[20rem] w-[15rem] bg-dark dark:bg-light text-light dark:text-dark`}
+				className={`xl:w-[20rem] w-[15rem] bg-dark dark:bg-light text-light dark:text-dark`}
 			>
 				<div className={`sidebar-content p-5`}>
 					<button onClick={toggleDarkTheme} type='button'>
@@ -91,7 +95,7 @@ const Sidebar = () => {
 					onclick={toggleSidebar}
 					wrapperClasses={`${
 						isShown ? 'left-[15rem]' : 'left-0'
-					} transition-[left] md:hidden block fixed top-[30%] xsm:p-3 p-2 bg-light`}
+					} transition-[left] md:hidden block fixed top-[70%] xsm:p-3 p-2 bg-dark dark:bg-light`}
 					buttonClasses='xsm:w-[23px] w-[15px] xsm:h-[28px] h-[20px] relative text-light dark:text-dark transition-[left] block before:absolute before:content-[""] before:h-full xsm:before:w-[2px] before:w-[1px] before:bg-light dark:before:bg-dark before:top-0 before:left-0 after:absolute after:content-[""] after:h-full xsm:after:w-[2px] after:w-[1px] after:bg-light dark:after:bg-dark after:top-0 after:right-0'
 					spanClasses='absolute h-full xsm:w-[2px] w-[1px] bg-light dark:bg-dark top-0 left-1/2 -translate-x-1/2'
 				/>

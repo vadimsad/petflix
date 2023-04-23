@@ -19,7 +19,7 @@ const Search = () => {
 				type='search'
 				placeholder='Поиск фильмов'
 				id='search'
-				className='text-ellipsis text-dark dark:text-light rounded-2xl xsm:px-4 xsm:pl-8 px-2 pl-6 xsm:py-1 py-0 bg-light dark:bg-dark transition-all border-2 border-dark dark:border-blue rounded-[4px] focus:outline-none focus:border-dark dark:focus:border-light lg:w-[200px] xl:focus:w-[300px] sm:focus:w-[200px] xsm:w-[200px] w-full sm:text-left text-center'
+				className='text-ellipsis text-dark dark:text-light rounded-xl xsm:px-4 xsm:pl-8 px-2 pl-7 xsm:py-1 py-0 bg-light dark:bg-dark transition-all border-2 border-dark dark:border-blue focus:outline-none focus:border-dark dark:focus:border-light lg:w-[200px] xl:focus:w-[300px] sm:focus:w-[200px] xsm:w-[200px] w-full xsm:text-left text-center'
 			/>
 		</label>
 	);

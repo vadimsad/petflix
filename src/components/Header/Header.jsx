@@ -18,7 +18,7 @@ const Header = () => {
 			ref={ref}
 			className={`${
 				isShown ? '-translate-y-0' : 'md:-translate-y-0 -translate-y-full'
-			} transition-all w-full z-30 md:relative fixed sm:shadow-sm shadow-md`}
+			} transition-all w-full md:z-20 z-30 md:relative fixed sm:shadow-sm shadow-md`}
 		>
 			<div className={`relative dark:bg-notsodark bg-notsolight`}>
 				<Menu />
