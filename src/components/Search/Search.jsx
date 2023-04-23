@@ -2,8 +2,8 @@ import React from 'react';
 
 const Search = () => {
 	return (
-		<label className='relative block'>
-			<div className='absolute w-auto h-[50%] left-[10px] top-1/2 -translate-y-1/2'>
+		<label className='relative flex border-2 rounded-xl border-dark dark:border-blue bg-light dark:bg-dark focus-within:border-blue dark:focus-within:border-light overflow-hidden transition-colors'>
+			<div className='relative w-[20px] h-auto left-[10px]'>
 				<svg
 					viewBox='0 0 32 32'
 					xmlns='http://www.w3.org/2000/svg'
@@ -19,7 +19,7 @@ const Search = () => {
 				type='search'
 				placeholder='Поиск фильмов'
 				id='search'
-				className='text-ellipsis text-dark dark:text-light rounded-xl xsm:px-4 xsm:pl-8 px-2 pl-7 xsm:py-1 py-0 bg-light dark:bg-dark transition-all border-2 border-dark dark:border-blue focus:outline-none focus:border-dark dark:focus:border-light lg:w-[200px] xl:focus:w-[300px] sm:focus:w-[200px] xsm:w-[200px] w-full xsm:text-left text-center'
+				className='text-ellipsis text-dark dark:text-light xsm:px-4 pl-5 px-2 xsm:py-1 py-0 bg-light dark:bg-dark transition-all lg:w-[200px] outline-none xl:focus:w-[300px] sm:focus:w-[200px] xsm:w-[200px] w-full xsm:text-left text-center'
 			/>
 		</label>
 	);

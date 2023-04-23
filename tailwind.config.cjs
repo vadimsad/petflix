@@ -17,7 +17,7 @@ module.exports = {
 				light: '#DCEAF0',
 				lightTransparent: 'rgba(220, 234, 240, 0.8);',
 				yellow: '#F8DB2F',
-				blue: '#1d2a63',
+				blue: '#18324e',
 			},
 			container: {
 				center: true,
