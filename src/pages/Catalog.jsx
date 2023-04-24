@@ -114,7 +114,7 @@ const Catalog = () => {
 					options={sortOptions}
 				/>
 			</div>
-			<div className='grid sm:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] sm:gap-6 gap-4 sm:p-5 sm:pt-0'>
+			<div className='grid sm:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] sm:gap-6 gap-4 sm:p-5 sm:pt-0'>
 				<CardBlock isLoading={isLoading} films={films} />
 			</div>
 			{currentPage < totalPages && (

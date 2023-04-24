@@ -35,7 +35,13 @@ const Home = () => {
 			setIsLoading
 		);
 		useFilmImages(
-			{ mainFilmId, imageType: 'STILL', pageNumber: 1 },
+			{
+				mainFilmId,
+				imageType: 'STILL',
+				pageNumber: 1,
+				defaultImageUrl:
+					'https://www.americanhungarian.org/sites/default/files/default_images/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.jpg',
+			},
 			setMainFilmImage,
 			isLoading,
 			setIsLoading

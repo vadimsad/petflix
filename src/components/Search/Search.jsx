@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 
-import { context } from '../../context/context';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateSearchText } from '../../redux/slices/searchSlice';
 
 const Search = () => {
-	const { searchText, setSearchText, setSearchQuery } = useContext(context);
+	const { searchText } = useSelector((state) => state.search.searchText);
+	const dispatch = useDispatch();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -30,7 +32,7 @@ const Search = () => {
 					placeholder='Поиск фильмов'
 					id='search'
 					value={searchText}
-					onChange={(e) => setSearchText(e.target.value)}
+					onChange={(e) => dispatch(updateSearchText(e.target.value))}
 					className='text-ellipsis text-dark dark:text-light xsm:px-4 pl-5 px-2 xsm:py-1 py-0 bg-light dark:bg-dark transition-all lg:w-[200px] outline-none xl:focus:w-[300px] sm:focus:w-[200px] xsm:w-[200px] w-full xsm:text-left text-center'
 				/>
 			</label>
