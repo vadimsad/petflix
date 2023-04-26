@@ -1,83 +1,68 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { api } from '../api/API';
 import Button from '../components/Button/Button';
 import CardBlock from '../components/CardBlock/CardBlock';
 import Filters from '../components/Filters/Filters';
 import Sort from '../components/Sort/Sort';
-import { context } from '../context/context';
+import { setCurrentPage, setTotalPages } from '../redux/slices/paginationSlice';
+import { setFilms, setStartLoading } from '../redux/slices/filmsSlice';
 
 const Catalog = () => {
-	const { searchQuery } = useContext(context);
+	const allFilms = useSelector((state) => state.films.all.content);
+	const filters = useSelector((state) => state.filters);
+	const sort = useSelector((state) => state.sort);
+	const { currentPage, totalPages } = useSelector((state) => state.pagination);
+	const { searchQuery } = useSelector((state) => state.search);
 
-	const sortOptions = [
-		{
-			value: 'RATING',
-			label: 'рейтингу',
-		},
-		{
-			value: 'NUM_VOTE',
-			label: 'отзывам',
-		},
-		{
-			value: 'YEAR',
-			label: 'годам',
-		},
-	];
-
-	const [currentPage, setCurrentPage] = useState(1);
-	const [filters, setFilters] = useState({});
-	const [films, setFilms] = useState([]);
-	const [totalPages, setTotalPages] = useState(0);
-	const [isLoading, setIsLoading] = useState(true);
-
-	const [sortType, setSortType] = useState(sortOptions[0]);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setIsLoading(true);
+		dispatch(setStartLoading('all'));
 
 		api
 			.getFilms(
-				filters.genres,
-				filters.countries,
-				filters.type,
-				filters.ratingFrom,
-				filters.yearFrom,
-				sortType.value,
+				filters.genres.selected.value,
+				filters.countries.selected.value,
+				filters.type.selected.value,
+				filters.ratingFrom.selected.value,
+				filters.yearFrom.selected.value,
+				sort.selected.value,
 				searchQuery,
 				currentPage
 			)
 			.then(({ totalPages, items }) => {
-				const newFilms = [...films, ...items];
+				const newFilms = [...allFilms, ...items];
 
-				setFilms(removeDuplicates(newFilms));
-				setIsLoading(false);
-				setTotalPages(totalPages);
+				dispatch(
+					setFilms({ category: 'all', films: removeDuplicates(newFilms) })
+				);
+				dispatch(setTotalPages(totalPages));
 			});
 	}, [currentPage]);
 
 	useEffect(() => {
-		setFilms([]);
-		setCurrentPage(1);
-		setIsLoading(true);
+		dispatch(setFilms({ category: 'all', films: [] }));
+		dispatch(setCurrentPage(1));
+		dispatch(setStartLoading('all'));
 
 		api
 			.getFilms(
-				filters.genres,
-				filters.countries,
-				filters.type,
-				filters.ratingFrom,
-				filters.yearFrom,
-				sortType.value,
+				filters.genres.selected.value,
+				filters.countries.selected.value,
+				filters.type.selected.value,
+				filters.ratingFrom.selected.value,
+				filters.yearFrom.selected.value,
+				sort.selected.value,
 				searchQuery,
 				currentPage
 			)
 			.then(({ totalPages, items }) => {
-				setFilms(items);
-				setIsLoading(false);
-				setTotalPages(totalPages);
+				dispatch(setFilms({ category: 'all', films: items }));
+				dispatch(setTotalPages(totalPages));
 			});
-	}, [filters, sortType, searchQuery]);
+	}, [filters, sort, searchQuery]);
 
 	const removeDuplicates = (array) => {
 		const uniqueFilms = [...new Set(array.map((item) => JSON.stringify(item)))];
@@ -86,7 +71,7 @@ const Catalog = () => {
 	};
 
 	const loadMoreFilms = () => {
-		setCurrentPage((prevPage) => prevPage + 1);
+		dispatch(setCurrentPage(currentPage + 1));
 	};
 
 	return (
@@ -103,24 +88,14 @@ const Catalog = () => {
 				сериалы.
 			</p>
 			<div className='sm:mx-5 mx-0 mb-5 p-5 flex flex-col xl:gap-5 gap-4 bg-notsolight dark:bg-notsodark rounded-xl'>
-				<Filters
-					filters={filters}
-					setFilters={setFilters}
-					isLoading={isLoading}
-				/>
-				<Sort
-					sortType={sortType}
-					setSortType={setSortType}
-					options={sortOptions}
-				/>
+				<Filters />
+				<Sort />
 			</div>
 			<div className='grid sm:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] sm:gap-6 gap-4 sm:p-5 sm:pt-0'>
-				<CardBlock isLoading={isLoading} films={films} />
+				<CardBlock />
 			</div>
 			{currentPage < totalPages && (
-				<Button disabled={isLoading} onclick={loadMoreFilms}>
-					Показать еще
-				</Button>
+				<Button onclick={loadMoreFilms}>Показать еще</Button>
 			)}
 		</>
 	);

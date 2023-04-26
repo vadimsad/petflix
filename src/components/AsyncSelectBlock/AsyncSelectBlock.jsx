@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AsyncSelect from 'react-select/async';
 
 import { api } from '../../api/API';
 import useCapitalize from '../../hooks/useCapitalize/useCapitalize';
+import { setFilter, setFilterOptions } from '../../redux/slices/filterSlice';
 
-const AsyncSelectBlock = ({
-	type,
-	placeholder,
-	filters,
-	setFilters,
-	isLoading,
-}) => {
+const AsyncSelectBlock = ({ type, placeholder }) => {
+	const { isLoading } = useSelector((state) => state.films.all);
+	const options = useSelector((state) => state.filters[type].options);
+	const dispatch = useDispatch();
+
 	let optionItem = null;
 	if (type) {
 		switch (type) {
@@ -25,8 +25,8 @@ const AsyncSelectBlock = ({
 		}
 	}
 
-	const onChangeHandle = (option) => {
-		setFilters({ ...filters, [type]: option.value });
+	const onFilterChange = (option) => {
+		dispatch(setFilter({ type, option }));
 	};
 
 	const loadOptions = (searchValue, resolve) => {
@@ -42,7 +42,8 @@ const AsyncSelectBlock = ({
 			const filteredOptions = selectOptions.filter((option) =>
 				option.label.toLowerCase().includes(searchValue.toLowerCase())
 			);
-			resolve(filteredOptions);
+			dispatch(setFilterOptions({ type, options: filteredOptions }));
+			resolve([options]);
 		});
 	};
 
@@ -53,7 +54,7 @@ const AsyncSelectBlock = ({
 			loadOptions={loadOptions}
 			defaultOptions
 			placeholder={placeholder}
-			onChange={onChangeHandle}
+			onChange={onFilterChange}
 			noOptionsMessage={() => 'Ничего не найдено :('}
 			loadingMessage={() => 'Загрузка...'}
 			isDisabled={isLoading}

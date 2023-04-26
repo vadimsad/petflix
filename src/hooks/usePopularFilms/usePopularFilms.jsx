@@ -1,14 +1,17 @@
-import { api } from '../../api/API';
+import { useSelector, useDispatch } from 'react-redux';
 
-const usePopularFilms = (setMainFilmId, setMinorFilms, minorFilmsQuantity) => {
+import { api } from '../../api/API';
+import { setFilms } from '../../redux/slices/filmsSlice';
+
+const usePopularFilms = (minorFilmsQuantity) => {
+	const dispatch = useDispatch();
+
 	api
-		.getPopular(1)
 		.then((res) => {
 			let mainFilm = res.films.slice(0, 1)[0];
 			let minorFilms = res.films.slice(1, minorFilmsQuantity + 1);
 
-			setMainFilmId(mainFilm.filmId);
-			setMinorFilms(minorFilms);
+			dispatch();
 		})
 		.catch(console.log);
 };

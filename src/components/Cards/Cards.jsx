@@ -1,11 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Card from './Card/Card';
 
-const Cards = ({ films }) => {
+const Cards = () => {
+	const allFilms = useSelector((state) => state.films.all.content);
+
 	return (
 		<>
-			{films.map(
+			{allFilms.map(
 				({
 					kinopoiskId,
 					posterUrl,
@@ -13,7 +16,6 @@ const Cards = ({ films }) => {
 					nameEn,
 					nameOriginal,
 					ratingKinopoisk,
-					ratingImdb,
 					year,
 					genres,
 				}) => (

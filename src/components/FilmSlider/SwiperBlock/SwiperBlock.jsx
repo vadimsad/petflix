@@ -1,14 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
-
 import Card from '../../Cards/Card/Card';
 
-const SwiperBlock = ({ minorFilms }) => {
+const SwiperBlock = () => {
+	const films = useSelector((state) => state.films.popular.content);
+
 	return (
 		<Swiper
 			spaceBetween={10}
@@ -28,11 +29,11 @@ const SwiperBlock = ({ minorFilms }) => {
 				},
 			}}
 		>
-			{minorFilms.map((film) => (
+			{films.slice(1).map((film) => (
 				<SwiperSlide key={film.filmId}>
 					<Card
 						key={film.filmId}
-						name={film.nameRu}
+						name={film.nameRu || film.nameEn}
 						imagesrc={film.posterUrl}
 						rating={film.rating}
 						year={film.year}

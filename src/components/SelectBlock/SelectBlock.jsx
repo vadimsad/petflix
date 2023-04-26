@@ -1,15 +1,16 @@
 import React from 'react';
 import Select from 'react-select';
-const SelectBlock = ({
-	type,
-	placeholder,
-	filters,
-	setFilters,
-	options,
-	isLoading,
-}) => {
-	const onChangeHandle = (option) => {
-		setFilters({ ...filters, [type]: option.value });
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setFilter } from '../../redux/slices/filterSlice';
+
+const SelectBlock = ({ type, placeholder }) => {
+	const options = useSelector((state) => state.filters[type].options);
+	const { isLoading } = useSelector((state) => state.films.all);
+	const dispatch = useDispatch();
+
+	const onFilterChange = (option) => {
+		dispatch(setFilter({ type, option }));
 	};
 	return (
 		<Select
@@ -17,7 +18,7 @@ const SelectBlock = ({
 			classNamePrefix='themed-select'
 			options={options}
 			placeholder={placeholder}
-			onChange={onChangeHandle}
+			onChange={onFilterChange}
 			noOptionsMessage={() => 'Ничего не найдено :('}
 			isDisabled={isLoading}
 			isLoading={isLoading}

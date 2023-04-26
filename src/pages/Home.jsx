@@ -1,52 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import useDidMountEffect from '../hooks/useDidMountEffect/useDidMountEffect';
-
+import { api } from '../api/API';
+import {
+	setFilms,
+	setMainFilm,
+	setMainFilmImage,
+	setStartLoading,
+} from '../redux/slices/filmsSlice';
 import FilmSlider from '../components/FilmSlider/FilmSlider';
-
 import MainCardBlock from '../components/MainCardBlock/MainCardBlock';
-import usePopularFilms from '../hooks/usePopularFilms/usePopularFilms';
-import useFilmById from '../hooks/useFilmById/useFilmById';
 import useFilmImages from '../hooks/useFilmImages/useFilmImages';
 
-const slidesPerView =
-	window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 3 : 4) : 5;
-const minorFilmsQuantity = 13;
-
 const Home = () => {
-	const [minorFilms, setMinorFilms] = useState([]);
-	const [mainFilmId, setMainFilmId] = useState(0);
-	const [mainFilmName, setMainFilmName] = useState('');
-	const [mainFilmDescription, setMainFilmDescription] = useState('');
-	const [mainFilmImage, setMainFilmImage] = useState('');
-
-	const [isLoading, setIsLoading] = useState(true);
+	const { popular, mainFilm } = useSelector((state) => state.films);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		usePopularFilms(setMainFilmId, setMinorFilms, minorFilmsQuantity);
+		dispatch(setStartLoading('popular'));
+
+		api.getPopular(1).then((res) => {
+			dispatch(setFilms({ category: 'popular', films: res.films }));
+		});
 	}, []);
 
-	useDidMountEffect(() => {
-		useFilmById(
-			mainFilmId,
-			setMainFilmName,
-			setMainFilmDescription,
-			isLoading,
-			setIsLoading
-		);
-		useFilmImages(
-			{
-				mainFilmId,
-				imageType: 'STILL',
-				pageNumber: 1,
-				defaultImageUrl:
-					'https://www.americanhungarian.org/sites/default/files/default_images/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.jpg',
-			},
-			setMainFilmImage,
-			isLoading,
-			setIsLoading
-		);
-	}, [mainFilmId]);
+	useEffect(() => {
+		if (popular.isLoading) return;
+
+		dispatch(setStartLoading('mainFilm'));
+		api
+			.getFilmById(popular.content[0].filmId)
+			.then((res) => {
+				dispatch(setMainFilm(res));
+			})
+			.catch(console.log);
+	}, [popular]);
+
+	useEffect(() => {
+		if (mainFilm.isLoading) return;
+		useFilmImages(mainFilm.content.kinopoiskId, 'STILL', 1).then((res) => {
+			dispatch(setMainFilmImage(res));
+		});
+	}, [mainFilm]);
 
 	return (
 		<>
@@ -54,18 +49,9 @@ const Home = () => {
 				Популярно сейчас:
 			</h1>
 			<div className='sm:p-5 sm:pt-0 p-0'>
-				<MainCardBlock
-					isLoading={isLoading}
-					mainFilmName={mainFilmName}
-					mainFilmImage={mainFilmImage}
-					mainFilmDescription={mainFilmDescription}
-				/>
+				<MainCardBlock />
 				<div className='flex gap-[15px]'>
-					<FilmSlider
-						isLoading={isLoading}
-						slidesPerView={slidesPerView}
-						minorFilms={minorFilms}
-					/>
+					<FilmSlider />
 				</div>
 			</div>
 		</>

@@ -1,15 +1,21 @@
 import React, { useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setSort } from '../../redux/slices/sortSlice';
 import useClickOutside from '../../hooks/useClickOutside/useClickOutside';
 
-const Sort = ({ sortType, setSortType, options }) => {
+const Sort = () => {
+	const sort = useSelector((state) => state.sort);
+	const dispatch = useDispatch();
+
 	const [isShown, setIsShown] = useState(false);
 
 	const showMenu = () => {
 		setIsShown((prevState) => !prevState);
 	};
 
-	const selectValue = (obj) => {
-		setSortType(obj);
+	const selectValue = (value) => {
+		dispatch(setSort(value));
 		setIsShown(false);
 	};
 
@@ -24,7 +30,7 @@ const Sort = ({ sortType, setSortType, options }) => {
 				className='d-inline underline decoration-dotted'
 				onClick={showMenu}
 			>
-				{sortType.label}
+				{sort.selected.label}
 			</button>
 			<ul
 				ref={sortRef}
@@ -32,12 +38,12 @@ const Sort = ({ sortType, setSortType, options }) => {
 					isShown ? '' : 'hidden'
 				} absolute z-30 top-[25px] left-[100px] py-1 rounded bg-dark dark:bg-light text-light dark:text-dark`}
 			>
-				{options.map((option) => (
+				{sort.options.map((option) => (
 					<li key={option.value}>
 						<button
 							type='button'
 							className={`${
-								option.value === sortType.value
+								option.value === sort.selected.value
 									? 'dark:bg-notsodark dark:text-light bg-notsolight text-dark'
 									: 'dark:hover:bg-notsolight hover:bg-notsodark'
 							} w-full py-1 px-5 transition-colors`}
