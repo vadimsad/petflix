@@ -123,9 +123,15 @@ export const filterSlice = createSlice({
 			const { type, options } = action.payload;
 			state[type].options = options;
 		},
+		resetFilters(state) {
+			Object.keys(state).forEach((key) => {
+				state[key].selected = {};
+			});
+		},
 	},
 });
 
-export const { setFilter, setFilterOptions } = filterSlice.actions;
+export const { setFilter, setFilterOptions, resetFilters } =
+	filterSlice.actions;
 
 export default filterSlice.reducer;

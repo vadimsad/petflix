@@ -6,6 +6,7 @@ import Button from '../components/Button/Button';
 import CardBlock from '../components/CardBlock/CardBlock';
 import Filters from '../components/Filters/Filters';
 import Sort from '../components/Sort/Sort';
+import { resetFilters } from '../redux/slices/filterSlice';
 import { setCurrentPage, setTotalPages } from '../redux/slices/paginationSlice';
 import { setFilms, setStartLoading } from '../redux/slices/filmsSlice';
 
@@ -15,8 +16,11 @@ const Catalog = () => {
 	const sort = useSelector((state) => state.sort);
 	const { currentPage, totalPages } = useSelector((state) => state.pagination);
 	const { searchQuery } = useSelector((state) => state.search);
-
 	const dispatch = useDispatch();
+
+	const isFilterActive = Object.keys(filters).find(
+		(filterKey) => Object.keys(filters[filterKey].selected).length !== 0
+	);
 
 	useEffect(() => {
 		dispatch(setStartLoading('all'));
@@ -74,6 +78,10 @@ const Catalog = () => {
 		dispatch(setCurrentPage(currentPage + 1));
 	};
 
+	const onResetFilters = () => {
+		dispatch(resetFilters());
+	};
+
 	return (
 		<>
 			<h1 className='sm:p-5 sm:pb-3 pb-3 pt-5 xl:text-4xl sm:text-3xl text-2xl font-serif text-dark dark:text-light transition-colors'>
@@ -89,7 +97,17 @@ const Catalog = () => {
 			</p>
 			<div className='sm:mx-5 mx-0 mb-5 p-5 flex flex-col xl:gap-5 gap-4 bg-notsolight dark:bg-notsodark rounded-xl'>
 				<Filters />
-				<Sort />
+				<div className='flex justify-between xsm:flex-row flex-col-reverse text-left'>
+					<Sort />
+					{isFilterActive && (
+						<button type='button' onClick={onResetFilters}>
+							<span className='text-red-600'>&#x2715; </span>
+							<span className='underline decoration-dotted'>
+								Сбросить фильтры
+							</span>
+						</button>
+					)}
+				</div>
 			</div>
 			<div className='grid sm:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] sm:gap-6 gap-4 sm:p-5 sm:pt-0'>
 				<CardBlock />
