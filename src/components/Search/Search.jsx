@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchText, setSearchQuery } from '../../redux/slices/searchSlice';
@@ -7,8 +8,11 @@ const Search = () => {
 	const { searchText } = useSelector((state) => state.search.searchText);
 	const dispatch = useDispatch();
 
+	const navigate = useNavigate();
+
 	const changeSearchQuery = (e) => {
 		e.preventDefault();
+		navigate('/catalog');
 		dispatch(setSearchQuery());
 	};
 
