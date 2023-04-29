@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../../redux/slices/filterSlice';
 
 const SelectBlock = ({ type, placeholder }) => {
-	const { options, selected } = useSelector((state) => state.filters[type]);
+	const { options, selected } = useSelector((state) => state.filters.types[type]);
 	const { isLoading } = useSelector((state) => state.films.all);
 	const dispatch = useDispatch();
 

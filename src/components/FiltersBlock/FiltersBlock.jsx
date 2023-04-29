@@ -6,12 +6,8 @@ import Sort from '../Sort/Sort';
 import { resetFilters } from '../../redux/slices/filterSlice';
 
 const FiltersBlock = () => {
-	const filters = useSelector((state) => state.filters);
+	const { activeFiltersCount } = useSelector((state) => state.filters);
 	const dispatch = useDispatch();
-
-	const isFilterActive = Object.keys(filters).find(
-		(filterKey) => Object.keys(filters[filterKey].selected).length !== 0,
-	);
 
 	const onResetFilters = () => {
 		dispatch(resetFilters());
@@ -22,7 +18,7 @@ const FiltersBlock = () => {
 			<Filters />
 			<div className='flex justify-between xsm:flex-row flex-col-reverse text-left'>
 				<Sort />
-				{isFilterActive && (
+				{activeFiltersCount > 0 && (
 					<button type='button' onClick={onResetFilters}>
 						<span className='text-red-600'>&#x2715; </span>
 						<span className='underline decoration-dotted'>Сбросить фильтры</span>

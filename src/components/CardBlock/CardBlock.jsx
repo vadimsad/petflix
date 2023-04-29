@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import CardLoader from '../Cards/Card/CardLoader';
 import Cards from '../Cards/Cards';
-import { setFilms, setStartLoading } from '../../redux/slices/filmsSlice';
+import { setFilms, setStartLoading, setStopLoading } from '../../redux/slices/filmsSlice';
 import { setCurrentPage, setTotalPages } from '../../redux/slices/paginationSlice';
 import { api } from '../../api/API';
 
@@ -11,7 +11,7 @@ const CardBlock = () => {
 	const { content: allFilms, isLoading } = useSelector((state) => state.films.all);
 	const { currentPage } = useSelector((state) => state.pagination);
 	const { searchQuery } = useSelector((state) => state.search);
-	const filters = useSelector((state) => state.filters);
+	const { types: filters, activeFiltersCount } = useSelector((state) => state.filters);
 	const sort = useSelector((state) => state.sort);
 	const dispatch = useDispatch();
 
@@ -33,32 +33,40 @@ const CardBlock = () => {
 	};
 
 	const loadMoreFilms = () => {
+		dispatch(setStartLoading('all'));
 		api.getFilms(...params).then(({ items }) => {
 			const newFilms = [...allFilms, ...items];
 			dispatch(setFilms({ category: 'all', films: removeDuplicates(newFilms) }));
 		});
+		dispatch(setStopLoading('all'));
 	};
 
 	const updateFilmList = () => {
+		dispatch(setStartLoading('all'));
 		api.getFilms(...params).then(({ totalPages, items }) => {
 			dispatch(setFilms({ category: 'all', films: items }));
 			dispatch(setTotalPages(totalPages));
 		});
+		// загрузка завершается сразу после начала, из-за чего лоадеров не видно, нужно  setFilms сделать асинхронным
+		dispatch(setStopLoading('all'));
 	};
 
 	useEffect(() => {
+		if (currentPage === 1) return;
+
 		// Подгружаем фильмы в низ списка
-		dispatch(setStartLoading('all'));
 		loadMoreFilms();
 	}, [currentPage]);
 
 	useEffect(() => {
+		if (currentPage !== 1) {
+			dispatch(setFilms({ category: 'all', films: [] }));
+			dispatch(setCurrentPage(1));
+		}
+
 		// Очищаем все фильмы и показываем новые, соответствующие фильтрам
-		dispatch(setStartLoading('all'));
-		dispatch(setFilms({ category: 'all', films: [] }));
-		dispatch(setCurrentPage(1));
 		updateFilmList();
-	}, [filters, sort, searchQuery]);
+	}, [activeFiltersCount, sort, searchQuery]);
 
 	return (
 		<>
