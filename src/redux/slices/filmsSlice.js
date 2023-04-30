@@ -14,6 +14,10 @@ const initialState = {
 		isLoading: true,
 		content: {},
 	},
+	quickSearchResults: {
+		isLoading: true,
+		content: [],
+	},
 };
 
 export const filmsSlice = createSlice({

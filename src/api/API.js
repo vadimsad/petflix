@@ -4,7 +4,7 @@ import axios from 'axios';
 ('gmail: acf887b4-bdef-4246-a283-3737a6f89e96 (500/500)');
 
 const HEADERS = {
-	'X-API-KEY': '290a29e5-6a38-41ae-a8bf-f1708456187d',
+	'X-API-KEY': 'acf887b4-bdef-4246-a283-3737a6f89e96',
 	'Content-Type': 'application/json',
 };
 
@@ -14,20 +14,7 @@ const axiosInstance = axios.create({
 });
 
 export const api = {
-	async getFilms(genres, countries, type, ratingFrom, yearFrom, order, keyword, page) {
-		const config = {
-			params: {
-				genres,
-				countries,
-				type,
-				ratingFrom,
-				yearFrom,
-				order,
-				keyword,
-				page,
-			},
-		};
-
+	async getFilms(config) {
 		const res = await axiosInstance.get('films', config);
 		return res.data;
 	},

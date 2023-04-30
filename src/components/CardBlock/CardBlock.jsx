@@ -15,16 +15,18 @@ const CardBlock = () => {
 	const sort = useSelector((state) => state.sort);
 	const dispatch = useDispatch();
 
-	const params = [
-		filters.genres.selected.value,
-		filters.countries.selected.value,
-		filters.type.selected.value,
-		filters.ratingFrom.selected.value,
-		filters.yearFrom.selected.value,
-		sort.selected.value,
-		searchQuery,
-		currentPage,
-	];
+	const config = {
+		params: {
+			genres: filters.genres.selected.value,
+			countries: filters.countries.selected.value,
+			type: filters.type.selected.value,
+			ratingFrom: filters.ratingFrom.selected.value,
+			yearFrom: filters.yearFrom.selected.value,
+			order: sort.selected.value,
+			keyword: searchQuery,
+			page: currentPage,
+		},
+	};
 
 	const removeDuplicates = (array) => {
 		const uniqueFilms = [...new Set(array.map((item) => JSON.stringify(item)))];
@@ -34,7 +36,7 @@ const CardBlock = () => {
 
 	const loadMoreFilms = () => {
 		dispatch(setStartLoading('all'));
-		api.getFilms(...params).then(({ items }) => {
+		api.getFilms(config).then(({ items }) => {
 			const newFilms = [...allFilms, ...items];
 			dispatch(setFilms({ category: 'all', films: removeDuplicates(newFilms) }));
 		});
@@ -43,11 +45,11 @@ const CardBlock = () => {
 
 	const updateFilmList = () => {
 		dispatch(setStartLoading('all'));
-		api.getFilms(...params).then(({ totalPages, items }) => {
+		api.getFilms(config).then(({ totalPages, items }) => {
 			dispatch(setFilms({ category: 'all', films: items }));
 			dispatch(setTotalPages(totalPages));
 		});
-		// загрузка завершается сразу после начала, из-за чего лоадеров не видно, нужно  setFilms сделать асинхронным
+		// загрузка завершается сразу после начала, из-за чего лоадеров не видно, нужно setFilms сделать асинхронным
 		dispatch(setStopLoading('all'));
 	};
 

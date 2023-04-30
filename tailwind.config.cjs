@@ -41,7 +41,7 @@ module.exports = {
 				},
 			},
 			animation: {
-				appear: 'appear 0.5s ease-in-out',
+				appear: 'appear 0.5s ease 0s 1 alternate forwards',
 			},
 		},
 	},

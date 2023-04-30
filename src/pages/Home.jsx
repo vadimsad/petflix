@@ -7,6 +7,7 @@ import {
 	setMainFilm,
 	setMainFilmImage,
 	setStartLoading,
+	setStopLoading,
 } from '../redux/slices/filmsSlice';
 import FilmSlider from '../components/FilmSlider/FilmSlider';
 import MainCardBlock from '../components/MainCardBlock/MainCardBlock';
@@ -22,6 +23,8 @@ const Home = () => {
 		api.getPopular(1).then((res) => {
 			dispatch(setFilms({ category: 'popular', films: res.films }));
 		});
+
+		dispatch(setStopLoading('popular'));
 	}, []);
 
 	useEffect(() => {
@@ -34,6 +37,7 @@ const Home = () => {
 				dispatch(setMainFilm(res));
 			})
 			.catch(console.log);
+		dispatch(setStopLoading('mainFilm'));
 	}, [popular]);
 
 	useEffect(() => {

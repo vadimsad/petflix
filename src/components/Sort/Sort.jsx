@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../../redux/slices/sortSlice';
 import useClickOutside from '../../hooks/useClickOutside/useClickOutside';
 
-const Sort = () => {
+const Sort = React.memo(() => {
 	const sort = useSelector((state) => state.sort);
 	const dispatch = useDispatch();
 
@@ -25,11 +25,7 @@ const Sort = () => {
 	return (
 		<div className='relative'>
 			<span>Сортировать по: </span>
-			<button
-				type='button'
-				className='d-inline underline decoration-dotted'
-				onClick={showMenu}
-			>
+			<button type='button' className='d-inline underline decoration-dotted' onClick={showMenu}>
 				{sort.selected.label}
 			</button>
 			<ul
@@ -56,6 +52,6 @@ const Sort = () => {
 			</ul>
 		</div>
 	);
-};
+});
 
 export default Sort;
