@@ -16,12 +16,10 @@ const Menu = () => {
 				<li className='xsm:border-none border-b dark:border-light border-dark'>
 					<Link to={'new'}>Что нового</Link>
 				</li>
-				<li className='xsm:border-none border-b dark:border-light border-dark'>
-					Что посмотреть
-				</li>
+				<li className='xsm:border-none border-b dark:border-light border-dark'>Что посмотреть</li>
 			</ul>
 			<ul className='flex flex-wrap lg:gap-x-4 gap-x-2 items-center xsm:flex-row flex-col xsm:w-auto w-full'>
-				<li>
+				<li className='w-full'>
 					<Search />
 				</li>
 			</ul>

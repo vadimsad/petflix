@@ -14,7 +14,6 @@ import MainCardBlock from '../components/MainCardBlock/MainCardBlock';
 import useFilmImages from '../hooks/useFilmImages/useFilmImages';
 
 const Home = () => {
-	const { popular, mainFilm } = useSelector((state) => state.films);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -22,30 +21,9 @@ const Home = () => {
 
 		api.getPopular(1).then((res) => {
 			dispatch(setFilms({ category: 'popular', films: res.films }));
+			dispatch(setStopLoading('popular'));
 		});
-
-		dispatch(setStopLoading('popular'));
 	}, []);
-
-	useEffect(() => {
-		if (popular.isLoading) return;
-
-		dispatch(setStartLoading('mainFilm'));
-		api
-			.getFilmById(popular.content[0].filmId)
-			.then((res) => {
-				dispatch(setMainFilm(res));
-			})
-			.catch(console.log);
-		dispatch(setStopLoading('mainFilm'));
-	}, [popular]);
-
-	useEffect(() => {
-		if (mainFilm.isLoading) return;
-		useFilmImages(mainFilm.content.kinopoiskId, 'STILL', 1).then((res) => {
-			dispatch(setMainFilmImage(res));
-		});
-	}, [mainFilm]);
 
 	return (
 		<>

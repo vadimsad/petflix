@@ -47,7 +47,11 @@ const Search = () => {
 	};
 
 	return (
-		<div className='relative group'>
+		<div
+			className={`${
+				isInputFocused ? 'max-xsm:-top-[160px]' : 'max-xsm:top-0'
+			} relative group transition-[top]`}
+		>
 			<form onSubmit={changeSearchQuery}>
 				<label className='relative flex border-2 rounded-xl border-dark dark:border-blue bg-light dark:bg-dark focus-within:border-blue dark:focus-within:border-light overflow-hidden transition-colors'>
 					<div className='relative w-[20px] h-auto left-[10px]'>
