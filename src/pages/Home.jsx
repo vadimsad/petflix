@@ -1,17 +1,10 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { api } from '../api/API';
-import {
-	setFilms,
-	setMainFilm,
-	setMainFilmImage,
-	setStartLoading,
-	setStopLoading,
-} from '../redux/slices/filmsSlice';
+import { setFilms, setStartLoading, setStopLoading } from '../redux/slices/filmsSlice';
 import FilmSlider from '../components/FilmSlider/FilmSlider';
 import MainCardBlock from '../components/MainCardBlock/MainCardBlock';
-import useFilmImages from '../hooks/useFilmImages/useFilmImages';
 
 const Home = () => {
 	const dispatch = useDispatch();

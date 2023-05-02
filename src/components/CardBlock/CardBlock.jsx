@@ -1,19 +1,25 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import qs from 'qs';
 
 import CardLoader from '../Cards/Card/CardLoader';
 import Cards from '../Cards/Cards';
 import { setFilms, setStartLoading, setStopLoading } from '../../redux/slices/filmsSlice';
 import { setCurrentPage, setTotalPages } from '../../redux/slices/paginationSlice';
 import { api } from '../../api/API';
+import { setSort } from '../../redux/slices/sortSlice';
+import { setSearchQuery, setSearchText } from '../../redux/slices/searchSlice';
+import { setFilter } from '../../redux/slices/filterSlice';
 
 const CardBlock = () => {
 	const { content: allFilms, isLoading } = useSelector((state) => state.films.all);
 	const { currentPage } = useSelector((state) => state.pagination);
 	const { searchQuery } = useSelector((state) => state.search);
 	const { types: filters, activeFiltersCount } = useSelector((state) => state.filters);
-	const sort = useSelector((state) => state.sort);
+	const { selected: sort, options: sortOptions } = useSelector((state) => state.sort);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const config = {
 		params: {
@@ -22,7 +28,7 @@ const CardBlock = () => {
 			type: filters.type.selected.value,
 			ratingFrom: filters.ratingFrom.selected.value,
 			yearFrom: filters.yearFrom.selected.value,
-			order: sort.selected.value,
+			order: sort.value,
 			keyword: searchQuery,
 			page: currentPage,
 		},
@@ -54,6 +60,22 @@ const CardBlock = () => {
 	};
 
 	useEffect(() => {
+		const searchParams = window.location.search;
+		if (searchParams) {
+			const paramsParsed = qs.parse(searchParams.substring(1));
+
+			const sortOption = sortOptions.find((option) => option.value === paramsParsed.sort);
+			const searchQuery = paramsParsed.searchQuery;
+
+			dispatch(setSort(sortOption));
+			if (searchQuery) {
+				dispatch(setSearchText(searchQuery));
+				dispatch(setSearchQuery());
+			}
+		}
+	}, []);
+
+	useEffect(() => {
 		if (currentPage === 1) return;
 
 		// Подгружаем фильмы в низ списка
@@ -69,6 +91,19 @@ const CardBlock = () => {
 		// Очищаем все фильмы и показываем новые, соответствующие фильтрам
 		updateFilmList();
 	}, [activeFiltersCount, sort, searchQuery]);
+
+	useEffect(() => {
+		const queryString = qs.stringify(
+			{
+				sort: sort.value,
+				searchQuery: searchQuery || {},
+				currentPage: currentPage === 1 ? {} : currentPage,
+			},
+			{ addQueryPrefix: true },
+		);
+
+		navigate(queryString);
+	}, [activeFiltersCount, sort, searchQuery, currentPage]);
 
 	return (
 		<>

@@ -13,8 +13,6 @@ const FiltersBlock = () => {
 		dispatch(resetFilters());
 	};
 
-	// Мемоизировал компоненты Filters и Sort, чтобы при изменении activeFiltersCount они не перерисовывались
-
 	return (
 		<div className='sm:mx-5 mx-0 mb-5 p-5 flex flex-col xl:gap-5 gap-4 bg-notsolight dark:bg-notsodark rounded-xl'>
 			<Filters />

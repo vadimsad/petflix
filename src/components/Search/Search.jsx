@@ -41,8 +41,8 @@ const Search = () => {
 		[searchText],
 	);
 
-	const changeSearchText = (e) => {
-		dispatch(setSearchText(e.target.value));
+	const changeSearchText = (event) => {
+		dispatch(setSearchText(event.target.value));
 		quickSearch();
 	};
 

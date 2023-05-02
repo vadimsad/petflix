@@ -5,7 +5,6 @@ import MainCard from '../Cards/MainCard/MainCard';
 import MainCardLoader from '../Cards/MainCard/MainCardLoader';
 import { api } from '../../api/API';
 import {
-	setFilms,
 	setMainFilm,
 	setMainFilmImage,
 	setStartLoading,

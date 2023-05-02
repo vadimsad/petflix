@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import useClickOutside from '../../../hooks/useClickOutside/useClickOutside';
+import { useSelector } from 'react-redux';
 
 import QuickItem from './QuickItem/QuickItem';
 import QuickItemLoader from './QuickItem/QuickItemLoader';

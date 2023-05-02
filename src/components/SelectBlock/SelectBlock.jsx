@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,6 +14,7 @@ const SelectBlock = ({ type, placeholder }) => {
 	const onFilterChange = (option) => {
 		dispatch(setFilter({ type, option }));
 	};
+
 	return (
 		<Select
 			className='themed-select-container'
