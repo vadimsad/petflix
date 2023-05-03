@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import qs from 'qs';
@@ -10,7 +10,6 @@ import { setCurrentPage, setTotalPages } from '../../redux/slices/paginationSlic
 import { api } from '../../api/API';
 import { setSort } from '../../redux/slices/sortSlice';
 import { setSearchQuery, setSearchText } from '../../redux/slices/searchSlice';
-import { setFilter } from '../../redux/slices/filterSlice';
 
 const CardBlock = () => {
 	const { content: allFilms, isLoading } = useSelector((state) => state.films.all);
@@ -18,16 +17,19 @@ const CardBlock = () => {
 	const { searchQuery } = useSelector((state) => state.search);
 	const { types: filters, activeFiltersCount } = useSelector((state) => state.filters);
 	const { selected: sort, options: sortOptions } = useSelector((state) => state.sort);
+
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const isQueryParamsSet = useRef(false);
+	const componentDidMount = useRef(false);
 
 	const config = {
 		params: {
-			genres: filters.genres.selected.value,
-			countries: filters.countries.selected.value,
-			type: filters.type.selected.value,
-			ratingFrom: filters.ratingFrom.selected.value,
-			yearFrom: filters.yearFrom.selected.value,
+			genres: filters.genres.selected?.value,
+			countries: filters.countries.selected?.value,
+			type: filters.type.selected?.value,
+			ratingFrom: filters.ratingFrom.selected?.value,
+			yearFrom: filters.yearFrom.selected?.value,
 			order: sort.value,
 			keyword: searchQuery,
 			page: currentPage,
@@ -40,6 +42,7 @@ const CardBlock = () => {
 		return uniqueFilmsSerialized;
 	};
 
+	// Подгрузить следуюущую страницу с фильмами вниз
 	const loadMoreFilms = () => {
 		dispatch(setStartLoading('all'));
 		api.getFilms(config).then(({ items }) => {
@@ -49,6 +52,7 @@ const CardBlock = () => {
 		dispatch(setStopLoading('all'));
 	};
 
+	// Заменить текущие фильмы на новые в соответствии с фильтрами
 	const updateFilmList = () => {
 		dispatch(setStartLoading('all'));
 		api.getFilms(config).then(({ totalPages, items }) => {
@@ -59,6 +63,7 @@ const CardBlock = () => {
 		dispatch(setStopLoading('all'));
 	};
 
+	// Достаем параметры поиска и сортировки из URL, если они есть, кладем их в редакс
 	useEffect(() => {
 		const searchParams = window.location.search;
 		if (searchParams) {
@@ -72,27 +77,39 @@ const CardBlock = () => {
 				dispatch(setSearchText(searchQuery));
 				dispatch(setSearchQuery());
 			}
+
+			isQueryParamsSet.current = true;
 		}
 	}, []);
 
+	// При изменении страницы подгружаем фильмы
 	useEffect(() => {
 		if (currentPage === 1) return;
 
-		// Подгружаем фильмы в низ списка
 		loadMoreFilms();
 	}, [currentPage]);
 
+	// При изменении фильтров и сортировки получаем соответствующие фильмы
 	useEffect(() => {
 		if (currentPage !== 1) {
-			dispatch(setFilms({ category: 'all', films: [] }));
+			// dispatch(setFilms({ category: 'all', films: [] }));
 			dispatch(setCurrentPage(1));
 		}
 
-		// Очищаем все фильмы и показываем новые, соответствующие фильтрам
-		updateFilmList();
+		if (!isQueryParamsSet.current) {
+			updateFilmList();
+		}
+
+		isQueryParamsSet.current = false;
 	}, [activeFiltersCount, sort, searchQuery]);
 
+	// Добавляем параметры фильтрации в URL при их изменении (кроме первой отрисовки)
 	useEffect(() => {
+		if (!componentDidMount.current) {
+			componentDidMount.current = true;
+			return;
+		}
+
 		const queryString = qs.stringify(
 			{
 				sort: sort.value,

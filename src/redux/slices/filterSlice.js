@@ -4,17 +4,17 @@ const initialState = {
 	activeFiltersCount: 0,
 	types: {
 		genres: {
-			selected: {},
+			selected: null,
 			placeholder: 'Жанр',
 			options: [],
 		},
 		countries: {
-			selected: {},
+			selected: null,
 			placeholder: 'Страна',
 			options: [],
 		},
 		type: {
-			selected: {},
+			selected: null,
 			placeholder: 'Тип',
 			options: [
 				{
@@ -40,7 +40,7 @@ const initialState = {
 			],
 		},
 		ratingFrom: {
-			selected: {},
+			selected: null,
 			placeholder: 'Рейтинг',
 			options: [
 				{
@@ -62,7 +62,7 @@ const initialState = {
 			],
 		},
 		yearFrom: {
-			selected: {},
+			selected: null,
 			placeholder: 'Год',
 			options: [
 				{
@@ -129,7 +129,7 @@ export const filterSlice = createSlice({
 		},
 		resetFilters(state) {
 			Object.keys(state.types).forEach((key) => {
-				state.types[key].selected = {};
+				state.types[key].selected = null;
 			});
 			state.activeFiltersCount = 0;
 		},

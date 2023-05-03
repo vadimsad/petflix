@@ -9,8 +9,6 @@ const SelectBlock = ({ type, placeholder }) => {
 	const { isLoading } = useSelector((state) => state.films.all);
 	const dispatch = useDispatch();
 
-	const isSelectedEmpty = Object.keys(selected).length === 0;
-
 	const onFilterChange = (option) => {
 		dispatch(setFilter({ type, option }));
 	};
@@ -25,7 +23,7 @@ const SelectBlock = ({ type, placeholder }) => {
 			noOptionsMessage={() => 'Ничего не найдено :('}
 			isDisabled={isLoading}
 			isLoading={isLoading}
-			value={isSelectedEmpty ? null : selected}
+			value={selected}
 		/>
 	);
 };

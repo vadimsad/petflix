@@ -8,7 +8,7 @@ import { setFilter, setFilterOptions } from '../../redux/slices/filterSlice';
 
 const AsyncSelectBlock = ({ type, placeholder }) => {
 	const { isLoading } = useSelector((state) => state.films.all);
-	const options = useSelector((state) => state.filters.types[type].options);
+	const { options } = useSelector((state) => state.filters.types[type]);
 	const dispatch = useDispatch();
 
 	let optionItem = null;
@@ -42,6 +42,7 @@ const AsyncSelectBlock = ({ type, placeholder }) => {
 			const filteredOptions = selectOptions.filter((option) =>
 				option.label.toLowerCase().includes(searchValue.toLowerCase()),
 			);
+
 			dispatch(setFilterOptions({ type, options: filteredOptions }));
 			resolve([options]);
 		});

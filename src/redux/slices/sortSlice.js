@@ -28,9 +28,15 @@ export const sortSlice = createSlice({
 		setSort(state, action) {
 			state.selected = action.payload;
 		},
+		resetSort(state) {
+			state.selected = {
+				value: 'RATING',
+				label: 'рейтингу',
+			};
+		},
 	},
 });
 
-export const { setSort } = sortSlice.actions;
+export const { setSort, resetSort } = sortSlice.actions;
 
 export default sortSlice.reducer;
