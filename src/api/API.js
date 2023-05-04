@@ -4,7 +4,7 @@ import axios from 'axios';
 ('gmail: acf887b4-bdef-4246-a283-3737a6f89e96 (500/500)');
 
 const HEADERS = {
-	'X-API-KEY': 'acf887b4-bdef-4246-a283-3737a6f89e96',
+	'X-API-KEY': '290a29e5-6a38-41ae-a8bf-f1708456187d',
 	'Content-Type': 'application/json',
 };
 
@@ -18,10 +18,10 @@ export const api = {
 		const res = await axiosInstance.get('films', config);
 		return res.data;
 	},
-	async getPopular(page) {
+	async getTop(type, page) {
 		const config = {
 			params: {
-				type: 'TOP_100_POPULAR_FILMS',
+				type,
 				page,
 			},
 		};

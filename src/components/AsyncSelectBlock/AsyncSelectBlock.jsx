@@ -7,7 +7,7 @@ import useCapitalize from '../../hooks/useCapitalize/useCapitalize';
 import { setFilter, setFilterOptions } from '../../redux/slices/filterSlice';
 
 const AsyncSelectBlock = ({ type, placeholder }) => {
-	const { isLoading } = useSelector((state) => state.films.all);
+	const { status } = useSelector((state) => state.allFilms);
 	const { options } = useSelector((state) => state.filters.types[type]);
 	const dispatch = useDispatch();
 
@@ -58,8 +58,8 @@ const AsyncSelectBlock = ({ type, placeholder }) => {
 			onChange={onFilterChange}
 			noOptionsMessage={() => 'Ничего не найдено :('}
 			loadingMessage={() => 'Загрузка...'}
-			isDisabled={isLoading}
-			isLoading={isLoading}
+			isDisabled={status !== 'success'}
+			isLoading={status !== 'success'}
 		/>
 	);
 };

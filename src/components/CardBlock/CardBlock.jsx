@@ -5,15 +5,20 @@ import qs from 'qs';
 
 import CardLoader from '../Cards/Card/CardLoader';
 import Cards from '../Cards/Cards';
-import { setFilms, setStartLoading, setStopLoading } from '../../redux/slices/filmsSlice';
+import {
+	fetchFilms,
+	setFilms,
+	setStartLoading,
+	setStopLoading,
+} from '../../redux/slices/filmsSlice';
 import { setCurrentPage, setTotalPages } from '../../redux/slices/paginationSlice';
 import { api } from '../../api/API';
 import { setSort } from '../../redux/slices/sortSlice';
 import { setSearchQuery, setSearchText } from '../../redux/slices/searchSlice';
+import { fetchAllFilms } from '../../redux/slices/allFilmsSlice';
 
 const CardBlock = () => {
-	const { content: allFilms, isLoading } = useSelector((state) => state.films.all);
-	const { currentPage } = useSelector((state) => state.pagination);
+	const { content: allFilms, status, currentPage } = useSelector((state) => state.allFilms);
 	const { searchQuery } = useSelector((state) => state.search);
 	const { types: filters, activeFiltersCount } = useSelector((state) => state.filters);
 	const { selected: sort, options: sortOptions } = useSelector((state) => state.sort);
@@ -36,31 +41,27 @@ const CardBlock = () => {
 		},
 	};
 
-	const removeDuplicates = (array) => {
-		const uniqueFilms = [...new Set(array.map((item) => JSON.stringify(item)))];
-		const uniqueFilmsSerialized = uniqueFilms.map((film) => JSON.parse(film));
-		return uniqueFilmsSerialized;
-	};
-
 	// Подгрузить следуюущую страницу с фильмами вниз
 	const loadMoreFilms = () => {
-		dispatch(setStartLoading('all'));
-		api.getFilms(config).then(({ items }) => {
-			const newFilms = [...allFilms, ...items];
-			dispatch(setFilms({ category: 'all', films: removeDuplicates(newFilms) }));
-		});
-		dispatch(setStopLoading('all'));
+		// dispatch(setStartLoading('all'));
+		// api.getFilms(config).then(({ items }) => {
+		// 	const newFilms = [...allFilms, ...items];
+		// 	dispatch(setFilms({ category: 'all', films: removeDuplicates(newFilms) }));
+		// });
+		// dispatch(setStopLoading('all'));
+		dispatch(fetchAllFilms({ config, operationType: 'add' }));
 	};
 
 	// Заменить текущие фильмы на новые в соответствии с фильтрами
 	const updateFilmList = () => {
-		dispatch(setStartLoading('all'));
-		api.getFilms(config).then(({ totalPages, items }) => {
-			dispatch(setFilms({ category: 'all', films: items }));
-			dispatch(setTotalPages(totalPages));
-		});
-		// загрузка завершается сразу после начала, из-за чего лоадеров не видно, нужно setFilms сделать асинхронным
-		dispatch(setStopLoading('all'));
+		// dispatch(setStartLoading('all'));
+		// api.getFilms(config).then(({ totalPages, items }) => {
+		// 	dispatch(setFilms({ category: 'all', films: items }));
+		// 	dispatch(setTotalPages(totalPages));
+		// });
+		// // загрузка завершается сразу после начала, из-за чего лоадеров не видно, нужно setFilms сделать асинхронным
+		// dispatch(setStopLoading('all'));
+		dispatch(fetchAllFilms({ config, operationType: 'replace' }));
 	};
 
 	// Достаем параметры поиска и сортировки из URL, если они есть, кладем их в редакс
@@ -125,7 +126,13 @@ const CardBlock = () => {
 	return (
 		<>
 			{/* Нужно сделать состояние загрузки для каждой карточки отдельно */}
-			{isLoading ? [...Array(20)].map((_, index) => <CardLoader key={index} />) : <Cards />}
+			{status === 'success' ? (
+				<Cards />
+			) : status === 'loading' ? (
+				[...Array(20)].map((_, index) => <CardLoader key={index} />)
+			) : (
+				'ОШИБКА'
+			)}
 		</>
 	);
 };

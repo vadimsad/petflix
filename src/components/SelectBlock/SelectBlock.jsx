@@ -6,7 +6,7 @@ import { setFilter } from '../../redux/slices/filterSlice';
 
 const SelectBlock = ({ type, placeholder }) => {
 	const { options, selected } = useSelector((state) => state.filters.types[type]);
-	const { isLoading } = useSelector((state) => state.films.all);
+	const { status } = useSelector((state) => state.allFilms);
 	const dispatch = useDispatch();
 
 	const onFilterChange = (option) => {
@@ -21,8 +21,8 @@ const SelectBlock = ({ type, placeholder }) => {
 			placeholder={placeholder}
 			onChange={onFilterChange}
 			noOptionsMessage={() => 'Ничего не найдено :('}
-			isDisabled={isLoading}
-			isLoading={isLoading}
+			isDisabled={status !== 'success'}
+			isLoading={status !== 'success'}
 			value={selected}
 		/>
 	);

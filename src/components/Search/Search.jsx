@@ -7,6 +7,7 @@ import { setSearchText, setSearchQuery } from '../../redux/slices/searchSlice';
 import useDebounce from '../../hooks/useDebounce/useDebounce';
 import { api } from '../../api/API';
 import { setFilms, setStartLoading, setStopLoading } from '../../redux/slices/filmsSlice';
+import { fetchQuickFilms } from '../../redux/slices/quickFilmsSlice';
 
 const Search = () => {
 	const [isInputFocused, setIsInputFocused] = useState(false);
@@ -17,33 +18,30 @@ const Search = () => {
 
 	const inputRef = useRef(null);
 
-	const changeSearchQuery = (e) => {
-		e.preventDefault();
+	const changeSearchQuery = (event) => {
+		event.preventDefault();
+
 		navigate('/catalog');
 		dispatch(setSearchQuery());
-
 		inputRef.current.blur();
 	};
 
 	const quickSearch = useCallback(
-		useDebounce(() => {
-			dispatch(setStartLoading('quickSearchResults'));
+		useDebounce((searchTextCurrent) => {
 			const config = {
 				params: {
-					keyword: searchText,
+					keyword: searchTextCurrent,
 				},
 			};
-			api.getFilms(config).then((films) => {
-				dispatch(setFilms({ category: 'quickSearchResults', films: films.items }));
-				dispatch(setStopLoading('quickSearchResults'));
-			});
+			dispatch(fetchQuickFilms(config));
 		}, 350),
 		[searchText],
 	);
 
 	const changeSearchText = (event) => {
-		dispatch(setSearchText(event.target.value));
-		quickSearch();
+		const searchTextCurrent = event.target.value;
+		dispatch(setSearchText(searchTextCurrent));
+		quickSearch(searchTextCurrent);
 	};
 
 	return (

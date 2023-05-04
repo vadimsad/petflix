@@ -1,21 +1,28 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import SwiperBlock from './SwiperBlock/SwiperBlock';
 import CardLoader from '../Cards/Card/CardLoader';
+import { fetchSliderFilms } from '../../redux/slices/sliderFilmsSlice';
 
-const slidesPerView =
-	window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 3 : 4) : 5;
+const slidesPerView = window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 3 : 4) : 5;
 
-const FilmSlider = () => {
-	const isLoading = useSelector((state) => state.films.popular.isLoading);
+const FilmSlider = ({ type, typeForAPI }) => {
+	const status = useSelector((state) => state.sliderFilms[type].status);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchSliderFilms({ type, typeForAPI, page: 1 }));
+	}, []);
 
 	return (
 		<>
-			{isLoading ? (
+			{status === 'success' ? (
+				<SwiperBlock type={type} />
+			) : status === 'loading' ? (
 				[...Array(slidesPerView)].map((_, index) => <CardLoader key={index} />)
 			) : (
-				<SwiperBlock />
+				'Ошибка загрузки'
 			)}
 		</>
 	);

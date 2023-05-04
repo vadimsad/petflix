@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Card from './Card/Card';
 
 const Cards = () => {
-	const allFilms = useSelector((state) => state.films.all.content);
+	const allFilms = useSelector((state) => state.allFilms.content);
 
 	return (
 		<>
@@ -28,7 +28,7 @@ const Cards = () => {
 						genres={genres}
 						alt={'Постер ' + nameRu || nameEn || nameOriginal}
 					/>
-				)
+				),
 			)}
 		</>
 	);

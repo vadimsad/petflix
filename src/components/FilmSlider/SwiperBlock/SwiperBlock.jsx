@@ -7,8 +7,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import Card from '../../Cards/Card/Card';
 
-const SwiperBlock = () => {
-	const films = useSelector((state) => state.films.popular.content);
+const SwiperBlock = ({ type }) => {
+	const films = useSelector((state) => state.sliderFilms[type].content);
 
 	return (
 		<Swiper

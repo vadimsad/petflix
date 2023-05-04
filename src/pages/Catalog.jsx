@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '../components/Button/Button';
 import CardBlock from '../components/CardBlock/CardBlock';
-import { setCurrentPage } from '../redux/slices/paginationSlice';
+import { setCurrentPage } from '../redux/slices/allFilmsSlice';
 import FiltersBlock from '../components/FiltersBlock/FiltersBlock';
 
 const Catalog = () => {
-	const { currentPage, totalPages } = useSelector((state) => state.pagination);
+	const { currentPage, totalPages } = useSelector((state) => state.allFilms);
 	const dispatch = useDispatch();
 
 	const loadNextPage = () => {
@@ -27,10 +27,17 @@ const Catalog = () => {
 				сериалы.
 			</p>
 			<FiltersBlock />
-			<div className='grid sm:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] sm:gap-6 gap-4 sm:p-5 sm:pt-0'>
+			<div className='grid sm:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] sm:gap-6 gap-4 sm:p-5 sm:pt-0 sm:mb-0 mb-4'>
 				<CardBlock />
 			</div>
-			{currentPage < totalPages && <Button onclick={loadNextPage}>Показать еще</Button>}
+			{currentPage < totalPages && (
+				<Button
+					classNames='md:w-auto w-[250px] md:h-auto xsm:h-[30px] h-auto'
+					onclick={loadNextPage}
+				>
+					Показать еще
+				</Button>
+			)}
 		</>
 	);
 };
