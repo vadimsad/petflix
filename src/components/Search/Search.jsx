@@ -5,8 +5,6 @@ import QuickResult from './QuickResult/QuickResult';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchText, setSearchQuery } from '../../redux/slices/searchSlice';
 import useDebounce from '../../hooks/useDebounce/useDebounce';
-import { api } from '../../api/API';
-import { setFilms, setStartLoading, setStopLoading } from '../../redux/slices/filmsSlice';
 import { fetchQuickFilms } from '../../redux/slices/quickFilmsSlice';
 
 const Search = () => {

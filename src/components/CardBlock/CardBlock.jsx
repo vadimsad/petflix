@@ -16,6 +16,8 @@ import { api } from '../../api/API';
 import { setSort } from '../../redux/slices/sortSlice';
 import { setSearchQuery, setSearchText } from '../../redux/slices/searchSlice';
 import { fetchAllFilms } from '../../redux/slices/allFilmsSlice';
+import { filter } from 'dom-helpers';
+import { setFilter } from '../../redux/slices/filterSlice';
 
 const CardBlock = () => {
 	const { content: allFilms, status, currentPage } = useSelector((state) => state.allFilms);
@@ -73,6 +75,22 @@ const CardBlock = () => {
 			const sortOption = sortOptions.find((option) => option.value === paramsParsed.sort);
 			const searchQuery = paramsParsed.searchQuery;
 
+			for (let key in paramsParsed) {
+				// Если текущее свойство не является одним из фильтров
+				if (!filters[key]) continue;
+				// Если внутри этого свойства лежит уже готовый объект
+				// (для фильтров, у которых опции загружаются с API - genres, countries)
+				if (typeof paramsParsed[key] === 'object') {
+					dispatch(setFilter({ type: key, option: paramsParsed[key] }));
+				} else {
+					// Для фильтров, у которых опции уже лежат внутри редакса, находим объект прямо там
+					const filterOption = filters[key].options.find(
+						(option) => option.value == paramsParsed[key],
+					);
+					dispatch(setFilter({ type: key, option: filterOption }));
+				}
+			}
+
 			dispatch(setSort(sortOption));
 			if (searchQuery) {
 				dispatch(setSearchText(searchQuery));
@@ -113,9 +131,13 @@ const CardBlock = () => {
 
 		const queryString = qs.stringify(
 			{
+				genres: filters.genres.selected || undefined,
+				countries: filters.countries.selected || undefined,
+				type: filters.type.selected?.value,
+				ratingFrom: filters.ratingFrom.selected?.value,
+				yearFrom: filters.yearFrom.selected?.value,
 				sort: sort.value,
 				searchQuery: searchQuery || {},
-				currentPage: currentPage === 1 ? {} : currentPage,
 			},
 			{ addQueryPrefix: true },
 		);
