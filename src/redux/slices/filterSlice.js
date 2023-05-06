@@ -1,4 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { api } from '../../api/API';
+import useCapitalize from '../../hooks/useCapitalize/useCapitalize';
+
+export const fetchFilters = createAsyncThunk(
+	'filters/fetchFilterOptionsStatus',
+	async (filterInfo) => {
+		const filters = await api.getFilters();
+		return { filters };
+	},
+);
 
 const initialState = {
 	activeFiltersCount: 0,
@@ -123,10 +133,6 @@ export const filterSlice = createSlice({
 			state.types[type].selected = option;
 			state.activeFiltersCount++;
 		},
-		setFilterOptions(state, action) {
-			const { type, options } = action.payload;
-			state.types[type].options = options;
-		},
 		resetFilters(state) {
 			Object.keys(state.types).forEach((key) => {
 				state.types[key].selected = null;
@@ -134,8 +140,36 @@ export const filterSlice = createSlice({
 			state.activeFiltersCount = 0;
 		},
 	},
+	extraReducers: (builder) => {
+		builder.addCase(fetchFilters.fulfilled, (state, action) => {
+			const { filters } = action.payload;
+			const { type, searchValue } = action.meta.arg;
+
+			const selectOptions = filters[type].map((option) => {
+				const optionItem = Object.keys(option)[1];
+				const optionName = option[optionItem];
+				const optionNameCapitalized = useCapitalize(optionName);
+				return {
+					value: option.id,
+					label: optionNameCapitalized,
+				};
+			});
+
+			if (searchValue) {
+				const filteredOptions = selectOptions.filter((option) => {
+					return (option.label || '').toLowerCase().includes(searchValue.toLowerCase());
+				});
+				state.types[type].options = filteredOptions;
+			} else {
+				state.types[type].options = selectOptions;
+			}
+		});
+		builder.addCase(fetchFilters.rejected, (state, action) => {
+			console.log('Ошибка получения опций фильтра ', action);
+		});
+	},
 });
 
-export const { setFilter, setFilterOptions, resetFilters } = filterSlice.actions;
+export const { setFilter, resetFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;
