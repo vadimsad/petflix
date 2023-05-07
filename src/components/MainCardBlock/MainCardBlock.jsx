@@ -20,11 +20,13 @@ const MainCardBlock = () => {
 	return (
 		<>
 			{status === 'success' ? (
-				<div className='lg:h-[400px] md:h-[300px] h-auto w-full relative sm:mb-[20px] mb-[10px] lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden md:pb-[40%] pb-0'>
+				<div className='h-auto w-full relative sm:mb-[20px] mb-[10px] lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden md:pb-[40%] pb-0'>
 					<MainCard
 						name={mainFilm.nameRu || mainFilm.nameEn || mainFilm.nameOriginal}
 						imagesrc={imageUrl}
 						description={mainFilm.description}
+						genres={mainFilm.genres}
+						rating={mainFilm.ratingKinopoisk}
 						alt='Постер'
 					/>
 				</div>

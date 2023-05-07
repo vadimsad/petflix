@@ -8,7 +8,7 @@ import FiltersBlock from '../components/FiltersBlock/FiltersBlock';
 import { selectAllFilms } from '../redux/slices/filmsSlice';
 
 const Catalog = () => {
-	const { currentPage, totalPages } = useSelector(selectAllFilms);
+	const { currentPage, totalPages, status } = useSelector(selectAllFilms);
 	const dispatch = useDispatch();
 
 	const loadNextPage = () => {
@@ -35,6 +35,7 @@ const Catalog = () => {
 				<Button
 					classNames='md:w-auto w-[250px] md:h-auto xsm:h-[30px] h-auto'
 					onclick={loadNextPage}
+					disabled={status !== 'success'}
 				>
 					Показать еще
 				</Button>
