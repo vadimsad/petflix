@@ -52,6 +52,8 @@ export const allFilmsSlice = createSlice({
 	},
 });
 
+export const selectAllFilmsData = (state) => state.allFilms;
+
 export const { setCurrentPage } = allFilmsSlice.actions;
 
 export default allFilmsSlice.reducer;

@@ -10,10 +10,10 @@ import { selectSort, setSort } from '../../redux/slices/sortSlice';
 import { selectSearch, setSearchQuery, setSearchText } from '../../redux/slices/searchSlice';
 import { fetchAllFilms } from '../../redux/slices/allFilmsSlice';
 import { selectFilters, setFilter } from '../../redux/slices/filterSlice';
-import { selectAllFilms } from '../../redux/slices/filmsSlice';
+import { selectAllFilmsData } from '../../redux/slices/allFilmsSlice';
 
 const CardBlock = () => {
-	const { status, currentPage } = useSelector(selectAllFilms);
+	const { status, currentPage } = useSelector(selectAllFilmsData);
 	const { searchQuery } = useSelector(selectSearch);
 	const { types: filters, activeFiltersCount } = useSelector(selectFilters);
 	const { selected: sort, options: sortOptions } = useSelector(selectSort);

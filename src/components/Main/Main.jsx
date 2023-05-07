@@ -1,11 +1,9 @@
-import { Outlet } from 'react-router';
+import React from 'react';
 
-const Main = () => {
+const Main = ({ children }) => {
 	return (
 		<main className='flex-1'>
-			<div className='xl:container px-4 text-dark dark:text-light'>
-				<Outlet />
-			</div>
+			<div className='xl:container px-4 text-dark dark:text-light'>{children}</div>
 		</main>
 	);
 };

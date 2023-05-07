@@ -7,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import Card from '../../Cards/Card/Card';
 import { selectSliderFilmsByType } from '../../../redux/slices/sliderFilmsSlice';
+import { Link } from 'react-router-dom';
 
 const SwiperBlock = ({ type }) => {
 	const { content: films } = useSelector(selectSliderFilmsByType(type));
@@ -32,15 +33,16 @@ const SwiperBlock = ({ type }) => {
 		>
 			{films.slice(1).map((film) => (
 				<SwiperSlide key={film.filmId}>
-					<Card
-						key={film.filmId}
-						name={film.nameRu || film.nameEn}
-						imagesrc={film.posterUrl}
-						rating={film.rating}
-						year={film.year}
-						genres={film.genres}
-						alt='Постер'
-					/>
+					<Link to={`catalog/${film.filmId}`} key={film.filmId}>
+						<Card
+							name={film.nameRu || film.nameEn}
+							imagesrc={film.posterUrl}
+							rating={film.rating}
+							year={film.year}
+							genres={film.genres}
+							alt='Постер'
+						/>
+					</Link>
 				</SwiperSlide>
 			))}
 		</Swiper>

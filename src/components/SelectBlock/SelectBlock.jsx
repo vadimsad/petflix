@@ -3,11 +3,11 @@ import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectFiltersByType, setFilter } from '../../redux/slices/filterSlice';
-import { selectAllFilms } from '../../redux/slices/filmsSlice';
+import { selectAllFilmsData } from '../../redux/slices/allFilmsSlice';
 
 const SelectBlock = ({ type, placeholder }) => {
 	const { options, selected } = useSelector(selectFiltersByType(type));
-	const { status } = useSelector(selectAllFilms);
+	const { status } = useSelector(selectAllFilmsData);
 	const dispatch = useDispatch();
 
 	const onFilterChange = (option) => {

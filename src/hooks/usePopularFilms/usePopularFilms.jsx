@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import { api } from '../../api/API';
-import { setFilms } from '../../redux/slices/filmsSlice';
 
 const usePopularFilms = (minorFilmsQuantity) => {
 	const dispatch = useDispatch();

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AsyncSelect from 'react-select/async';
-import { selectAllFilms } from '../../redux/slices/filmsSlice';
+import { allFilmsSlice, selectAllFilmsData } from '../../redux/slices/allFilmsSlice';
 
 import { fetchFilters, selectFiltersByType, setFilter } from '../../redux/slices/filterSlice';
 
 const AsyncSelectBlock = ({ type, placeholder }) => {
-	const { status } = useSelector(selectAllFilms);
+	const { status } = useSelector(selectAllFilmsData);
 	const { options } = useSelector(selectFiltersByType(type));
 	const dispatch = useDispatch();
 

@@ -13,6 +13,7 @@ import Catalog from './pages/Catalog';
 import New from './pages/New';
 
 import { store } from './redux/store';
+import SingleFilm from './components/SingleFilm/SingleFilm';
 
 const router = createBrowserRouter([
 	{
@@ -20,12 +21,16 @@ const router = createBrowserRouter([
 		element: <App />,
 		children: [
 			{
-				path: '/',
+				path: '',
 				element: <Home />,
 			},
 			{
 				path: 'catalog',
 				element: <Catalog />,
+			},
+			{
+				path: 'catalog/:id',
+				element: <SingleFilm />,
 			},
 			{
 				path: 'new',

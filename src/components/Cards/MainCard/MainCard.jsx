@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import RatingStar from '../Card/RatingStar/RatingStar';
 
 const MainCard = ({ imagesrc, name, description, genres, rating, alt }) => {
@@ -42,7 +43,7 @@ const MainCard = ({ imagesrc, name, description, genres, rating, alt }) => {
 					Смотреть
 				</a> */}
 			</div>
-			<a href='#' className='absolute inset-0 xsm:z-10 z-20'></a>
+			{/* <Link to={`catalog/${id}`} className='absolute inset-0 xsm:z-10 z-20'></Link> */}
 		</>
 	);
 };

@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectAllFilms } from '../../redux/slices/filmsSlice';
+import { Link } from 'react-router-dom';
+import { selectAllFilmsData } from '../../redux/slices/allFilmsSlice';
 
 import Card from './Card/Card';
 
 const Cards = () => {
-	const { content: allFilms } = useSelector(selectAllFilms);
+	const { content: allFilms } = useSelector(selectAllFilmsData);
 
 	return (
 		<>
@@ -20,15 +21,16 @@ const Cards = () => {
 					year,
 					genres,
 				}) => (
-					<Card
-						key={kinopoiskId}
-						imagesrc={posterUrl}
-						name={nameRu || nameEn || nameOriginal}
-						rating={ratingKinopoisk || '-'}
-						year={year}
-						genres={genres}
-						alt={'Постер ' + nameRu || nameEn || nameOriginal}
-					/>
+					<Link to={`${kinopoiskId}`} key={kinopoiskId}>
+						<Card
+							imagesrc={posterUrl}
+							name={nameRu || nameEn || nameOriginal}
+							rating={ratingKinopoisk || '-'}
+							year={year}
+							genres={genres}
+							alt={'Постер ' + nameRu || nameEn || nameOriginal}
+						/>
+					</Link>
 				),
 			)}
 		</>

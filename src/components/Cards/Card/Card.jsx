@@ -3,7 +3,7 @@ import RatingStar from './RatingStar/RatingStar';
 
 const Card = ({ imagesrc, alt, name, rating, year, genres }) => {
 	return (
-		<a className='relative group hover:scale-[1.03] transition-transform duration-200'>
+		<div className='relative group hover:scale-[1.03] transition-transform duration-200'>
 			<figure className='flex flex-col h-full'>
 				<div className='relative pt-[142%] mb-1 sm:rounded-[20px] rounded-[10px] overflow-hidden'>
 					<img loading='lazy' src={imagesrc} alt={alt} className='w-full h-full absolute inset-0' />
@@ -30,7 +30,7 @@ const Card = ({ imagesrc, alt, name, rating, year, genres }) => {
 					{name}
 				</figcaption>
 			</figure>
-		</a>
+		</div>
 	);
 };
 
