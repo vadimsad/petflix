@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectFilters } from '../../redux/slices/filterSlice';
 
 import AsyncSelectBlock from '../AsyncSelectBlock/AsyncSelectBlock';
 import SelectBlock from '../SelectBlock/SelectBlock';
 
 const Filters = () => {
-	const filters = useSelector((state) => state.filters.types);
+	const { types: filters } = useSelector(selectFilters);
 
 	return (
 		<div className='grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] xl:gap-5 md:gap-3 gap-2'>

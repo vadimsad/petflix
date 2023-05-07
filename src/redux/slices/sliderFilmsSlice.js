@@ -52,6 +52,9 @@ export const sliderFilmsSlice = createSlice({
 	},
 });
 
+export const selectSliderFilms = (state) => state.sliderFilms;
+export const selectSliderFilmsByType = (type) => (state) => state.sliderFilms[type];
+
 export const { setSliderFilms } = sliderFilmsSlice.actions;
 
 export default sliderFilmsSlice.reducer;

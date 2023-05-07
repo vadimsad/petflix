@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectAllFilms } from '../../redux/slices/filmsSlice';
 
 const Button = ({ classNames, onclick, children }) => {
-	const { status } = useSelector((state) => state.allFilms);
+	const { status } = useSelector(selectAllFilms);
 
 	return (
 		<button

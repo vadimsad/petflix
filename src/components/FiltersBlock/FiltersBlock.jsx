@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Filters from '../Filters/Filters';
 import Sort from '../Sort/Sort';
-import { resetFilters } from '../../redux/slices/filterSlice';
+import { resetFilters, selectFilters } from '../../redux/slices/filterSlice';
 import { setSearchQuery, setSearchText } from '../../redux/slices/searchSlice';
 import { resetSort } from '../../redux/slices/sortSlice';
 
 const FiltersBlock = () => {
-	const { activeFiltersCount } = useSelector((state) => state.filters);
+	const { activeFiltersCount } = useSelector(selectFilters);
 	const dispatch = useDispatch();
 
 	const onResetFilters = () => {

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectAllFilms } from '../../redux/slices/filmsSlice';
 
 import Card from './Card/Card';
 
 const Cards = () => {
-	const allFilms = useSelector((state) => state.allFilms.content);
+	const { content: allFilms } = useSelector(selectAllFilms);
 
 	return (
 		<>

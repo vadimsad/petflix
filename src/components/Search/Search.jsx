@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router';
 
 import QuickResult from './QuickResult/QuickResult';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchText, setSearchQuery } from '../../redux/slices/searchSlice';
+import { setSearchText, setSearchQuery, selectSearch } from '../../redux/slices/searchSlice';
 import useDebounce from '../../hooks/useDebounce/useDebounce';
 import { fetchQuickFilms } from '../../redux/slices/quickFilmsSlice';
 
 const Search = () => {
 	const [isInputFocused, setIsInputFocused] = useState(false);
-	const { searchText } = useSelector((state) => state.search);
+	const { searchText } = useSelector(selectSearch);
 	const dispatch = useDispatch();
 
 	const navigate = useNavigate();

@@ -1,51 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AsyncSelect from 'react-select/async';
+import { selectAllFilms } from '../../redux/slices/filmsSlice';
 
-import { api } from '../../api/API';
-import useCapitalize from '../../hooks/useCapitalize/useCapitalize';
-import { setFilter, setFilterOptions } from '../../redux/slices/filterSlice';
+import { fetchFilters, selectFiltersByType, setFilter } from '../../redux/slices/filterSlice';
 
 const AsyncSelectBlock = ({ type, placeholder }) => {
-	const { status } = useSelector((state) => state.allFilms);
-	const { options } = useSelector((state) => state.filters.types[type]);
+	const { status } = useSelector(selectAllFilms);
+	const { options } = useSelector(selectFiltersByType(type));
 	const dispatch = useDispatch();
-
-	let optionItem = null;
-	if (type) {
-		switch (type) {
-			case 'genres': {
-				optionItem = 'genre';
-				break;
-			}
-			case 'countries': {
-				optionItem = 'country';
-				break;
-			}
-		}
-	}
 
 	const onFilterChange = (option) => {
 		dispatch(setFilter({ type, option }));
 	};
 
 	const loadOptions = (searchValue, resolve) => {
-		api.getFilters().then((filters) => {
-			const selectOptions = filters[type].map((option) => {
-				const optionName = option[optionItem];
-				const optionNameCapitalized = useCapitalize(optionName);
-				return {
-					value: option.id,
-					label: optionNameCapitalized,
-				};
-			});
-			const filteredOptions = selectOptions.filter((option) =>
-				option.label.toLowerCase().includes(searchValue.toLowerCase()),
-			);
-
-			dispatch(setFilterOptions({ type, options: filteredOptions }));
-			resolve([options]);
-		});
+		dispatch(fetchFilters({ type, searchValue }));
+		resolve([options]);
 	};
 
 	return (

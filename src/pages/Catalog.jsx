@@ -5,9 +5,10 @@ import Button from '../components/Button/Button';
 import CardBlock from '../components/CardBlock/CardBlock';
 import { setCurrentPage } from '../redux/slices/allFilmsSlice';
 import FiltersBlock from '../components/FiltersBlock/FiltersBlock';
+import { selectAllFilms } from '../redux/slices/filmsSlice';
 
 const Catalog = () => {
-	const { currentPage, totalPages } = useSelector((state) => state.allFilms);
+	const { currentPage, totalPages } = useSelector(selectAllFilms);
 	const dispatch = useDispatch();
 
 	const loadNextPage = () => {

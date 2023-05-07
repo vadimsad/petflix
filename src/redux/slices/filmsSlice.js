@@ -1,24 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../../api/API';
 
-export const fetchFilms = createAsyncThunk(
-	'users/fetchFilmsStatus',
-	async (data, thunkAPI) => {
-		const { config, type } = data;
-		const response = await api.getFilms(config);
-		return { ...response, type };
-	},
-	{
-		getPendingMeta: (action, { getState }) => {
-			const type = action.meta.arg.type;
-			return { type };
-		},
-		getRejectedMeta: (action, { getState }) => {
-			const type = action.meta.arg.type;
-			return { type };
-		},
-	},
-);
+export const fetchFilms = createAsyncThunk('users/fetchFilmsStatus', async (data, thunkAPI) => {
+	const { config, type } = data;
+	const response = await api.getFilms(config);
+	return { ...response, type };
+});
 
 const initialState = {
 	all: {
@@ -82,6 +69,8 @@ export const filmsSlice = createSlice({
 		});
 	},
 });
+
+export const selectAllFilms = (state) => state.allFilms;
 
 export const { setFilms, setMainFilm, setMainFilmImage, setStartLoading, setStopLoading } =
 	filmsSlice.actions;

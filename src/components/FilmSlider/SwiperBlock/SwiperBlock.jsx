@@ -6,9 +6,10 @@ import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Card from '../../Cards/Card/Card';
+import { selectSliderFilmsByType } from '../../../redux/slices/sliderFilmsSlice';
 
 const SwiperBlock = ({ type }) => {
-	const films = useSelector((state) => state.sliderFilms[type].content);
+	const { content: films } = useSelector(selectSliderFilmsByType(type));
 
 	return (
 		<Swiper

@@ -47,6 +47,8 @@ export const mainFilmSlice = createSlice({
 	},
 });
 
+export const selectMainFilm = (state) => state.mainFilm;
+
 export const { setMainFilm, setMainFilmImage } = mainFilmSlice.actions;
 
 export default mainFilmSlice.reducer;

@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setFilter } from '../../redux/slices/filterSlice';
+import { selectFiltersByType, setFilter } from '../../redux/slices/filterSlice';
+import { selectAllFilms } from '../../redux/slices/filmsSlice';
 
 const SelectBlock = ({ type, placeholder }) => {
-	const { options, selected } = useSelector((state) => state.filters.types[type]);
-	const { status } = useSelector((state) => state.allFilms);
+	const { options, selected } = useSelector(selectFiltersByType(type));
+	const { status } = useSelector(selectAllFilms);
 	const dispatch = useDispatch();
 
 	const onFilterChange = (option) => {

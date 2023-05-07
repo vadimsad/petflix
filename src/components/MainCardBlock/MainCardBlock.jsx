@@ -3,18 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import MainCard from '../Cards/MainCard/MainCard';
 import MainCardLoader from '../Cards/MainCard/MainCardLoader';
-import { fetchMainFilm } from '../../redux/slices/mainFilmSlice';
+import { fetchMainFilm, selectMainFilm } from '../../redux/slices/mainFilmSlice';
+import { selectSliderFilms } from '../../redux/slices/sliderFilmsSlice';
 
 const MainCardBlock = () => {
-	const { content: mainFilm, status, imageUrl } = useSelector((state) => state.mainFilm);
-	const popularFilms = useSelector((state) => state.sliderFilms.popular);
+	const { content: mainFilm, status, imageUrl } = useSelector(selectMainFilm);
+	const { popular } = useSelector(selectSliderFilms);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (popularFilms.status !== 'success') return;
-		const mainFilmId = popularFilms.content[0].filmId;
+		if (popular.status !== 'success') return;
+		const mainFilmId = popular.content[0].filmId;
 		dispatch(fetchMainFilm({ id: mainFilmId, imageType: 'STILL', page: 1 }));
-	}, [popularFilms]);
+	}, [popular]);
 
 	return (
 		<>

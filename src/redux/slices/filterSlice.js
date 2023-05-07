@@ -170,6 +170,9 @@ export const filterSlice = createSlice({
 	},
 });
 
+export const selectFilters = (state) => state.filters;
+export const selectFiltersByType = (type) => (state) => state.filters.types[type];
+
 export const { setFilter, resetFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;

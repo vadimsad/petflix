@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setSort } from '../../redux/slices/sortSlice';
+import { selectSort, setSort } from '../../redux/slices/sortSlice';
 import useClickOutside from '../../hooks/useClickOutside/useClickOutside';
 
 const Sort = React.memo(() => {
-	const sort = useSelector((state) => state.sort);
+	const sort = useSelector(selectSort);
 	const dispatch = useDispatch();
 
 	const [isShown, setIsShown] = useState(false);
