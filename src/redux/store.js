@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import allFilms from './slices/allFilmsSlice';
+import singleFilm from './slices/singleFilmSlice';
 import mainFilm from './slices/mainFilmSlice';
 import sliderFilms from './slices/sliderFilmsSlice';
 import quickFilms from './slices/quickFilmsSlice';
@@ -10,5 +11,15 @@ import search from './slices/searchSlice';
 import pagination from './slices/paginationSlice';
 
 export const store = configureStore({
-	reducer: { allFilms, mainFilm, sliderFilms, quickFilms, filters, sort, search, pagination },
+	reducer: {
+		allFilms,
+		singleFilm,
+		mainFilm,
+		sliderFilms,
+		quickFilms,
+		filters,
+		sort,
+		search,
+		pagination,
+	},
 });

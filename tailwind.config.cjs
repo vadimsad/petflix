@@ -16,7 +16,9 @@ module.exports = {
 				notsolight: '#b8d4e0',
 				light: '#DCEAF0',
 				lightTransparent: 'rgba(220, 234, 240, 0.8);',
-				yellow: '#F8DB2F',
+				red: '#e30e1c',
+				yellow: '#eed21a',
+				green: '#15e34e',
 				blue: '#18324e',
 			},
 			container: {
