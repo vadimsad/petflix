@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import QuickItem from './QuickItem/QuickItem';
 import QuickItemLoader from './QuickItem/QuickItemLoader';
@@ -17,12 +18,13 @@ const QuickResult = React.memo(({ shown }) => {
 				quickFilms.map((film) => {
 					return (
 						<li key={film.kinopoiskId}>
-							<QuickItem
-								key={film.kinopoiskId}
-								name={film.nameRu || film.nameEn || film.nameOriginal}
-								imageUrl={film.posterUrlPreview}
-								genres={film.genres}
-							/>
+							<Link to={`catalog/${film.kinopoiskId}`}>
+								<QuickItem
+									name={film.nameRu || film.nameEn || film.nameOriginal}
+									imageUrl={film.posterUrlPreview}
+									genres={film.genres}
+								/>
+							</Link>
 						</li>
 					);
 				})

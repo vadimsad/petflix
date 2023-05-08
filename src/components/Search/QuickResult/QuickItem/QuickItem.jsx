@@ -2,10 +2,7 @@ import React from 'react';
 
 const QuickItem = ({ name, imageUrl, genres }) => {
 	return (
-		<a
-			href='#'
-			className='flex gap-3 px-2 py-2 bg-transparent hover:bg-notsolight dark:hover:bg-notsodark'
-		>
+		<div className='flex gap-3 px-2 py-2 bg-transparent hover:bg-notsolight dark:hover:bg-notsodark'>
 			<div className='flex-[1]'>
 				<img className='w-full h-full object-cover' src={imageUrl} alt={name + 'Постер'} />
 			</div>
@@ -17,7 +14,7 @@ const QuickItem = ({ name, imageUrl, genres }) => {
 					)}
 				</p>
 			</div>
-		</a>
+		</div>
 	);
 };
 
