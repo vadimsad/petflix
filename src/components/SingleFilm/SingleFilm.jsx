@@ -43,7 +43,7 @@ const SingleFilm = () => {
 						)}
 					</span>
 				</div>
-				<p className='text-lg'>{film.description}</p>
+				<p className='text-lg'>{film.shortDescription}</p>
 			</div>
 			<div className='absolute z-10 inset-0 bottom-auto h-full after:content-[""] after:absolute after:inset-0 after:bg-gradient-to-r after:from-black after:to-transparent lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden'>
 				<img
