@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import RatingStar from '../Card/RatingStar/RatingStar';
+import Rating from '../../Rating/Rating';
 
 const MainCard = ({ imagesrc, name, description, genres, rating, alt }) => {
 	return (
@@ -24,12 +23,7 @@ const MainCard = ({ imagesrc, name, description, genres, rating, alt }) => {
 					<p className=''>{description}</p>
 				</div>
 				<div className='lg:hidden block flex items-center gap-2'>
-					<div className='inline-flex'>
-						<div className='w-[14px] h-[14px] self-center'>
-							<RatingStar fill='#FFDC74' />
-						</div>
-						<i className='not-italic lg:text-sm text-xs'>{rating}</i>
-					</div>
+					<Rating>{rating}</Rating>
 					<span className='lg:text-sm text-xs'>
 						{genres.map((genre, index) =>
 							index + 1 === genres.length ? genre.genre : genre.genre + ', ',

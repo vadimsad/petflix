@@ -36,7 +36,7 @@ const SingleFilm = () => {
 				<div className='flex gap-2 mb-2'>
 					<Rating>{film.ratingKinopoisk}</Rating>
 					<span className='opacity-80'>{film.year}</span>
-					<span className='opacity-80'>{film.filmLength + ' мин'}</span>
+					{film.filmLength && <span className='opacity-80'>{film.filmLength + ' мин'}</span>}
 					<span className='opacity-80'>
 						{film.genres.map((genre, index) =>
 							index !== film.genres.length - 1 ? genre.genre + ', ' : genre.genre,
