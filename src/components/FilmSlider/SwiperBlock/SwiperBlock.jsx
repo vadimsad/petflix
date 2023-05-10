@@ -8,9 +8,19 @@ import 'swiper/css/navigation';
 import Card from '../../Cards/Card/Card';
 import { selectSliderFilmsByType } from '../../../redux/slices/sliderFilmsSlice';
 import { Link } from 'react-router-dom';
+import { selectSimilarFilms } from '../../../redux/slices/singleFilmSlice';
 
-const SwiperBlock = ({ type }) => {
-	const { content: films } = useSelector(selectSliderFilmsByType(type));
+const SwiperBlock = ({ type, page }) => {
+	const { content: filmsOnHomePage } = useSelector(selectSliderFilmsByType(type)) || {};
+	const filmsOnSinglePage = useSelector(selectSimilarFilms);
+
+	let films;
+
+	if (page === 'home') {
+		films = filmsOnHomePage.slice(1);
+	} else {
+		films = filmsOnSinglePage;
+	}
 
 	return (
 		<Swiper
@@ -31,9 +41,9 @@ const SwiperBlock = ({ type }) => {
 				},
 			}}
 		>
-			{films.slice(1).map((film) => (
+			{films.map((film) => (
 				<SwiperSlide key={film.filmId}>
-					<Link to={`catalog/${film.filmId}`} key={film.filmId}>
+					<Link to={`../catalog/${film.filmId}`} relative='route' key={film.filmId}>
 						<Card
 							name={film.nameRu || film.nameEn}
 							imagesrc={film.posterUrl}

@@ -12,7 +12,7 @@ const Home = () => {
 			<div className='sm:p-5 sm:pt-0 p-0'>
 				<MainCardBlock />
 				<div className='flex gap-[15px]'>
-					<FilmSlider type='popular' typeForAPI='TOP_100_POPULAR_FILMS' />
+					<FilmSlider type='popular' typeForAPI='TOP_100_POPULAR_FILMS' page='home' />
 				</div>
 			</div>
 		</>

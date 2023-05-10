@@ -9,9 +9,23 @@ export const fetchFilm = createAsyncThunk('singleFilm/fetchFilmStatus', async (i
 	return { filmData, filmImage };
 });
 
+export const fetchSliderFilmsSimilar = createAsyncThunk(
+	'singleFilm/fetchSliderFilmsSimilarStatus',
+	async (id) => {
+		const response = await api.getSimilar(id);
+		return response;
+	},
+);
+
 const initialState = {
-	status: 'loading',
-	content: {},
+	film: {
+		status: 'loading',
+		content: {},
+	},
+	similar: {
+		status: 'loading',
+		content: [],
+	},
 };
 
 export const singleFilmSlice = createSlice({
@@ -19,12 +33,12 @@ export const singleFilmSlice = createSlice({
 	initialState,
 	reducers: {
 		setFilm(state, action) {
-			state.content = action.payload;
+			state.film.content = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchFilm.pending, (state) => {
-			state.status = 'loading';
+			state.film.status = 'loading';
 		});
 		builder.addCase(fetchFilm.fulfilled, (state, action) => {
 			const { filmData, filmImage } = action.payload;
@@ -34,17 +48,32 @@ export const singleFilmSlice = createSlice({
 				imageUrl = filmImage.items[0].imageUrl;
 			}
 
-			state.content = { ...filmData, imageUrl };
-			state.status = 'success';
+			state.film.content = { ...filmData, imageUrl };
+			state.film.status = 'success';
 		});
 		builder.addCase(fetchFilm.rejected, (state, action) => {
-			state.status = 'error';
+			state.film.status = 'error';
+			console.log(action);
+		});
+		builder.addCase(fetchSliderFilmsSimilar.pending, (state) => {
+			state.similar.status = 'loading';
+		});
+		builder.addCase(fetchSliderFilmsSimilar.fulfilled, (state, action) => {
+			state.similar.content = action.payload.items;
+			state.similar.status = 'success';
+		});
+		builder.addCase(fetchSliderFilmsSimilar.rejected, (state, action) => {
+			state.similar.status = 'error';
 			console.log(action);
 		});
 	},
 });
 
-export const selectFilm = (state) => state.singleFilm;
+export const selectFilm = (state) => state.singleFilm.film;
+export const selectFilmId = (state) => state.singleFilm.film.content.kinopoiskId;
+
+export const selectSimilarFilms = (state) => state.singleFilm.similar.content;
+export const selectSimilarFilmsStatus = (state) => state.singleFilm.similar.status;
 
 export const { setFilm } = singleFilmSlice.actions;
 

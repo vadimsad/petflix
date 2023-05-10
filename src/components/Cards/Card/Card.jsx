@@ -17,13 +17,15 @@ const Card = ({ imagesrc, alt, name, rating, year, genres }) => {
 							<Rating>{rating}</Rating>
 							<span>{year}</span>
 						</div>
-						<div className='lg:text-sm text-xs'>
-							<span>
-								{genres.map((genre, index) =>
-									index + 1 === genres.length ? genre.genre : genre.genre + ', ',
-								)}
-							</span>
-						</div>
+						{genres && (
+							<div className='lg:text-sm text-xs'>
+								<span>
+									{genres.map((genre, index) =>
+										index + 1 === genres.length ? genre.genre : genre.genre + ', ',
+									)}
+								</span>
+							</div>
+						)}
 					</div>
 				</div>
 				<figcaption className='lg:text-base text-xs mt-auto whitespace-nowrap text-ellipsis overflow-hidden'>
