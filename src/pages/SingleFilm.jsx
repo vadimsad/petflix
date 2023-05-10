@@ -5,6 +5,7 @@ import { fetchFilm, selectFilm } from '../redux/slices/singleFilmSlice';
 
 import FilmHeader from '../components/SingleFilm/FilmHeader/FilmHeader';
 import Description from '../components/SingleFilm/Description/Description';
+import Similar from '../components/SingleFilm/Similar/Similar';
 
 const SingleFilm = () => {
 	const { id } = useParams();
@@ -34,7 +35,15 @@ const SingleFilm = () => {
 				imageUrl={film.imageUrl}
 				genres={genresShown}
 			/>
-			<Description>{film.description}</Description>
+			<Description>{film.description || 'Описание отсутствует :('}</Description>
+			<Similar />
+			{/* 
+                Карточка
+                Описание
+                Похожие
+                Отзывы
+                Награды
+            */}
 		</>
 	);
 };

@@ -16,7 +16,7 @@ const FilmHeader = ({
 	imageUrl,
 }) => {
 	return (
-		<div className='relative px-5 py-10 mt-5 min-h-[400px] flex'>
+		<section className='relative px-5 py-10 mt-5 min-h-[400px] flex mb-5'>
 			<div className='relative z-20 inline-block w-1/2 flex flex-col'>
 				<Logo logoUrl={logoUrl} name={name} />
 				<div className='flex gap-2 mb-2'>
@@ -33,7 +33,7 @@ const FilmHeader = ({
 			<div className='absolute z-10 inset-0 bottom-auto h-full after:content-[""] after:absolute after:inset-0 after:bg-gradient-to-r after:from-black after:to-transparent lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden'>
 				<img src={imageUrl} alt={`Фильм ${name}`} className='w-full h-full object-cover' />
 			</div>
-		</div>
+		</section>
 	);
 };
 

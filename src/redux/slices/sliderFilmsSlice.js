@@ -7,16 +7,6 @@ export const fetchSliderFilms = createAsyncThunk(
 		const response = await api.getTop(typeForAPI, page);
 		return { ...response, type };
 	},
-	{
-		getPendingMeta: (action) => {
-			const type = action.arg.type;
-			return { type };
-		},
-		getRejectedMeta: (action) => {
-			const type = action.arg.type;
-			return { type };
-		},
-	},
 );
 
 const initialState = {
