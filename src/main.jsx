@@ -13,7 +13,7 @@ import Catalog from './pages/Catalog';
 import New from './pages/New';
 
 import { store } from './redux/store';
-import SingleFilm from './components/SingleFilm/SingleFilm';
+import SingleFilm from './pages/SingleFilm';
 
 const router = createBrowserRouter([
 	{

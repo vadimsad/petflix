@@ -6,6 +6,7 @@ import Sort from '../Sort/Sort';
 import { resetFilters, selectFilters } from '../../redux/slices/filterSlice';
 import { setSearchQuery, setSearchText } from '../../redux/slices/searchSlice';
 import { resetSort } from '../../redux/slices/sortSlice';
+import { setCurrentPage } from '../../redux/slices/allFilmsSlice';
 
 const FiltersBlock = () => {
 	const { activeFiltersCount } = useSelector(selectFilters);
@@ -17,6 +18,7 @@ const FiltersBlock = () => {
 
 	useEffect(() => {
 		return () => {
+			dispatch(setCurrentPage(1));
 			dispatch(resetFilters());
 			dispatch(setSearchText(''));
 			dispatch(setSearchQuery());
