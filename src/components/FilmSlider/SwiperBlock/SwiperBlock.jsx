@@ -22,6 +22,10 @@ const SwiperBlock = ({ type, page }) => {
 		films = filmsOnSinglePage;
 	}
 
+	if (films.length === 0) {
+		return <span>Фильмы не найдены :(</span>;
+	}
+
 	return (
 		<Swiper
 			spaceBetween={10}

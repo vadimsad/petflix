@@ -36,6 +36,10 @@ export const api = {
 		const res = await axiosInstance.get(`films/${filmId}`);
 		return res.data;
 	},
+	async getReviews(filmId) {
+		const res = await axiosInstance.get(`films/${filmId}/reviews`);
+		return res.data;
+	},
 	async getFilmImages(filmId, type, page) {
 		const config = {
 			params: {

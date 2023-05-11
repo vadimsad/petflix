@@ -15,15 +15,17 @@ const FilmHeader = ({
 	countries,
 	imageUrl,
 }) => {
+	const country = countries[0]?.country || null;
+
 	return (
-		<section className='relative px-5 py-10 mt-5 min-h-[400px] flex mb-5'>
+		<section className='relative px-5 py-10 mt-5 min-h-[400px] flex mb-10'>
 			<div className='relative z-20 inline-block w-1/2 flex flex-col'>
 				<Logo logoUrl={logoUrl} name={name} />
 				<div className='flex gap-2 mb-2'>
 					<Info rating={rating} year={year} length={length} genres={genres} />
 				</div>
 				<div className='flex-1 mb-2'>
-					<ShortDescription shortDescription={shortDescription} country={countries[0].country} />
+					<ShortDescription shortDescription={shortDescription} country={country} />
 				</div>
 				<div className='flex gap-2'>
 					<Button>Смотреть</Button>
