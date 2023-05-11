@@ -14,7 +14,7 @@ const SingleFilm = () => {
 
 	useEffect(() => {
 		dispatch(fetchFilm(id));
-	}, []);
+	}, [id]);
 
 	if (status !== 'success') {
 		return <div>Loading...</div>;

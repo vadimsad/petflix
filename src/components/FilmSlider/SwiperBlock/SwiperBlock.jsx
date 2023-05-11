@@ -43,7 +43,7 @@ const SwiperBlock = ({ type, page }) => {
 		>
 			{films.map((film) => (
 				<SwiperSlide key={film.filmId}>
-					<Link to={`../catalog/${film.filmId}`} relative='route' key={film.filmId}>
+					<Link to={`/catalog/${film.filmId}`} key={film.filmId}>
 						<Card
 							name={film.nameRu || film.nameEn}
 							imagesrc={film.posterUrl}
