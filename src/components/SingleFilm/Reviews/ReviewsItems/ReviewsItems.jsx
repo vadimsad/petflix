@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
 import {
 	fetchFilmReviews,
 	selectFilmId,
@@ -7,6 +9,9 @@ import {
 	selectFilmReviewsStatus,
 } from '../../../../redux/slices/singleFilmSlice';
 import ReviewsItem from './ReviewsItem/ReviewsItem';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const ReviewsItems = () => {
 	const reviews = useSelector(selectFilmReviews);
@@ -23,17 +28,35 @@ const ReviewsItems = () => {
 	}
 
 	return (
-		<div className='grid grid-cols-3 gap-3'>
+		<Swiper
+			spaceBetween={10}
+			slidesPerView={1.5}
+			slidesPerGroup={1}
+			modules={[Navigation]}
+			navigation={true}
+			breakpoints={{
+				1024: {
+					slidesPerView: 2.5,
+					slidesPerGroup: 2,
+				},
+				// 640: {
+				// 	slidesPerView: 1.5,
+				// 	slidesPerGroup: 1,
+				// 	spaceBetween: 15,
+				// },
+			}}
+		>
 			{reviews.map((review) => (
-				<ReviewsItem
-					key={review.kinopoiskId}
-					author={review.author}
-					date={review.date}
-					ratingType={review.type}
-					text={review.description}
-				/>
+				<SwiperSlide key={review.kinopoiskId}>
+					<ReviewsItem
+						author={review.author}
+						date={review.date}
+						ratingType={review.type}
+						text={review.description}
+					/>
+				</SwiperSlide>
 			))}
-		</div>
+		</Swiper>
 	);
 };
 
