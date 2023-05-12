@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import useModal from '../../../../../hooks/useModal/useModal';
 
 const ReviewsItem = ({ author, date, ratingType, text }) => {
-	const [showFull, setShowFull] = useState(false);
+	const ref = useRef();
+	const [showFullText, setShowFullText] = useModal(ref);
 
 	const readableDate = new Date(date).toLocaleDateString('ru-RU', { dateStyle: 'long' });
 
@@ -36,15 +38,16 @@ const ReviewsItem = ({ author, date, ratingType, text }) => {
 					<span className='text-xl'>{ratingEmoji}</span>
 				</div>
 			</header>
-			<p className={`${showFull ? '' : 'line-clamp-5'} mb-2`}>{text}</p>
+			<p className={`line-clamp-5 mb-2`}>{text}</p>
 			<button
 				onClick={() => {
-					setShowFull((prev) => !prev);
+					setShowFullText((prev) => !prev);
 				}}
 				className='text-notsolight'
 			>
-				{showFull ? 'Скрыть' : 'Читать полностью'}
+				{showFullText ? 'Скрыть' : 'Читать полностью'}
 			</button>
+			<dialog ref={ref}>Описание</dialog>
 		</blockquote>
 	);
 };
