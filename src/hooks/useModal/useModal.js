@@ -1,35 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const useModal = (modalRef) => {
-	const [showModal, setShowModal] = useState(false);
+const useModal = () => {
+	const ref = useRef(null);
+	const onOpen = () => ref.current.showModal();
+	const onClose = () => ref.current.close();
+
+	const handleClickOutside = (event) => {
+		console.log(ref.current.contains(event.target));
+	};
 
 	useEffect(() => {
-		if (showModal) {
-			show();
-		} else {
-			close();
-		}
-
-		modalRef.current.addEventListener('close', closeWithState);
-
+		document.addEventListener('click', handleClickOutside);
 		return () => {
-			modalRef.current.removeEventListener('close', closeWithState);
+			document.removeEventListener('click', handleClickOutside);
 		};
-	}, [showModal]);
+	}, []);
 
-	function show() {
-		if (!modalRef.current) return;
-		modalRef.current.showModal();
-	}
-	function close() {
-		if (!modalRef.current) return;
-		modalRef.current.close();
-	}
-	function closeWithState() {
-		setShowModal(false);
-	}
-
-	return [showModal, setShowModal];
+	return { ref, onOpen, onClose };
 };
 
 export default useModal;
