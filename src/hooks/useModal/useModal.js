@@ -6,7 +6,7 @@ const useModal = () => {
 	const onClose = () => ref.current.close();
 
 	const handleClickOutside = (event) => {
-		console.log(ref.current.contains(event.target));
+		// console.log(ref.current.contains(event.target));
 	};
 
 	useEffect(() => {

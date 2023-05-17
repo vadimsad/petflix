@@ -51,11 +51,6 @@ const ReviewsItems = () => {
 						slidesPerView: 2.5,
 						slidesPerGroup: 2,
 					},
-					// 640: {
-					// 	slidesPerView: 1.5,
-					// 	slidesPerGroup: 1,
-					// 	spaceBetween: 15,
-					// },
 				}}
 			>
 				{reviews.map((review) => (

@@ -15,7 +15,6 @@ const slidesPerView = window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 3 
 const FilmSlider = ({ type, typeForAPI, page }) => {
 	const { status: statusOnHomePage } = useSelector(selectSliderFilmsByType(type)) || {};
 	const statusOnSinglePage = useSelector(selectSimilarFilmsStatus);
-	// console.log(statusOnHomePage, statusOnSinglePage);
 	const id = useSelector(selectFilmId);
 	const dispatch = useDispatch();
 
