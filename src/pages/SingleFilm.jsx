@@ -5,8 +5,10 @@ import { fetchFilm, selectFilm } from '../redux/slices/singleFilmSlice';
 
 import FilmHeader from '../components/SingleFilm/FilmHeader/FilmHeader';
 import Description from '../components/SingleFilm/Description/Description';
+import DescriptionWrapper from '../components/SingleFilm/DescriptionWrapper/DescriptionWrapper';
 import Similar from '../components/SingleFilm/Similar/Similar';
 import Reviews from '../components/SingleFilm/Reviews/Reviews';
+import Awards from '../components/SingleFilm/Awards/Awards';
 
 const SingleFilm = () => {
 	const { id } = useParams();
@@ -36,7 +38,10 @@ const SingleFilm = () => {
 				imageUrl={film.imageUrl}
 				genres={genresShown}
 			/>
-			<Description>{film.description || 'Описание отсутствует :('}</Description>
+			<DescriptionWrapper>
+				<Description>{film.description || 'Описание отсутствует :('}</Description>
+				<Awards />
+			</DescriptionWrapper>
 			<Similar />
 			<Reviews />
 			{/* 

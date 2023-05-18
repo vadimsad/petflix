@@ -1,10 +1,18 @@
 import React, { forwardRef } from 'react';
 
 const Modal = forwardRef(({ children, onClose }, ref) => {
+	const handleClickOutside = (event) => {
+		// Если клик был снаружи dialog'а
+		if (event.target.isEqualNode(ref.current)) {
+			onClose();
+		}
+	};
+
 	return (
 		<dialog
 			ref={ref}
 			className={`p-0 max-w-[50%] overflow-visible open:flex flex-col bg-transparent backdrop:bg-darkTransparent`}
+			onClick={handleClickOutside}
 		>
 			<button
 				type='button'

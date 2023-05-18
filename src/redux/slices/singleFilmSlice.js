@@ -25,6 +25,11 @@ export const fetchFilmReviews = createAsyncThunk(
 	},
 );
 
+export const fetchFilmAwards = createAsyncThunk('singleFilm/fetchFilmAwardsStatus', async (id) => {
+	const response = await api.getAwards(id);
+	return response;
+});
+
 const initialState = {
 	film: {
 		status: 'loading',
@@ -35,6 +40,10 @@ const initialState = {
 		content: [],
 	},
 	reviews: {
+		status: 'loading',
+		content: [],
+	},
+	awards: {
 		status: 'loading',
 		content: [],
 	},
@@ -91,11 +100,27 @@ export const singleFilmSlice = createSlice({
 		});
 		builder.addCase(fetchFilmReviews.fulfilled, (state, action) => {
 			state.reviews.content = action.payload.items;
-			console.log(action.payload.items);
 			state.reviews.status = 'success';
 		});
 		builder.addCase(fetchFilmReviews.rejected, (state) => {
 			state.reviews.status = 'error';
+		});
+
+		// fetchFilmAwards
+
+		builder.addCase(fetchFilmAwards.pending, (state) => {
+			state.awards.status = 'loading';
+		});
+		builder.addCase(fetchFilmAwards.fulfilled, (state, action) => {
+			const awards = action.payload.items.filter(
+				(item) => item.win === true && item.imageUrl !== null,
+			);
+			state.awards.content = awards;
+			console.log(awards);
+			state.awards.status = 'success';
+		});
+		builder.addCase(fetchFilmAwards.rejected, (state) => {
+			state.awards.status = 'error';
 		});
 	},
 });
@@ -108,6 +133,8 @@ export const selectSimilarFilmsStatus = (state) => state.singleFilm.similar.stat
 
 export const selectFilmReviews = (state) => state.singleFilm.reviews.content;
 export const selectFilmReviewsStatus = (state) => state.singleFilm.reviews.status;
+
+export const selectFilmAwards = (state) => state.singleFilm.awards.content;
 
 export const { setFilm } = singleFilmSlice.actions;
 
