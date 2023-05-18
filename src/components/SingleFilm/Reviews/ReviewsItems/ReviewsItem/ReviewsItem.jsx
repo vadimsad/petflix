@@ -31,13 +31,13 @@ const ReviewsItem = ({ author, date, ratingType, text, openModal, setModalInfo }
 	function layout(isModal = false) {
 		return (
 			<blockquote
-				className={`inline-block p-5 bg-notsolight dark:bg-notsodark rounded-xl ${
+				className={`inline-block sm:p-5 p-3 bg-notsolight dark:bg-notsodark rounded-xl ${
 					isModal ? 'overflow-auto flex flex-col rounded-tr-none' : ''
 				}`}
 			>
 				<header className='flex items-center justify-between mb-2'>
 					<div className='flex flex-col'>
-						<cite className='not-italic lg:text-xl text-lg'>{author}</cite>
+						<cite className='line-clamp-1 not-italic lg:text-xl text-lg'>{author}</cite>
 						<time className='opacity-60 lg:text-sm text-xs'>{readableDate}</time>
 					</div>
 					<div

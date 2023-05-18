@@ -16,13 +16,13 @@ const Awards = () => {
 	return (
 		<>
 			<h2 className='font-serif lg:text-3xl text-2xl lg:mb-3 mb-1'>Награды</h2>
-			<ul className='flex justify-center flex-wrap gap-4'>
+			<ul className='flex flex-wrap gap-4'>
 				{awards.map((award, index) => (
 					<li
-						className={`lg:flex-1 flex-[0_0_120px] bg-darkTransparent rounded-lg xl:p-3 p-1`}
+						className={`flex-[1_0_50%] lg:max-w-[150px] md:max-w-[150px] xsm:max-w-[120px] max-w-[100px] bg-darkTransparent rounded-lg xl:px-3 xl:py-4 px-1 py-2`}
 						key={index}
 					>
-						<div className='w-full xl:h-[200px] lg:h-[150px] h-[100px] xl:p-6 p-4'>
+						<div className='w-full xl:h-[100px] xsm:h-[80px] h-[60px] mb-2'>
 							<img
 								src={award.imageUrl}
 								alt={award.name}

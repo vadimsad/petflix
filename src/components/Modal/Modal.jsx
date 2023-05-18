@@ -11,7 +11,7 @@ const Modal = forwardRef(({ children, onClose }, ref) => {
 	return (
 		<dialog
 			ref={ref}
-			className={`p-0 max-w-[50%] overflow-visible open:flex flex-col bg-transparent backdrop:bg-darkTransparent`}
+			className={`p-0 md:max-w-[50%] xsm:max-w-[75%] max-w-[85%] overflow-visible open:flex flex-col bg-transparent backdrop:bg-darkTransparent`}
 			onClick={handleClickOutside}
 		>
 			<button
