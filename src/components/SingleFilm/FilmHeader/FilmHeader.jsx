@@ -18,7 +18,7 @@ const FilmHeader = ({
 	const country = countries[0]?.country || null;
 
 	return (
-		<section className='relative px-5 md:py-10 py-8 mt-5 xl:h-[400px] lg:h-[350px] h-auto flex lg:mb-10 mb-8'>
+		<section className='relative px-5 md:py-10 py-8 mt-5 xl:h-[400px] lg:h-[350px] h-auto flex lg:mb-10 mb-8 text-light'>
 			<div className='relative z-20 inline-block lg:w-1/2 w-3/4 flex flex-col'>
 				<Logo logoUrl={logoUrl} name={name} />
 				<div className='flex flex-wrap gap-2 lg:mb-2 mb-1 lg:text-base xsm:text-sm text-xs'>

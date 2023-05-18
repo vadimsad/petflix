@@ -33,6 +33,7 @@ const Catalog = () => {
 			</div>
 			{currentPage < totalPages && (
 				<Button
+					useTheme={true}
 					classNames='md:w-auto w-[250px] md:h-auto xsm:h-[30px] h-auto mx-auto'
 					onclick={loadNextPage}
 					disabled={status !== 'success'}
