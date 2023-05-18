@@ -9,7 +9,11 @@ const Logo = ({ logoUrl, name }) => {
 		);
 	}
 
-	return <h1 className='text-6xl font-serif mb-3'>{name}</h1>;
+	return (
+		<h1 className='xl:text-6xl lg:text-4xl xsm:text-3xl text-2xl font-serif lg:mb-3 mb-2'>
+			{name}
+		</h1>
+	);
 };
 
 export default Logo;

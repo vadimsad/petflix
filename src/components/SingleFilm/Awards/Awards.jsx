@@ -15,8 +15,8 @@ const Awards = () => {
 
 	return (
 		<>
-			<h2 className='font-serif text-3xl mb-3'>Награды</h2>
-			<ul className='flex flex-wrap gap-4'>
+			<h2 className='font-serif lg:text-3xl text-2xl lg:mb-3 mb-1'>Награды</h2>
+			<ul className='flex justify-center flex-wrap gap-4'>
 				{awards.map((award, index) => (
 					<li
 						className={`lg:flex-1 flex-[0_0_120px] bg-darkTransparent rounded-lg xl:p-3 p-1`}

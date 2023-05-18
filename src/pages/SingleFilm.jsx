@@ -44,13 +44,6 @@ const SingleFilm = () => {
 			</DescriptionWrapper>
 			<Similar />
 			<Reviews />
-			{/* 
-                Карточка
-                Описание
-                Похожие
-                Отзывы
-                Награды
-            */}
 		</>
 	);
 };

@@ -3,8 +3,8 @@ import FilmSlider from '../../FilmSlider/FilmSlider';
 
 const Similar = () => {
 	return (
-		<section className='mb-10'>
-			<h2 className='font-serif text-3xl mb-3 px-5'>Похожие</h2>
+		<section className='lg:mb-10 mb-8'>
+			<h2 className='font-serif lg:text-3xl text-2xl lg:mb-3 mb-1 px-5'>Похожие</h2>
 			<FilmSlider />
 		</section>
 	);

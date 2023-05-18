@@ -37,21 +37,23 @@ const ReviewsItem = ({ author, date, ratingType, text, openModal, setModalInfo }
 			>
 				<header className='flex items-center justify-between mb-2'>
 					<div className='flex flex-col'>
-						<cite className='not-italic text-xl'>{author}</cite>
-						<time className='opacity-60 text-sm'>{readableDate}</time>
+						<cite className='not-italic lg:text-xl text-lg'>{author}</cite>
+						<time className='opacity-60 lg:text-sm text-xs'>{readableDate}</time>
 					</div>
 					<div
 						className={`group flex justify-center bg-darkTransparent items-center p-2 rounded-lg`}
 					>
-						<span className='text-xl group-hover:scale-90 transition-transform'>{ratingEmoji}</span>
+						<span className='lg:text-xl text-lg group-hover:scale-90 transition-transform'>
+							{ratingEmoji}
+						</span>
 					</div>
 				</header>
 				{isModal ? (
-					<p className={`mb-2 overflow-auto`}>{text}</p>
+					<p className={`mb-2 overflow-auto lg:text-base text-sm`}>{text}</p>
 				) : (
 					<>
-						<p className={`line-clamp-5 mb-2`}>{text}</p>
-						<button onClick={handleOpenModal} className='text-notsolight'>
+						<p className={`line-clamp-5 lg:mb-2 mb-1 lg:text-base text-sm`}>{text}</p>
+						<button onClick={handleOpenModal} className='text-notsolight lg:text-base text-sm'>
 							{'Читать полностью'}
 						</button>
 					</>
