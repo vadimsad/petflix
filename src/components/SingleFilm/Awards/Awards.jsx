@@ -13,6 +13,10 @@ const Awards = () => {
 		dispatch(fetchFilmAwards(filmId));
 	}, []);
 
+	if (awards.length === 0) {
+		return;
+	}
+
 	return (
 		<>
 			<h2 className='font-serif lg:text-3xl text-2xl lg:mb-3 mb-1'>Награды</h2>

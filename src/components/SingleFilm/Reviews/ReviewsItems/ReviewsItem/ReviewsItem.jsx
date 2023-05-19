@@ -53,7 +53,13 @@ const ReviewsItem = ({ author, date, ratingType, text, openModal, setModalInfo }
 				) : (
 					<>
 						<p className={`line-clamp-5 lg:mb-2 mb-1 lg:text-base text-sm`}>{text}</p>
-						<button onClick={handleOpenModal} className='text-notsolight lg:text-base text-sm'>
+						<button
+							onClick={handleOpenModal}
+							type='button'
+							title='Показать весь отзыв'
+							aria-label='Показать весь отзыв'
+							className='text-notsodark dark:text-notsolight lg:text-base text-sm'
+						>
 							{'Читать полностью'}
 						</button>
 					</>
