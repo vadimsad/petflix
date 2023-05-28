@@ -1,7 +1,26 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { api } from '../../api/API';
+import { RootState } from '../store';
+import { FetchStatus, DataObject, ImageType } from '../types';
 
-export const fetchMainFilm = createAsyncThunk(
+type FetchMainReturnType = {
+	filmData: DataObject;
+	filmImage: string;
+};
+
+type FetchMainPropsType = {
+	id: number;
+	imageType: ImageType;
+	page: number;
+};
+
+type MainFilmStateType = {
+	imageUrl: string;
+	status: FetchStatus;
+	content: DataObject;
+};
+
+export const fetchMainFilm = createAsyncThunk<FetchMainReturnType, FetchMainPropsType>(
 	'mainFilm/fetchMainFilmStatus',
 	async ({ id, imageType, page }) => {
 		const filmData = await api.getFilmById(id);
@@ -12,9 +31,9 @@ export const fetchMainFilm = createAsyncThunk(
 	},
 );
 
-const initialState = {
+const initialState: MainFilmStateType = {
 	imageUrl: 'https://stream-trader.ru/templates/Postbox/dleimages/no_image.jpg',
-	status: 'loading',
+	status: FetchStatus.loading,
 	content: {},
 };
 
@@ -22,32 +41,32 @@ export const mainFilmSlice = createSlice({
 	name: 'mainFilm',
 	initialState,
 	reducers: {
-		setMainFilm(state, action) {
+		setMainFilm(state, action: PayloadAction<DataObject>) {
 			state.content = action.payload;
 		},
-		setMainFilmImage(state, action) {
+		setMainFilmImage(state, action: PayloadAction<string>) {
 			state.imageUrl = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchMainFilm.pending, (state, action) => {
-			state.status = 'loading';
+			state.status = FetchStatus.loading;
 		});
 		builder.addCase(fetchMainFilm.fulfilled, (state, action) => {
 			const { filmData, filmImage } = action.payload;
 
 			if (filmImage) state.imageUrl = filmImage;
 			state.content = filmData;
-			state.status = 'success';
+			state.status = FetchStatus.success;
 		});
 		builder.addCase(fetchMainFilm.rejected, (state, action) => {
 			state.content = {};
-			state.status = 'error';
+			state.status = FetchStatus.error;
 		});
 	},
 });
 
-export const selectMainFilm = (state) => state.mainFilm;
+export const selectMainFilm = (state: RootState) => state.mainFilm;
 
 export const { setMainFilm, setMainFilmImage } = mainFilmSlice.actions;
 

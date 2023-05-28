@@ -1,6 +1,4 @@
-import React from 'react';
-
-const useCapitalize = (string) => {
+const useCapitalize = (string: string) => {
 	if (typeof string !== 'string') return;
 
 	return string.charAt(0).toUpperCase() + string.slice(1);

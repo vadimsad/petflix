@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
-const Button = ({ classNames, onclick, disabled, useTheme, children }) => {
+type ButtonPropsType = {
+	classNames?: string;
+	onclick?: MouseEventHandler<HTMLButtonElement>;
+	disabled?: boolean;
+	useTheme?: boolean;
+	children?: React.ReactNode;
+};
+
+const Button: React.FC<ButtonPropsType> = ({
+	classNames,
+	onclick,
+	disabled,
+	useTheme,
+	children,
+}) => {
 	return (
 		<button
 			onClick={onclick}

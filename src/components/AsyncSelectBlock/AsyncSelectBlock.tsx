@@ -1,22 +1,32 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AsyncSelect from 'react-select/async';
-import { allFilmsSlice, selectAllFilmsData } from '../../redux/slices/allFilmsSlice';
+import { selectAllFilmsData } from '../../redux/slices/allFilmsSlice';
+import { FilterOption, FilterTypes } from '../../redux/types';
 
 import { fetchFilters, selectFiltersByType, setFilter } from '../../redux/slices/filterSlice';
+import { SingleValue } from 'react-select';
+import { AppDispatch } from '../../redux/store';
 
-const AsyncSelectBlock = ({ type, placeholder }) => {
+type AsyncSelectBlockPropTypes = {
+	type: FilterTypes;
+	placeholder: string;
+};
+
+const AsyncSelectBlock: React.FC<AsyncSelectBlockPropTypes> = ({ type, placeholder }) => {
 	const { status } = useSelector(selectAllFilmsData);
 	const { options } = useSelector(selectFiltersByType(type));
-	const dispatch = useDispatch();
+	const dispatch: AppDispatch = useDispatch();
 
-	const onFilterChange = (option) => {
-		dispatch(setFilter({ type, option }));
+	const onFilterChange = (option: SingleValue<FilterOption>) => {
+		if (option) {
+			dispatch(setFilter({ type, option }));
+		}
 	};
 
-	const loadOptions = (searchValue, resolve) => {
+	const loadOptions = (searchValue: string, resolve: (arg: FilterOption[]) => void) => {
 		dispatch(fetchFilters({ type, searchValue }));
-		resolve([options]);
+		resolve(options); // тут было resolve([options])
 	};
 
 	return (

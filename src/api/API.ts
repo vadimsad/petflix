@@ -1,4 +1,13 @@
 import axios from 'axios';
+import {
+	FilmCollectionParams,
+	FilmCollectionType,
+	FilmParams,
+	FilmType,
+	IFetchConfig,
+	ImageParams,
+	ImageType,
+} from '../redux/types';
 
 ('mail: 290a29e5-6a38-41ae-a8bf-f1708456187d (0/500)');
 ('gmail: acf887b4-bdef-4246-a283-3737a6f89e96 (500/500)');
@@ -14,12 +23,12 @@ const axiosInstance = axios.create({
 });
 
 export const api = {
-	async getFilms(config) {
+	async getFilms(config: IFetchConfig<FilmParams>) {
 		const res = await axiosInstance.get('films', config);
 		return res.data;
 	},
-	async getTop(type, page) {
-		const config = {
+	async getTop(type: FilmCollectionType, page: number) {
+		const config: IFetchConfig<FilmCollectionParams> = {
 			params: {
 				type,
 				page,
@@ -28,24 +37,24 @@ export const api = {
 		const res = await axiosInstance.get('films/top', config);
 		return res.data;
 	},
-	async getSimilar(filmId) {
+	async getSimilar(filmId: number) {
 		const res = await axiosInstance.get(`films/${filmId}/similars`);
 		return res.data;
 	},
-	async getFilmById(filmId) {
+	async getFilmById(filmId: number) {
 		const res = await axiosInstance.get(`films/${filmId}`);
 		return res.data;
 	},
-	async getReviews(filmId) {
+	async getReviews(filmId: number) {
 		const res = await axiosInstance.get(`films/${filmId}/reviews`);
 		return res.data;
 	},
-	async getAwards(filmId) {
+	async getAwards(filmId: number) {
 		const res = await axiosInstance.get(`films/${filmId}/awards`);
 		return res.data;
 	},
-	async getFilmImages(filmId, type, page) {
-		const config = {
+	async getFilmImages(filmId: number, type: ImageType, page: number) {
+		const config: IFetchConfig<ImageParams> = {
 			params: {
 				type,
 				page,

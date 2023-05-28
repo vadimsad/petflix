@@ -1,6 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import { FilterOption } from '../types';
 
-const initialState = {
+type SortStateType = {
+	selected: FilterOption;
+	options: FilterOption[];
+};
+
+const initialState: SortStateType = {
 	selected: {
 		value: 'RATING',
 		label: 'рейтингу',
@@ -25,7 +32,7 @@ export const sortSlice = createSlice({
 	name: 'sort',
 	initialState,
 	reducers: {
-		setSort(state, action) {
+		setSort(state, action: PayloadAction<FilterOption>) {
 			state.selected = action.payload;
 		},
 		resetSort(state) {
@@ -37,7 +44,7 @@ export const sortSlice = createSlice({
 	},
 });
 
-export const selectSort = (state) => state.sort;
+export const selectSort = (state: RootState) => state.sort;
 
 export const { setSort, resetSort } = sortSlice.actions;
 

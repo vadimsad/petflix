@@ -1,7 +1,15 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { api } from '../../api/API';
+import {
+	IFetchData,
+	FetchStatus,
+	DataObject,
+	FilmParams,
+	IFetchConfig,
+	IFetchContentType,
+} from '../types';
 
-export const fetchQuickFilms = createAsyncThunk(
+export const fetchQuickFilms = createAsyncThunk<IFetchData<DataObject[]>, IFetchConfig<FilmParams>>(
 	'quickFilms/fetchQuickFilmsStatus',
 	async (config) => {
 		const response = await api.getFilms(config);
@@ -9,8 +17,8 @@ export const fetchQuickFilms = createAsyncThunk(
 	},
 );
 
-const initialState = {
-	status: 'loading',
+const initialState: IFetchContentType<DataObject[]> = {
+	status: FetchStatus.loading,
 	content: [],
 };
 
@@ -18,21 +26,21 @@ export const quickFilmsSlice = createSlice({
 	name: 'quickFilms',
 	initialState,
 	reducers: {
-		setQuickFilms(state, action) {
+		setQuickFilms(state, action: PayloadAction<DataObject[]>) {
 			state.content = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchQuickFilms.pending, (state) => {
-			state.status = 'loading';
+			state.status = FetchStatus.loading;
 		});
 		builder.addCase(fetchQuickFilms.fulfilled, (state, action) => {
 			state.content = action.payload.items;
-			state.status = 'success';
+			state.status = FetchStatus.success;
 		});
 		builder.addCase(fetchQuickFilms.rejected, (state) => {
 			state.content = [];
-			state.status = 'error';
+			state.status = FetchStatus.error;
 		});
 	},
 });

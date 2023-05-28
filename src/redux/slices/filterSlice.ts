@@ -1,8 +1,43 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { api } from '../../api/API';
 import useCapitalize from '../../hooks/useCapitalize/useCapitalize';
+import { RootState } from '../store';
+import { FilterOption, FilterTypes } from '../types';
 
-export const fetchFilters = createAsyncThunk(
+type FetchFilterInfoType = {
+	type: FilterTypes;
+	searchValue: string;
+};
+
+type Genre = {
+	id: number;
+	genre: string;
+};
+
+type Country = {
+	id: number;
+	country: string;
+};
+
+type FilterState = {
+	activeFiltersCount: number;
+	types: {
+		[key: string]: {
+			selected: FilterOption | null;
+			placeholder: string;
+			options: FilterOption[];
+		};
+	};
+};
+
+type FetchFilterReturnType = {
+	filters: {
+		genres: Genre[];
+		countries: Country[];
+	};
+};
+
+export const fetchFilters = createAsyncThunk<FetchFilterReturnType, FetchFilterInfoType>(
 	'filters/fetchFilterOptionsStatus',
 	async (filterInfo) => {
 		const filters = await api.getFilters();
@@ -10,7 +45,7 @@ export const fetchFilters = createAsyncThunk(
 	},
 );
 
-const initialState = {
+const initialState: FilterState = {
 	activeFiltersCount: 0,
 	types: {
 		genres: {
@@ -128,7 +163,7 @@ export const filterSlice = createSlice({
 	name: 'filters',
 	initialState,
 	reducers: {
-		setFilter(state, action) {
+		setFilter(state, action: PayloadAction<{ type: FilterTypes; option: FilterOption }>) {
 			const { type, option } = action.payload;
 			state.types[type].selected = option;
 			state.activeFiltersCount++;
@@ -146,8 +181,16 @@ export const filterSlice = createSlice({
 			const { type, searchValue } = action.meta.arg;
 
 			const selectOptions = filters[type].map((option) => {
-				const optionItem = Object.keys(option)[1];
-				const optionName = option[optionItem];
+				let optionName: string;
+				if ('genre' in option) {
+					optionName = option.genre;
+				} else if ('country' in option) {
+					optionName = option.country;
+				} else {
+					optionName = '';
+				}
+				// const optionItem = Object.keys(option)[1];
+				// const optionName = option[optionItem];
 				const optionNameCapitalized = useCapitalize(optionName);
 				return {
 					value: option.id,
@@ -170,8 +213,9 @@ export const filterSlice = createSlice({
 	},
 });
 
-export const selectFilters = (state) => state.filters;
-export const selectFiltersByType = (type) => (state) => state.filters.types[type];
+export const selectFilters = (state: RootState) => state.filters;
+export const selectFiltersByType = (type: keyof FilterState['types']) => (state: RootState) =>
+	state.filters.types[type];
 
 export const { setFilter, resetFilters } = filterSlice.actions;
 

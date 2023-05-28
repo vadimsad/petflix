@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, DependencyList, EffectCallback } from 'react';
 
-const useDidMountEffect = (func, deps) => {
+const useDidMountEffect = (func: EffectCallback, deps: DependencyList) => {
 	const didMount = useRef(false);
 
 	useEffect(() => {
