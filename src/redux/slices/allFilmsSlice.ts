@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { api } from '../../api/API';
-import { FetchStatus, DataObject, FilmParams, IFetchConfig, IFetchContentType } from '../types';
+import { FetchStatus, FilmParams, IFetchConfig, IFetchContentType } from '../types';
 import useDeduplicate from '../../hooks/useDeduplicate/useDeduplicate';
 import { RootState } from '../store';
+import { CardInfo } from '../../components/types';
 
 type FetchDataType = {
 	config: IFetchConfig<FilmParams>;
@@ -24,7 +25,7 @@ export const fetchAllFilms = createAsyncThunk<FetchReturnType, FetchDataType>(
 	},
 );
 
-interface IAllFilmsStateType extends IFetchContentType<DataObject[]> {
+interface IAllFilmsStateType extends IFetchContentType<CardInfo[]> {
 	currentPage: number;
 	totalPages?: number;
 }
@@ -52,10 +53,10 @@ export const allFilmsSlice = createSlice({
 
 			if (operationType === 'add') {
 				const newFilms = [...state.content, ...items];
-				state.content = useDeduplicate(newFilms) as DataObject[];
+				state.content = useDeduplicate(newFilms) as CardInfo[];
 				state.totalPages = totalPages;
 			} else if (operationType === 'replace') {
-				state.content = items as DataObject[];
+				state.content = items as CardInfo[];
 				state.totalPages = totalPages;
 			}
 			state.status = FetchStatus.success;

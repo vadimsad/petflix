@@ -1,28 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { FilterOption } from '../types';
+import { FilmOrder, FilterOption } from '../types';
 
 type SortStateType = {
-	selected: FilterOption;
-	options: FilterOption[];
+	selected: FilterOption<FilmOrder>;
+	options: FilterOption<FilmOrder>[];
 };
 
 const initialState: SortStateType = {
 	selected: {
-		value: 'RATING',
+		value: FilmOrder.RATING,
 		label: 'рейтингу',
 	},
 	options: [
 		{
-			value: 'RATING',
+			value: FilmOrder.RATING,
 			label: 'рейтингу',
 		},
 		{
-			value: 'NUM_VOTE',
+			value: FilmOrder.NUM_VOTE,
 			label: 'отзывам',
 		},
 		{
-			value: 'YEAR',
+			value: FilmOrder.YEAR,
 			label: 'годам',
 		},
 	],
@@ -32,12 +32,12 @@ export const sortSlice = createSlice({
 	name: 'sort',
 	initialState,
 	reducers: {
-		setSort(state, action: PayloadAction<FilterOption>) {
+		setSort(state, action: PayloadAction<FilterOption<FilmOrder>>) {
 			state.selected = action.payload;
 		},
 		resetSort(state) {
 			state.selected = {
-				value: 'RATING',
+				value: FilmOrder.RATING,
 				label: 'рейтингу',
 			};
 		},

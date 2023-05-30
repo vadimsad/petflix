@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../../api/API';
 import { DataObject, FetchStatus, FilmCollectionType, IFetchContentType } from '../types';
 import { RootState } from '../store';
@@ -59,7 +59,7 @@ export const sliderFilmsSlice = createSlice({
 });
 
 export const selectSliderFilms = (state: RootState) => state.sliderFilms;
-export const selectSliderFilmsByType = (type: keyof SliderFilmsStateType) => (state: RootState) =>
-	state.sliderFilms[type];
+export const selectSliderFilmsByType = (type?: keyof SliderFilmsStateType) => (state: RootState) =>
+	type ? state.sliderFilms[type] : '';
 
 export default sliderFilmsSlice.reducer;

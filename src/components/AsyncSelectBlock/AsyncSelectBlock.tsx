@@ -18,13 +18,16 @@ const AsyncSelectBlock: React.FC<AsyncSelectBlockPropTypes> = ({ type, placehold
 	const { options } = useSelector(selectFiltersByType(type));
 	const dispatch: AppDispatch = useDispatch();
 
-	const onFilterChange = (option: SingleValue<FilterOption>) => {
+	const onFilterChange = (option: SingleValue<FilterOption<string | number>>) => {
 		if (option) {
 			dispatch(setFilter({ type, option }));
 		}
 	};
 
-	const loadOptions = (searchValue: string, resolve: (arg: FilterOption[]) => void) => {
+	const loadOptions = (
+		searchValue: string,
+		resolve: (arg: FilterOption<string | number>[]) => void,
+	) => {
 		dispatch(fetchFilters({ type, searchValue }));
 		resolve(options); // тут было resolve([options])
 	};

@@ -8,6 +8,7 @@ import {
 	IFetchConfig,
 	IFetchContentType,
 } from '../types';
+import { RootState } from '../store';
 
 export const fetchQuickFilms = createAsyncThunk<IFetchData<DataObject[]>, IFetchConfig<FilmParams>>(
 	'quickFilms/fetchQuickFilmsStatus',
@@ -46,5 +47,7 @@ export const quickFilmsSlice = createSlice({
 });
 
 export const { setQuickFilms } = quickFilmsSlice.actions;
+
+export const selectQuickFilms = (state: RootState) => state.quickFilms;
 
 export default quickFilmsSlice.reducer;

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { api } from '../../api/API';
 import useCapitalize from '../../hooks/useCapitalize/useCapitalize';
 import { RootState } from '../store';
-import { FilterOption, FilterTypes } from '../types';
+import { FilmType, FilterOption, FilterTypes } from '../types';
 
 type FetchFilterInfoType = {
 	type: FilterTypes;
@@ -19,13 +19,33 @@ type Country = {
 	country: string;
 };
 
-type FilterState = {
+export type FilterState = {
 	activeFiltersCount: number;
 	types: {
-		[key: string]: {
-			selected: FilterOption | null;
+		genres: {
+			selected: FilterOption<string | number> | null;
 			placeholder: string;
-			options: FilterOption[];
+			options: FilterOption<string | number>[];
+		};
+		countries: {
+			selected: FilterOption<string | number> | null;
+			placeholder: string;
+			options: FilterOption<string | number>[];
+		};
+		type: {
+			selected: FilterOption<FilmType> | null;
+			placeholder: string;
+			options: FilterOption<FilmType>[];
+		};
+		ratingFrom: {
+			selected: FilterOption<string | number> | null;
+			placeholder: string;
+			options: FilterOption<string | number>[];
+		};
+		yearFrom: {
+			selected: FilterOption<string | number> | null;
+			placeholder: string;
+			options: FilterOption<string | number>[];
 		};
 	};
 };
@@ -63,23 +83,23 @@ const initialState: FilterState = {
 			placeholder: 'Тип',
 			options: [
 				{
-					value: 'ALL',
+					value: FilmType.ALL,
 					label: 'Все',
 				},
 				{
-					value: 'FILM',
+					value: FilmType.FILM,
 					label: 'Фильмы',
 				},
 				{
-					value: 'TV_SHOW',
+					value: FilmType.TV_SHOW,
 					label: 'Телешоу',
 				},
 				{
-					value: 'TV_SERIES',
+					value: FilmType.TV_SERIES,
 					label: 'Сериалы',
 				},
 				{
-					value: 'MINI_SERIES',
+					value: FilmType.MINI_SERIES,
 					label: 'Короткометражные сериалы',
 				},
 			],
@@ -163,14 +183,17 @@ export const filterSlice = createSlice({
 	name: 'filters',
 	initialState,
 	reducers: {
-		setFilter(state, action: PayloadAction<{ type: FilterTypes; option: FilterOption }>) {
+		setFilter(
+			state,
+			action: PayloadAction<{ type: FilterTypes; option: FilterOption<string | number> }>,
+		) {
 			const { type, option } = action.payload;
 			state.types[type].selected = option;
 			state.activeFiltersCount++;
 		},
 		resetFilters(state) {
 			Object.keys(state.types).forEach((key) => {
-				state.types[key].selected = null;
+				state.types[key as keyof FilterState['types']].selected = null;
 			});
 			state.activeFiltersCount = 0;
 		},

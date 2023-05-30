@@ -1,4 +1,4 @@
-enum FilmOrder {
+export enum FilmOrder {
 	RATING = 'RATING',
 	NUM_VOTE = 'NUM_VOTE',
 	YEAR = 'YEAR',
@@ -59,18 +59,18 @@ export type ImageItemType = {
 };
 
 export type FilmParams = {
-	genres?: number;
-	countries?: number;
+	genres?: number | string;
+	countries?: number | string;
 	keyword?: string;
 	order?: FilmOrder;
 	page?: number;
-	ratingFrom?: number;
-	type: FilmType;
-	yearFrom?: number;
+	ratingFrom?: number | string;
+	type?: FilmType;
+	yearFrom?: number | string;
 };
 
-export type FilterOption = {
-	value: string | number;
+export type FilterOption<T> = {
+	value: T;
 	label?: string;
 };
 
@@ -92,3 +92,62 @@ export interface IFetchContentType<T> {
 	status: FetchStatus;
 	content: T;
 }
+
+export interface Genre {
+	genre: string;
+}
+
+export interface Country {
+	country: string;
+}
+
+// export interface FilmData {
+// 	kinopoiskId: number;
+// 	imdbId: string;
+// 	nameRu: string;
+// 	nameEn: null;
+// 	nameOriginal: string;
+// 	posterUrl: string;
+// 	posterUrlPreview: string;
+// 	coverUrl: string;
+// 	logoUrl: string;
+// 	reviewsCount: number;
+// 	ratingGoodReview: number;
+// 	ratingGoodReviewVoteCount: number;
+// 	ratingKinopoisk: number;
+// 	ratingKinopoiskVoteCount: number;
+// 	ratingImdb: number;
+// 	ratingImdbVoteCount: number;
+// 	ratingFilmCritics: number;
+// 	ratingFilmCriticsVoteCount: number;
+// 	ratingAwait: null;
+// 	ratingAwaitCount: number;
+// 	ratingRfCritics: number;
+// 	ratingRfCriticsVoteCount: number;
+// 	webUrl: string;
+// 	year: number;
+// 	filmLength: number;
+// 	slogan: string;
+// 	description: string;
+// 	shortDescription: string;
+// 	editorAnnotation: string;
+// 	isTicketsAvailable: boolean;
+// 	productionStatus: null;
+// 	type: string;
+// 	ratingMpaa: string;
+// 	ratingAgeLimits: string;
+// 	countries: Country[];
+// 	genres: Genre[];
+// 	startYear: null;
+// 	endYear: null;
+// 	serial: boolean;
+// 	shortFilm: boolean;
+// 	completed: boolean;
+// 	hasImax: boolean;
+// 	has3D: boolean;
+// 	lastSync: Date;
+// }
+
+// export interface Country {
+// 	country: string;
+// }
