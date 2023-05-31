@@ -109,7 +109,6 @@ export const singleFilmSlice = createSlice({
 		});
 		builder.addCase(fetchFilm.rejected, (state, action) => {
 			state.film.status = FetchStatus.error;
-			console.log(action);
 		});
 
 		// fetchSliderFilmsSimilar
@@ -149,7 +148,6 @@ export const singleFilmSlice = createSlice({
 				(item) => item.win === true && item.imageUrl !== null,
 			);
 			state.awards.content = awards;
-			console.log(awards);
 			state.awards.status = FetchStatus.success;
 		});
 		builder.addCase(fetchFilmAwards.rejected, (state) => {

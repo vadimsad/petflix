@@ -1,16 +1,19 @@
-import React, { MouseEvent, ReactNode, RefObject } from 'react';
+import React, { MouseEvent, ReactNode, Ref, RefObject, forwardRef } from 'react';
 
 interface ModalProps {
 	children: ReactNode;
 	onClose: () => void;
-	ref: RefObject<HTMLDialogElement>;
+	ref: Ref<HTMLDialogElement>;
 }
 
-const Modal: React.FC<ModalProps> = ({ children, onClose, ref }) => {
+const Modal = forwardRef<HTMLDialogElement, ModalProps>(({ children, onClose }, ref) => {
 	const handleClickOutside = (event: MouseEvent) => {
 		if (!ref) return;
 		// Если клик был по backdrop
-		if (event.target instanceof HTMLDialogElement && event.target.isEqualNode(ref.current)) {
+		if (
+			event.target instanceof HTMLDialogElement &&
+			event.target.isEqualNode((ref as RefObject<HTMLDialogElement>).current)
+		) {
 			onClose();
 		}
 	};
@@ -33,5 +36,5 @@ const Modal: React.FC<ModalProps> = ({ children, onClose, ref }) => {
 			{children}
 		</dialog>
 	);
-};
+});
 export default Modal;
