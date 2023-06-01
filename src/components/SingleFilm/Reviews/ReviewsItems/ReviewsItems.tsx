@@ -16,6 +16,7 @@ import 'swiper/css/navigation';
 import Modal from '../../../Modal/Modal';
 import useModal from '../../../../hooks/useModal/useModal';
 import { AppDispatch } from '../../../../redux/store';
+import { FetchStatus } from '../../../../redux/types';
 
 const ReviewsItems: React.FC = () => {
 	const reviews = useSelector(selectFilmReviews);
@@ -35,8 +36,12 @@ const ReviewsItems: React.FC = () => {
 		dispatch(fetchFilmReviews(filmId));
 	}, []);
 
-	if (reviewsStatus !== 'success') {
-		return <div>Loading...</div>;
+	if (reviewsStatus === FetchStatus.loading) {
+		return <h2>Loading ...</h2>;
+	} else if (reviewsStatus === FetchStatus.error) {
+		return <h2>Произошла ошибка получения отзывов :(</h2>;
+	} else if (reviewsStatus === FetchStatus.success && reviews.length === 0) {
+		return <h2>Отзывы не найдены :(</h2>;
 	}
 
 	return (
