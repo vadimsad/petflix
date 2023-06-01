@@ -23,7 +23,7 @@ const SwiperBlock: React.FC<SwiperBlockProps> = ({ type, page }) => {
 
 	let films: DataObject[];
 
-	if (page === 'home') {
+	if (page === 'home' && filmsOnHomePage) {
 		films = filmsOnHomePage.slice(1);
 	} else {
 		films = filmsOnSinglePage;
@@ -54,13 +54,14 @@ const SwiperBlock: React.FC<SwiperBlockProps> = ({ type, page }) => {
 		>
 			{films.map((film) => (
 				<SwiperSlide key={film.filmId as Key}>
-					<Link to={`/catalog/${film.filmId}`} key={film.filmId as Key}>
+					<Link to={`/catalog/${film.filmId}`}>
 						<Card
+							id={film.filmId as number}
 							name={(film.nameRu as string) || (film.nameEn as string)}
 							imagesrc={film.posterUrl as string}
-							rating={film.rating as number}
+							rating={(film.rating as number) || 0}
 							year={film.year as number}
-							genres={film.genres as Genre[]}
+							genres={(film.genres as Genre[]) || []}
 							alt='Постер'
 						/>
 					</Link>

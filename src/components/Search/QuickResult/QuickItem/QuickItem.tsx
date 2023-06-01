@@ -1,24 +1,58 @@
 import React from 'react';
 import { Genre } from '../../../../redux/types';
+import Rating from '../../../Rating/Rating';
+import AddToFavorite from '../../../AddToFavorite/AddToFavorite';
 
 interface QuickItemProps {
+	id: number;
 	name: string;
 	imageUrl: string;
 	genres: Genre[];
+	rating: number | string;
+	invertColors?: boolean;
 }
 
-const QuickItem: React.FC<QuickItemProps> = ({ name, imageUrl, genres }) => {
+const QuickItem: React.FC<QuickItemProps> = ({
+	id,
+	name,
+	imageUrl,
+	genres,
+	rating,
+	invertColors = false,
+}) => {
 	return (
-		<div className='flex gap-3 px-2 py-2 bg-transparent hover:bg-notsolight dark:hover:bg-notsodark'>
+		<div
+			className={`relative flex gap-3 px-2 py-2 bg-transparent transition-colors group ${
+				invertColors
+					? 'hover:bg-notsodark dark:hover:bg-notsolight'
+					: 'hover:bg-notsolight dark:hover:bg-notsodark'
+			}`}
+		>
+			<AddToFavorite
+				id={id}
+				name={name}
+				imageUrl={imageUrl}
+				rating={rating}
+				genres={genres}
+				classNames='absolute m-1 bottom-0 right-0 scale-[0.7] opacity-0 group-hover:opacity-100 hover:scale-[0.75]'
+			/>
 			<div className='flex-[1]'>
 				<img className='w-full h-full object-cover' src={imageUrl} alt={name + 'Постер'} />
 			</div>
-			<div className='xsm:flex-[4] flex-[5]'>
-				<h4 className='xl:text-xl xsm:text-base text-sm font-serif'>{name}</h4>
+			<div className='xsm:flex-[3] flex-[4]'>
+				<h4
+					className={`xl:text-lg xsm:text-base text-sm font-serif border-b mb-2 ${
+						invertColors ? 'border-light dark:border-dark' : 'border-dark dark:border-light'
+					}`}
+				>
+					{name}
+				</h4>
 				<p className='xl:text-sm text-xs'>
-					{genres.map((genre, index) =>
-						index + 1 === genres.length ? genre.genre : genre.genre + ', ',
-					)}
+					<Rating classNames='mr-1'>{rating}</Rating>
+					{genres
+						.map((genre) => Object.values(genre))
+						.flat()
+						.join(', ')}
 				</p>
 			</div>
 		</div>

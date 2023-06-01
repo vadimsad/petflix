@@ -22,7 +22,7 @@ interface FilmSliderProps {
 }
 
 // Этот компонент - одна большая ошибка, которую я совершил
-// в надежде на переиспользуемость этого компонента
+// в надежде обеспечить его переиспользуемость
 
 const FilmSlider: React.FC<FilmSliderProps> = ({ type, typeForAPI, page }) => {
 	const { status: statusOnHomePage } = useSelector(selectSliderFilmsByType(type)) || {};

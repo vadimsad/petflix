@@ -29,6 +29,7 @@ const SingleFilm = () => {
 	return (
 		<>
 			<FilmHeader
+				id={film.kinopoiskId}
 				logoUrl={film.logourl}
 				name={film.nameRu || film.nameEn || film.nameOriginal}
 				rating={film.ratingKinopoisk}
@@ -37,6 +38,7 @@ const SingleFilm = () => {
 				shortDescription={film.shortDescription}
 				countries={film.countries}
 				imageUrl={film.imageUrl}
+				posterUrl={film.posterUrl}
 				genres={genresShown}
 			/>
 			<DescriptionWrapper>

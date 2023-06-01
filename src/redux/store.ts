@@ -9,6 +9,7 @@ import filters from './slices/filterSlice';
 import sort from './slices/sortSlice';
 import search from './slices/searchSlice';
 import pagination from './slices/paginationSlice';
+import favoriteFilms from './slices/favoriteFilmsSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
 		sort,
 		search,
 		pagination,
+		favoriteFilms,
 	},
 });
 

@@ -2,9 +2,10 @@ import React, { ReactNode } from 'react';
 
 type RatingProps = {
 	children: number | string;
+	classNames?: string;
 };
 
-const Rating: React.FC<RatingProps> = ({ children }) => {
+const Rating: React.FC<RatingProps> = ({ children, classNames }) => {
 	const rating = normalizeRating(children);
 	let background: string;
 
@@ -22,7 +23,9 @@ const Rating: React.FC<RatingProps> = ({ children }) => {
 	}
 
 	return (
-		<span className={`inline-block rounded px-1 ${background}`}>{children ? rating : '-'}</span>
+		<span className={`inline-block rounded px-1 ${background} ${classNames}`}>
+			{children ? rating : '-'}
+		</span>
 	);
 };
 

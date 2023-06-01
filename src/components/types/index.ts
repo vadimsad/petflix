@@ -8,7 +8,7 @@ export type CardInfo = {
 	nameOriginal: string;
 	ratingKinopoisk: string | number;
 	year: number;
-	genres?: Genre[];
+	genres: Genre[];
 };
 
 export enum FilmsInSlider {

@@ -4,8 +4,10 @@ import Info from './Info/Info';
 import Logo from './Logo/Logo';
 import ShortDescription from './ShortDescription/ShortDescription';
 import { Country, Genre } from '../../../redux/types';
+import AddToFavorite from '../../AddToFavorite/AddToFavorite';
 
 interface FilmHeaderProps {
+	id: number;
 	logoUrl: string;
 	name: string;
 	rating: number;
@@ -15,9 +17,11 @@ interface FilmHeaderProps {
 	shortDescription: string;
 	countries: Country[];
 	imageUrl: string;
+	posterUrl: string;
 }
 
 const FilmHeader: React.FC<FilmHeaderProps> = ({
+	id,
 	logoUrl,
 	name,
 	rating,
@@ -27,6 +31,7 @@ const FilmHeader: React.FC<FilmHeaderProps> = ({
 	shortDescription,
 	countries,
 	imageUrl,
+	posterUrl,
 }) => {
 	const country = countries[0]?.country || '';
 
@@ -42,7 +47,7 @@ const FilmHeader: React.FC<FilmHeaderProps> = ({
 				</div>
 				<div className='flex gap-2'>
 					<Button>Смотреть</Button>
-					<Button>Сохранить</Button>
+					<AddToFavorite id={id} name={name} rating={rating} genres={genres} imageUrl={posterUrl} />
 				</div>
 			</div>
 			<div className='absolute z-10 inset-0 bottom-auto h-full after:content-[""] after:absolute after:inset-0 after:bg-gradient-to-r after:from-black after:to-transparent lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden'>

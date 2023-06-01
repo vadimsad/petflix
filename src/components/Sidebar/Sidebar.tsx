@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import useClickOutside from '../../hooks/useClickOutside/useClickOutside';
 import Burger from '../Header/Burger/Burger';
 import Logo from '../Logo/Logo';
-import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
+import ThemeSwitcher from './ThemeSwitcher/ThemeSwitcher';
+import RandomFilm from './RandomFilm/RandomFilm';
+import ExternalLink from '../ExternalLink/ExternalLink';
+import FavoriteFilms from './FavoriteFilms/FavoriteFilms';
 
 const Sidebar = () => {
 	const isSmallDevice = window.matchMedia('(max-width:768px)').matches;
@@ -26,11 +29,20 @@ const Sidebar = () => {
 						isShown ? '' : '-left-[15rem]'
 					} scroll-container fixed z-30 overflow-y-auto inset-0 right-auto sm:shadow-sm shadow-md xl:w-[20rem] w-[15rem] bg-dark dark:bg-light text-light dark:text-dark transition-all`}
 				>
-					<div className={`sidebar-content p-5`}>
-						<Logo />
-						<ThemeSwitcher />
+					<div className={`sidebar-content p-3`}>
+						<header>
+							<div className='flex mb-3 items-center justify-between'>
+								<Logo />
+								<ExternalLink />
+							</div>
+							<div className='flex items-center justify-between mb-8'>
+								<span className='text-lg'>Переключить тему:</span>
+								<ThemeSwitcher />
+							</div>
+						</header>
+						<RandomFilm />
+						<FavoriteFilms />
 						{/* 
-						Логотип
 							Избранные фильмы
 							Актеры
 						*/}

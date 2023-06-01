@@ -26,9 +26,11 @@ const QuickResult: React.FC<QuickResultProps> = React.memo(({ shown }) => {
 						<li key={film.kinopoiskId as Key}>
 							<Link to={`catalog/${film.kinopoiskId}`}>
 								<QuickItem
+									id={film.kinopoiskId as number}
 									name={(film.nameRu || film.nameEn || film.nameOriginal) as string}
 									imageUrl={film.posterUrlPreview as string}
-									genres={film.genres as Genre[]}
+									genres={(film.genres as Genre[]).slice(0, 3)}
+									rating={film.ratingKinopoisk as number}
 								/>
 							</Link>
 						</li>

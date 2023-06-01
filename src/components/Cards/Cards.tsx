@@ -21,8 +21,9 @@ const Cards: React.FC = () => {
 					year,
 					genres,
 				}) => (
-					<Link to={`${kinopoiskId}`} key={kinopoiskId as React.Key}>
+					<Link to={`${kinopoiskId}`} key={kinopoiskId}>
 						<Card
+							id={kinopoiskId}
 							imagesrc={posterUrl}
 							name={nameRu || nameEn || nameOriginal}
 							rating={ratingKinopoisk}

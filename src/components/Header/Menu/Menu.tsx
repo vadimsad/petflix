@@ -13,7 +13,7 @@ const Menu = () => {
 						className={({ isActive }) =>
 							isActive
 								? 'border-b-2 border-dark dark:border-light'
-								: 'after:absolute after:content-[""] after:w-0 after:h-[2px] dark:after:bg-light after:bg-dark after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:after:w-1/2 active:after:w-full after:transition-[width]'
+								: 'after:absolute after:content-[""] after:w-0 after:h-[2px] dark:after:bg-light after:bg-dark after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:after:w-1/2 focus-within:after:w-1/2 active:after:w-full after:transition-[width]'
 						}
 					>
 						Главная
@@ -25,7 +25,7 @@ const Menu = () => {
 						className={({ isActive }) =>
 							isActive
 								? 'border-b-2 border-dark dark:border-light'
-								: 'after:absolute after:content-[""] after:w-0 after:h-[2px] dark:after:bg-light after:bg-dark after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:after:w-1/2 active:after:w-full after:transition-[width]'
+								: 'after:absolute after:content-[""] after:w-0 after:h-[2px] dark:after:bg-light after:bg-dark after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:after:w-1/2 focus-within:after:w-1/2 active:after:w-full after:transition-[width]'
 						}
 					>
 						Каталог
@@ -37,7 +37,7 @@ const Menu = () => {
 						className={({ isActive }) =>
 							isActive
 								? 'border-b-2 border-dark dark:border-light'
-								: 'after:absolute after:content-[""] after:w-0 after:h-[2px] dark:after:bg-light after:bg-dark after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:after:w-1/2 active:after:w-full after:transition-[width]'
+								: 'after:absolute after:content-[""] after:w-0 after:h-[2px] dark:after:bg-light after:bg-dark after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:after:w-1/2 focus-within:after:w-1/2 active:after:w-full after:transition-[width]'
 						}
 					>
 						Что нового
@@ -50,7 +50,7 @@ const Menu = () => {
 						className={({ isActive }) =>
 							isActive
 								? 'border-b-2 border-dark dark:border-light'
-								: 'after:absolute after:content-[""] after:w-0 after:h-[2px] dark:after:bg-light after:bg-dark after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:after:w-1/2 active:after:w-full after:transition-[width]'
+								: 'after:absolute after:content-[""] after:w-0 after:h-[2px] dark:after:bg-light after:bg-dark after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:after:w-1/2 focus-within:after:w-1/2 active:after:w-full after:transition-[width]'
 						}
 					>
 						Что посмотреть
