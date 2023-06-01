@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import useClickOutside from '../../hooks/useClickOutside/useClickOutside';
 import Burger from './Burger/Burger';
 import Menu from './Menu/Menu';
 
-const Header = () => {
+const Header: React.FC = () => {
 	const [isShown, setIsShown] = useState(false);
 
 	const toggleMenu = () => {
@@ -20,9 +20,7 @@ const Header = () => {
 				isShown ? '-translate-y-0' : 'md:-translate-y-0 -translate-y-full'
 			} transition-all w-full md:z-20 z-30 md:relative fixed sm:shadow-sm shadow-md`}
 		>
-			<div
-				className={`relative dark:bg-notsodark bg-notsolight transition-colors`}
-			>
+			<div className={`relative dark:bg-notsodark bg-notsolight transition-colors`}>
 				<Menu />
 				<Burger
 					onclick={toggleMenu}

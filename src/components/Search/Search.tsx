@@ -50,7 +50,7 @@ const Search = () => {
 			} relative group transition-[top]`}
 		>
 			<form onSubmit={changeSearchQuery}>
-				<label className='relative flex border-2 rounded-xl border-dark dark:border-blue bg-light dark:bg-dark focus-within:border-blue dark:focus-within:border-light overflow-hidden transition-colors'>
+				<label className='relative flex border-2 rounded-xl border-dark dark:border-blue bg-light dark:bg-dark dark:hover:border-light hover:border-blue focus-within:border-blue dark:focus-within:border-light overflow-hidden transition-colors'>
 					<div className='relative w-[20px] h-auto left-[10px]'>
 						<svg
 							viewBox='0 0 32 32'

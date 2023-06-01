@@ -46,6 +46,16 @@ export const fetchFilmReviews = createAsyncThunk<FetchReviewType, number>(
 	},
 );
 
+type FetchFactsType = IFetchData<DataObject[]>;
+
+export const fetchFilmFacts = createAsyncThunk<FetchFactsType, number>(
+	'singleFilm/fetchFilmFactsStatus',
+	async (id) => {
+		const response = await api.getFacts(id);
+		return response;
+	},
+);
+
 type FetchAwardsType = Omit<IFetchData<DataObject[]>, 'totalPages'>;
 
 export const fetchFilmAwards = createAsyncThunk<FetchAwardsType, number>(
@@ -60,6 +70,7 @@ type SingleFilmStateType = {
 	film: IFetchContentType<DataObject>;
 	similar: IFetchContentType<DataObject[]>;
 	reviews: IFetchContentType<DataObject[]>;
+	facts: IFetchContentType<DataObject[]>;
 	awards: IFetchContentType<DataObject[]>;
 };
 
@@ -73,6 +84,10 @@ const initialState: SingleFilmStateType = {
 		content: [],
 	},
 	reviews: {
+		status: FetchStatus.loading,
+		content: [],
+	},
+	facts: {
 		status: FetchStatus.loading,
 		content: [],
 	},
@@ -138,6 +153,19 @@ export const singleFilmSlice = createSlice({
 			state.reviews.status = FetchStatus.error;
 		});
 
+		// fetchFilmFacts
+
+		builder.addCase(fetchFilmFacts.pending, (state) => {
+			state.facts.status = FetchStatus.loading;
+		});
+		builder.addCase(fetchFilmFacts.fulfilled, (state, action) => {
+			state.facts.content = action.payload.items;
+			state.facts.status = FetchStatus.success;
+		});
+		builder.addCase(fetchFilmFacts.rejected, (state) => {
+			state.facts.status = FetchStatus.error;
+		});
+
 		// fetchFilmAwards
 
 		builder.addCase(fetchFilmAwards.pending, (state) => {
@@ -165,7 +193,11 @@ export const selectSimilarFilmsStatus = (state: RootState) => state.singleFilm.s
 export const selectFilmReviews = (state: RootState) => state.singleFilm.reviews.content;
 export const selectFilmReviewsStatus = (state: RootState) => state.singleFilm.reviews.status;
 
+export const selectFilmFacts = (state: RootState) => state.singleFilm.facts.content;
+export const selectFilmFactsStatus = (state: RootState) => state.singleFilm.facts.status;
+
 export const selectFilmAwards = (state: RootState) => state.singleFilm.awards.content;
+export const selectFilmAwardsStatus = (state: RootState) => state.singleFilm.awards.status;
 
 export const { setFilm } = singleFilmSlice.actions;
 

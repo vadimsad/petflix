@@ -9,6 +9,7 @@ import DescriptionWrapper from '../components/SingleFilm/DescriptionWrapper/Desc
 import Similar from '../components/SingleFilm/Similar/Similar';
 import Reviews from '../components/SingleFilm/Reviews/Reviews';
 import Awards from '../components/SingleFilm/Awards/Awards';
+import Facts from '../components/SingleFilm/Facts/Facts';
 
 const SingleFilm = () => {
 	const { id } = useParams();
@@ -40,6 +41,7 @@ const SingleFilm = () => {
 			/>
 			<DescriptionWrapper>
 				<Description>{film.description || 'Описание отсутствует :('}</Description>
+				<Facts />
 				<Awards />
 			</DescriptionWrapper>
 			<Similar />

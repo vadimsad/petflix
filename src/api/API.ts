@@ -49,6 +49,10 @@ export const api = {
 		const res = await axiosInstance.get(`films/${filmId}/reviews`);
 		return res.data;
 	},
+	async getFacts(filmId: number) {
+		const res = await axiosInstance.get(`films/${filmId}/facts`);
+		return res.data;
+	},
 	async getAwards(filmId: number) {
 		const res = await axiosInstance.get(`films/${filmId}/awards`);
 		return res.data;

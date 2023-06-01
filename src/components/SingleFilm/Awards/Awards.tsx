@@ -1,21 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchFilmAwards, selectFilmId } from '../../../redux/slices/singleFilmSlice';
+import {
+	fetchFilmAwards,
+	selectFilmAwardsStatus,
+	selectFilmId,
+} from '../../../redux/slices/singleFilmSlice';
 import { selectFilmAwards } from '../../../redux/slices/singleFilmSlice';
 import { AppDispatch } from '../../../redux/store';
+import { FetchStatus } from '../../../redux/types';
 
-const Awards = () => {
-	const filmId = useSelector(selectFilmId);
+const Awards: React.FC = () => {
+	const filmId = useSelector(selectFilmId) as number;
 	const awards = useSelector(selectFilmAwards);
+	const awardsStatus = useSelector(selectFilmAwardsStatus);
 	const dispatch: AppDispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(fetchFilmAwards(filmId as number));
-	}, []);
+		dispatch(fetchFilmAwards(filmId));
+	}, [filmId]);
 
-	if (awards.length === 0) {
-		return;
+	if (awardsStatus === FetchStatus.loading) {
+		return <h2>Загрузка ...</h2>;
+	} else if (awardsStatus === FetchStatus.error) {
+		return <h2>Произошла ошибка получения наград :(</h2>;
+	} else if (awardsStatus === FetchStatus.success && awards.length === 0) {
+		return null;
 	}
 
 	return (
