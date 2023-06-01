@@ -22,11 +22,7 @@ const QuickItem: React.FC<QuickItemProps> = ({
 }) => {
 	return (
 		<div
-			className={`relative flex gap-3 px-2 py-2 bg-transparent transition-colors group ${
-				invertColors
-					? 'hover:bg-notsodark dark:hover:bg-notsolight'
-					: 'hover:bg-notsolight dark:hover:bg-notsodark'
-			}`}
+			className={`relative flex gap-3 px-2 py-2 bg-transparent transition-colors group hover:bg-notsolight dark:hover:bg-notsodark`}
 		>
 			<AddToFavorite
 				id={id}
@@ -42,12 +38,18 @@ const QuickItem: React.FC<QuickItemProps> = ({
 			<div className='xsm:flex-[3] flex-[4]'>
 				<h4
 					className={`xl:text-lg xsm:text-base text-sm font-serif border-b mb-2 ${
-						invertColors ? 'border-light dark:border-dark' : 'border-dark dark:border-light'
+						invertColors
+							? 'border-light dark:border-dark group-hover:border-dark dark:group-hover:border-light group-hover:text-dark dark:group-hover:text-light'
+							: 'border-dark dark:border-light'
 					}`}
 				>
 					{name}
 				</h4>
-				<p className='xl:text-sm text-xs'>
+				<p
+					className={`xl:text-sm text-xs ${
+						invertColors ? 'group-hover:text-dark dark:group-hover:text-light' : ''
+					}`}
+				>
 					<Rating classNames='mr-1'>{rating}</Rating>
 					{genres
 						.map((genre) => Object.values(genre))

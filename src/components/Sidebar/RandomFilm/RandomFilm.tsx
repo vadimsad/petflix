@@ -18,11 +18,12 @@ const RandomFilm: React.FC<RandomFilmProps> = () => {
 		const randomIndex = Math.floor(Math.random() * popularFilms?.length);
 		const randomFilm = popularFilms[randomIndex];
 		return (
-			<>
+			<div className='dark:bg-notsolight bg-notsodark p-2 rounded-xl'>
 				<h2 className='text-lg'>Случайный фильм:</h2>
 				<div className='rounded-xl overflow-hidden'>
 					<Link to={`catalog/${randomFilm.filmId}`}>
 						<QuickItem
+							id={randomFilm.filmId as number}
 							name={(randomFilm.nameRu || randomFilm.nameEn || randomFilm.nameOriginal) as string}
 							imageUrl={randomFilm.posterUrl as string}
 							genres={(randomFilm.genres as Genre[]).slice(0, 2)}
@@ -31,7 +32,7 @@ const RandomFilm: React.FC<RandomFilmProps> = () => {
 						/>
 					</Link>
 				</div>
-			</>
+			</div>
 		);
 	}
 

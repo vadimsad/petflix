@@ -9,7 +9,7 @@ import { fetchQuickFilms } from '../../redux/slices/quickFilmsSlice';
 import { AppDispatch } from '../../redux/store';
 
 const Search = () => {
-	const [isInputFocused, setIsInputFocused] = useState(false);
+	const [isInputFocused, setIsInputFocused] = useState(true);
 	const { searchText } = useSelector(selectSearch);
 	const dispatch: AppDispatch = useDispatch();
 

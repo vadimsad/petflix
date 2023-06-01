@@ -15,6 +15,7 @@ type AddToFavProps = {
 	genres: Genre[];
 	imageUrl: string;
 	classNames?: string;
+	childClass?: string;
 };
 
 const AddToFavorite: React.FC<AddToFavProps> = ({
@@ -24,6 +25,7 @@ const AddToFavorite: React.FC<AddToFavProps> = ({
 	genres,
 	imageUrl,
 	classNames,
+	childClass,
 }) => {
 	const thisFilm = useSelector(selectFavoriteById(id));
 	const dispatch: AppDispatch = useDispatch();
@@ -41,7 +43,7 @@ const AddToFavorite: React.FC<AddToFavProps> = ({
 
 	return (
 		<button type='button' className={`${classNames} transition-all`} onClick={handleCLick}>
-			<span className='p-2 inline-block text-2xl bg-darkTransparent rounded-xl'>
+			<span className={`p-2 inline-block text-2xl bg-darkTransparent rounded-xl ${childClass}`}>
 				{isFilmInFavorite ? '❤️' : '🖤'}
 			</span>
 		</button>

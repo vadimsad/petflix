@@ -40,7 +40,9 @@ const Sidebar = () => {
 								<ThemeSwitcher />
 							</div>
 						</header>
-						<RandomFilm />
+						<div className='mb-3'>
+							<RandomFilm />
+						</div>
 						<FavoriteFilms />
 						{/* 
 							Избранные фильмы

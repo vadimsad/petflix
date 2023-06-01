@@ -29,7 +29,7 @@ const QuickResult: React.FC<QuickResultProps> = React.memo(({ shown }) => {
 									id={film.kinopoiskId as number}
 									name={(film.nameRu || film.nameEn || film.nameOriginal) as string}
 									imageUrl={film.posterUrlPreview as string}
-									genres={(film.genres as Genre[]).slice(0, 3)}
+									genres={film.genres as Genre[]}
 									rating={film.ratingKinopoisk as number}
 								/>
 							</Link>

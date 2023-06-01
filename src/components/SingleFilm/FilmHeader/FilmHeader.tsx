@@ -47,7 +47,14 @@ const FilmHeader: React.FC<FilmHeaderProps> = ({
 				</div>
 				<div className='flex gap-2'>
 					<Button>Смотреть</Button>
-					<AddToFavorite id={id} name={name} rating={rating} genres={genres} imageUrl={posterUrl} />
+					<AddToFavorite
+						id={id}
+						name={name}
+						rating={rating}
+						genres={genres}
+						imageUrl={posterUrl}
+						childClass='rounded-[8px] bg-transparent border border-dark border-light hover:bg-light active:scale-[0.97]'
+					/>
 				</div>
 			</div>
 			<div className='absolute z-10 inset-0 bottom-auto h-full after:content-[""] after:absolute after:inset-0 after:bg-gradient-to-r after:from-black after:to-transparent lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden'>
