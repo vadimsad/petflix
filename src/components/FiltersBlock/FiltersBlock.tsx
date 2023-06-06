@@ -27,7 +27,7 @@ const FiltersBlock = () => {
 	}, []);
 
 	return (
-		<div className='sm:mx-5 mx-0 mb-5 p-5 flex flex-col xl:gap-5 gap-4 bg-notsolight dark:bg-notsodark rounded-xl'>
+		<div className='relative z-10 sm:mx-5 mx-0 mb-5 p-5 flex flex-col xl:gap-5 gap-4 bg-notsolight dark:bg-notsodark rounded-xl'>
 			<Filters />
 			<div className='flex justify-between xsm:flex-row flex-col-reverse text-left'>
 				<Sort />

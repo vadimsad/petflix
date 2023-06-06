@@ -6,13 +6,13 @@ import MainCardLoader from '../Cards/MainCard/MainCardLoader';
 import { fetchMainFilm, selectMainFilm } from '../../redux/slices/mainFilmSlice';
 import { selectSliderFilms } from '../../redux/slices/sliderFilmsSlice';
 import { Link } from 'react-router-dom';
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch, AppThunkDispatch } from '../../redux/store';
 import { Genre, ImageType } from '../../redux/types';
 
 const MainCardBlock = () => {
 	const { content: mainFilm, status, imageUrl } = useSelector(selectMainFilm);
 	const { popular } = useSelector(selectSliderFilms);
-	const dispatch: AppDispatch = useDispatch();
+	const dispatch: AppThunkDispatch = useDispatch();
 
 	useEffect(() => {
 		if (popular.status !== 'success') return;

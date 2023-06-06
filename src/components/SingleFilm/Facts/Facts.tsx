@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '../../../redux/store';
+import { AppThunkDispatch } from '../../../redux/store';
 import {
 	fetchFilmFacts,
 	selectFilmFacts,
@@ -14,7 +14,7 @@ const Facts: React.FC = () => {
 	const filmId = useSelector(selectFilmId) as number;
 	const facts = useSelector(selectFilmFacts);
 	const factsStatus = useSelector(selectFilmFactsStatus);
-	const dispatch: AppDispatch = useDispatch();
+	const dispatch: AppThunkDispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchFilmFacts(filmId));
