@@ -34,4 +34,4 @@ const FavoriteFilms: React.FC = () => {
 	);
 };
 
-export default FavoriteFilms;
+export default React.memo(FavoriteFilms);

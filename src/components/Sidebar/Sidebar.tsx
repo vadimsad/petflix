@@ -45,7 +45,6 @@ const Sidebar = () => {
 						</div>
 						<FavoriteFilms />
 						{/* 
-							Избранные фильмы
 							Актеры
 						*/}
 					</div>
@@ -55,9 +54,9 @@ const Sidebar = () => {
 						onclick={toggleSidebar}
 						wrapperClasses={`${
 							isShown ? 'left-[15rem]' : 'left-0'
-						} md:hidden block fixed z-30 top-[70%] xsm:p-3 p-2 bg-dark dark:bg-light transition-all`}
-						buttonClasses='xsm:w-[23px] w-[18px] xsm:h-[28px] h-[23px] relative text-light dark:text-dark block before:absolute before:content-[""] before:h-full xsm:before:w-[2px] before:w-[1px] before:bg-light dark:before:bg-dark before:top-0 before:left-0 after:absolute after:content-[""] after:h-full xsm:after:w-[2px] after:w-[1px] after:bg-light dark:after:bg-dark after:top-0 after:right-0 before:transition-colors after:transition-colors'
-						spanClasses='absolute h-full xsm:w-[2px] w-[1px] bg-light dark:bg-dark top-0 left-1/2 -translate-x-1/2 transition-colors'
+						} md:hidden block fixed z-30 top-[70%] p-2 bg-dark dark:bg-light transition-all`}
+						buttonClasses='w-[18px] h-[23px] relative text-light dark:text-dark block before:absolute before:content-[""] before:h-full before:w-[1px] before:bg-light dark:before:bg-dark before:top-0 before:left-0 after:absolute after:content-[""] after:h-full after:w-[1px] after:bg-light dark:after:bg-dark after:top-0 after:right-0 before:transition-colors after:transition-colors'
+						spanClasses='absolute h-full w-[1px] bg-light dark:bg-dark top-0 left-1/2 -translate-x-1/2 transition-colors'
 					/>
 				)}
 			</div>

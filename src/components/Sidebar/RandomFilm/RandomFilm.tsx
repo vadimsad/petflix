@@ -4,23 +4,19 @@ import { selectSliderFilmsByType } from '../../../redux/slices/sliderFilmsSlice'
 import { FetchStatus, Genre } from '../../../redux/types';
 import QuickItem from '../../Search/QuickResult/QuickItem/QuickItem';
 import { Link } from 'react-router-dom';
+import QuickItemLoader from '../../Search/QuickResult/QuickItem/QuickItemLoader';
 
-type RandomFilmProps = {};
-
-const RandomFilm: React.FC<RandomFilmProps> = () => {
+const RandomFilm: React.FC = () => {
 	const { status, content: popularFilms } = useSelector(selectSliderFilmsByType('popular')) || {};
 
-	if (status === FetchStatus.loading) {
-		return <h2>Loading ...</h2>;
-	} else if (status === FetchStatus.error) {
-		return <h2>Произошла ошибка получения данных фильма :(</h2>;
-	} else if (status === FetchStatus.success && popularFilms) {
-		const randomIndex = Math.floor(Math.random() * popularFilms?.length);
-		const randomFilm = popularFilms[randomIndex];
-		return (
-			<div className='dark:bg-notsolight bg-notsodark p-2 rounded-xl'>
-				<h2 className='text-lg'>Случайный фильм:</h2>
-				<div className='rounded-xl overflow-hidden'>
+	const randomIndex = Math.floor(Math.random() * popularFilms?.length!);
+	const randomFilm = popularFilms![randomIndex];
+
+	return (
+		<div className='dark:bg-notsolight bg-notsodark p-2 rounded-xl'>
+			<h2 className='text-lg'>Случайный фильм:</h2>
+			<div className={`${status === FetchStatus.success ? 'rounded-xl' : ''} overflow-hidden`}>
+				{status === FetchStatus.success ? (
 					<Link to={`catalog/${randomFilm.filmId}`}>
 						<QuickItem
 							id={randomFilm.filmId as number}
@@ -31,12 +27,14 @@ const RandomFilm: React.FC<RandomFilmProps> = () => {
 							invertColors={true}
 						/>
 					</Link>
-				</div>
+				) : status === FetchStatus.loading ? (
+					<QuickItemLoader />
+				) : (
+					<h2>Произошла ошибка получения данных фильма :(</h2>
+				)}
 			</div>
-		);
-	}
-
-	return <h2>Не удалось получить данные о фильме :(</h2>;
+		</div>
+	);
 };
 
-export default RandomFilm;
+export default React.memo(RandomFilm);

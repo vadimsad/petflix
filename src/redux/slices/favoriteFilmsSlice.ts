@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import { Genre } from '../types';
 import { RootState } from '../store';
 
@@ -26,6 +26,19 @@ export const favoriteFilmsSlice = createSlice({
 });
 
 export const { addFavorite, removeFavorite } = favoriteFilmsSlice.actions;
+
+export const listenerMiddlewareAddFav = createListenerMiddleware();
+listenerMiddlewareAddFav.startListening({
+	actionCreator: addFavorite,
+	effect: (action, listenerApi) =>
+		localStorage.setItem(`${action.payload.id}`, JSON.stringify(action.payload)),
+});
+
+export const listenerMiddlewareDelFav = createListenerMiddleware();
+listenerMiddlewareDelFav.startListening({
+	actionCreator: removeFavorite,
+	effect: (action, listenerApi) => localStorage.removeItem(`${action.payload}`),
+});
 
 export const selectFavoriteFilms = (state: RootState) => state.favoriteFilms;
 export const selectFavoriteById = (id: number) => (state: RootState) =>

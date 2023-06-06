@@ -35,7 +35,7 @@ const QuickItem: React.FC<QuickItemProps> = ({
 			<div className='flex-[1]'>
 				<img className='w-full h-full object-cover' src={imageUrl} alt={name + 'Постер'} />
 			</div>
-			<div className='xsm:flex-[3] flex-[4]'>
+			<div className='flex-[2]'>
 				<h4
 					className={`xl:text-lg xsm:text-base text-sm font-serif border-b mb-2 ${
 						invertColors
