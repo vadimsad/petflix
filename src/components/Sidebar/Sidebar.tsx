@@ -44,9 +44,6 @@ const Sidebar = () => {
 							<RandomFilm />
 						</div>
 						<FavoriteFilms />
-						{/* 
-							Актеры
-						*/}
 					</div>
 				</aside>
 				{isSmallDevice && (

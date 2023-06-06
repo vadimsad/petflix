@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { AnyAction, ThunkDispatch, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import allFilms from './slices/allFilmsSlice';
 import singleFilm from './slices/singleFilmSlice';
@@ -42,3 +42,4 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
+export type AppThunkDispatch = ThunkDispatch<RootState, any, AnyAction>;

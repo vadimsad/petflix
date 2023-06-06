@@ -11,7 +11,7 @@ import {
 } from '../../redux/slices/singleFilmSlice';
 import { FilmsInSlider } from '../types';
 import { FetchStatus, FilmCollectionType } from '../../redux/types';
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch, AppThunkDispatch } from '../../redux/store';
 
 const slidesPerView = window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 3 : 4) : 5;
 
@@ -28,7 +28,7 @@ const FilmSlider: React.FC<FilmSliderProps> = ({ type, typeForAPI, page }) => {
 	const { status: statusOnHomePage } = useSelector(selectSliderFilmsByType(type)) || {};
 	const statusOnSinglePage = useSelector(selectSimilarFilmsStatus);
 	const id = useSelector(selectFilmId);
-	const dispatch: AppDispatch = useDispatch();
+	const dispatch: AppThunkDispatch = useDispatch();
 
 	let status: FetchStatus;
 

@@ -6,7 +6,7 @@ import { FilterOption, FilterTypes } from '../../redux/types';
 
 import { fetchFilters, selectFiltersByType, setFilter } from '../../redux/slices/filterSlice';
 import { SingleValue } from 'react-select';
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch, AppThunkDispatch } from '../../redux/store';
 
 type AsyncSelectBlockPropTypes = {
 	type: FilterTypes;
@@ -16,7 +16,7 @@ type AsyncSelectBlockPropTypes = {
 const AsyncSelectBlock: React.FC<AsyncSelectBlockPropTypes> = ({ type, placeholder }) => {
 	const { status } = useSelector(selectAllFilmsData);
 	const { options } = useSelector(selectFiltersByType(type));
-	const dispatch: AppDispatch = useDispatch();
+	const dispatch: AppThunkDispatch = useDispatch();
 
 	const onFilterChange = (option: SingleValue<FilterOption<string | number>>) => {
 		if (option) {
