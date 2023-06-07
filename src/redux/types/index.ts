@@ -43,6 +43,8 @@ export enum ImageType {
 
 export type DataObject = Record<string, string | number | boolean | []>;
 
+export type QuickDataObject = { films: DataObject[]; persons: DataObject[] };
+
 export interface IFetchData<T> {
 	total: number;
 	totalPages: number;
@@ -101,53 +103,7 @@ export interface Country {
 	country: string;
 }
 
-// export interface FilmData {
-// 	kinopoiskId: number;
-// 	imdbId: string;
-// 	nameRu: string;
-// 	nameEn: null;
-// 	nameOriginal: string;
-// 	posterUrl: string;
-// 	posterUrlPreview: string;
-// 	coverUrl: string;
-// 	logoUrl: string;
-// 	reviewsCount: number;
-// 	ratingGoodReview: number;
-// 	ratingGoodReviewVoteCount: number;
-// 	ratingKinopoisk: number;
-// 	ratingKinopoiskVoteCount: number;
-// 	ratingImdb: number;
-// 	ratingImdbVoteCount: number;
-// 	ratingFilmCritics: number;
-// 	ratingFilmCriticsVoteCount: number;
-// 	ratingAwait: null;
-// 	ratingAwaitCount: number;
-// 	ratingRfCritics: number;
-// 	ratingRfCriticsVoteCount: number;
-// 	webUrl: string;
-// 	year: number;
-// 	filmLength: number;
-// 	slogan: string;
-// 	description: string;
-// 	shortDescription: string;
-// 	editorAnnotation: string;
-// 	isTicketsAvailable: boolean;
-// 	productionStatus: null;
-// 	type: string;
-// 	ratingMpaa: string;
-// 	ratingAgeLimits: string;
-// 	countries: Country[];
-// 	genres: Genre[];
-// 	startYear: null;
-// 	endYear: null;
-// 	serial: boolean;
-// 	shortFilm: boolean;
-// 	completed: boolean;
-// 	hasImax: boolean;
-// 	has3D: boolean;
-// 	lastSync: Date;
-// }
-
-// export interface Country {
-// 	country: string;
-// }
+export enum SearchProperty {
+	films = 'films',
+	persons = 'persons',
+}

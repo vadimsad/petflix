@@ -18,13 +18,17 @@ const HEADERS = {
 };
 
 const axiosInstance = axios.create({
-	baseURL: 'https://kinopoiskapiunofficial.tech/api/v2.2/',
+	baseURL: 'https://kinopoiskapiunofficial.tech/api/',
 	headers: HEADERS,
 });
 
 export const api = {
 	async getFilms(config: IFetchConfig<FilmParams>) {
-		const res = await axiosInstance.get('films', config);
+		const res = await axiosInstance.get('v2.2/films', config);
+		return res.data;
+	},
+	async getPersons(config: { params: { name?: string } }) {
+		const res = await axiosInstance.get('v1/persons', config);
 		return res.data;
 	},
 	async getTop(type: FilmCollectionType, page: number) {
@@ -34,27 +38,27 @@ export const api = {
 				page,
 			},
 		};
-		const res = await axiosInstance.get('films/top', config);
+		const res = await axiosInstance.get('v2.2/films/top', config);
 		return res.data;
 	},
 	async getSimilar(filmId: number) {
-		const res = await axiosInstance.get(`films/${filmId}/similars`);
+		const res = await axiosInstance.get(`v2.2/films/${filmId}/similars`);
 		return res.data;
 	},
 	async getFilmById(filmId: number) {
-		const res = await axiosInstance.get(`films/${filmId}`);
+		const res = await axiosInstance.get(`v2.2/films/${filmId}`);
 		return res.data;
 	},
 	async getReviews(filmId: number) {
-		const res = await axiosInstance.get(`films/${filmId}/reviews`);
+		const res = await axiosInstance.get(`v2.2/films/${filmId}/reviews`);
 		return res.data;
 	},
 	async getFacts(filmId: number) {
-		const res = await axiosInstance.get(`films/${filmId}/facts`);
+		const res = await axiosInstance.get(`v2.2/films/${filmId}/facts`);
 		return res.data;
 	},
 	async getAwards(filmId: number) {
-		const res = await axiosInstance.get(`films/${filmId}/awards`);
+		const res = await axiosInstance.get(`v2.2/films/${filmId}/awards`);
 		return res.data;
 	},
 	async getFilmImages(filmId: number, type: ImageType, page: number) {
@@ -64,11 +68,11 @@ export const api = {
 				page,
 			},
 		};
-		const res = await axiosInstance.get(`films/${filmId}/images`, config);
+		const res = await axiosInstance.get(`v2.2/films/${filmId}/images`, config);
 		return res.data;
 	},
 	async getFilters() {
-		const res = await axiosInstance.get(`films/filters`);
+		const res = await axiosInstance.get(`v2.2/films/filters`);
 		return res.data;
 	},
 };

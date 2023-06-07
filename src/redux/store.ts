@@ -5,6 +5,7 @@ import singleFilm from './slices/singleFilmSlice';
 import mainFilm from './slices/mainFilmSlice';
 import sliderFilms from './slices/sliderFilmsSlice';
 import quickFilms from './slices/quickFilmsSlice';
+import quickPersons from './slices/quickPersonsSlice';
 import filters from './slices/filterSlice';
 import sort from './slices/sortSlice';
 import search from './slices/searchSlice';
@@ -26,6 +27,7 @@ export const store = configureStore({
 		mainFilm,
 		sliderFilms,
 		quickFilms,
+		quickPersons,
 		filters,
 		sort,
 		search,

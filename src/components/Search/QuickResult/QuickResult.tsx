@@ -5,14 +5,18 @@ import { Link } from 'react-router-dom';
 import QuickItem from './QuickItem/QuickItem';
 import QuickItemLoader from './QuickItem/QuickItemLoader';
 import { selectQuickFilms } from '../../../redux/slices/quickFilmsSlice';
-import { Genre } from '../../../redux/types';
+import { Genre, SearchProperty } from '../../../redux/types';
+import { selectQuickPersons } from '../../../redux/slices/quickPersonsSlice';
 
 interface QuickResultProps {
 	shown: boolean;
+	type: SearchProperty;
 }
 
-const QuickResult: React.FC<QuickResultProps> = React.memo(({ shown }) => {
-	const { content: quickFilms, status } = useSelector(selectQuickFilms);
+const QuickResult: React.FC<QuickResultProps> = ({ shown, type }) => {
+	const { content: quickItems, status } = useSelector(
+		type === SearchProperty.films ? selectQuickFilms : selectQuickPersons,
+	);
 
 	return (
 		<ul
@@ -20,17 +24,21 @@ const QuickResult: React.FC<QuickResultProps> = React.memo(({ shown }) => {
 				shown ? 'visible opacity-100 mt-2' : 'invisible opacity-0 mt-10'
 			} absolute z-20 right-0 md:w-[30vw] xsm:w-[300px] w-full lg:max-h-[500px] max-h-[300px] py-2 rounded-xl overflow-auto border-2 border-dark dark:border-blue bg-light dark:bg-dark transition-[opacity_0.3s_ease]`}
 		>
-			{status === 'success' && quickFilms.length !== 0 ? (
-				quickFilms.map((film) => {
+			{status === 'success' && quickItems.length !== 0 ? (
+				quickItems.map((item) => {
 					return (
-						<li key={film.kinopoiskId as Key}>
-							<Link to={`catalog/${film.kinopoiskId}`}>
+						<li key={item.kinopoiskId as Key}>
+							<Link
+								to={`${type === SearchProperty.films ? 'catalog/' : 'person/'}${item.kinopoiskId}`}
+							>
 								<QuickItem
-									id={film.kinopoiskId as number}
-									name={(film.nameRu || film.nameEn || film.nameOriginal) as string}
-									imageUrl={film.posterUrlPreview as string}
-									genres={film.genres as Genre[]}
-									rating={film.ratingKinopoisk as number}
+									id={item.kinopoiskId as number}
+									name={(item.nameRu || item.nameEn || item.nameOriginal) as string}
+									imageUrl={(item.posterUrlPreview || item.posterUrl) as string}
+									genres={(item.genres as Genre[]) || []}
+									sex={item.sex as string}
+									rating={(item.ratingKinopoisk as number) || 0}
+									itemType={type}
 								/>
 							</Link>
 						</li>
@@ -49,6 +57,6 @@ const QuickResult: React.FC<QuickResultProps> = React.memo(({ shown }) => {
 			)}
 		</ul>
 	);
-});
+};
 
 export default QuickResult;
