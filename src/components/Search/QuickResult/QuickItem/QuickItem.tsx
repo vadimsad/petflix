@@ -47,7 +47,7 @@ const QuickItem: React.FC<QuickItemProps> = ({
 			</div>
 			<div className='flex-[2]'>
 				<h4
-					className={`xl:text-lg xsm:text-base text-sm font-serif border-b mb-2 ${
+					className={`xsm:text-base text-sm font-serif border-b mb-2 ${
 						invertColors
 							? 'border-light dark:border-dark group-hover:border-dark dark:group-hover:border-light group-hover:text-dark dark:group-hover:text-light'
 							: 'border-dark dark:border-light'

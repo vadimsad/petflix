@@ -30,7 +30,7 @@ const SwiperBlock: React.FC<SwiperBlockProps> = ({ type, page }) => {
 	}
 
 	if (films.length === 0) {
-		return <span>Фильмы не найдены :(</span>;
+		return <span className='relative z-10'>Фильмы не найдены :(</span>;
 	}
 
 	return (

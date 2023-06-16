@@ -5,8 +5,8 @@ import Search from '../../Search/Search';
 
 const Menu = () => {
 	return (
-		<div className='xl:container sm:px-9 px-4 lg:py-6 py-4 text-dark dark:text-light flex xsm:flex-row flex-col justify-between items-center lg:text-xl xsm:text-md text-lg xsm:gap-y-0 gap-y-3 gap-x-2'>
-			<ul className='flex flex-wrap lg:gap-x-4 gap-x-2 xsm:gap-y-0 gap-y-3 items-center xsm:flex-row flex-col'>
+		<div className='xl:container sm:px-9 px-4 lg:py-6 py-4 text-dark dark:text-light flex sm:flex-row flex-col justify-between items-center lg:text-xl xsm:text-md text-lg sm:gap-y-0 gap-y-3 gap-x-2'>
+			<ul className='flex flex-wrap lg:gap-x-4 gap-x-2 sm:gap-y-0 gap-y-3 items-center sm:flex-row flex-col'>
 				<li className='relative'>
 					<NavLink
 						to={'/'}

@@ -15,14 +15,14 @@ import 'swiper/css/navigation';
 
 import Modal from '../../../Modal/Modal';
 import useModal from '../../../../hooks/useModal/useModal';
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch, AppThunkDispatch } from '../../../../redux/store';
 import { FetchStatus } from '../../../../redux/types';
 
 const ReviewsItems: React.FC = () => {
 	const reviews = useSelector(selectFilmReviews);
 	const reviewsStatus = useSelector(selectFilmReviewsStatus);
 	const filmId = useSelector(selectFilmId) as number;
-	const dispatch: AppDispatch = useDispatch();
+	const dispatch: AppThunkDispatch = useDispatch();
 
 	const [modalInfo, setModalInfo] = useState<ReactNode>(null);
 	const { ref, onOpen, onClose } = useModal();

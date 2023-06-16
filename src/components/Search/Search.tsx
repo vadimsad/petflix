@@ -11,7 +11,7 @@ import { SearchProperty } from '../../redux/types';
 import { fetchQuickPersons } from '../../redux/slices/quickPersonsSlice';
 
 const Search = () => {
-	const [isInputFocused, setIsInputFocused] = useState(true);
+	const [isInputFocused, setIsInputFocused] = useState(false);
 	const [searchProperty, setSearchProperty] = useState(SearchProperty.films);
 	const { searchText } = useSelector(selectSearch);
 	const dispatch: AppThunkDispatch = useDispatch();
@@ -87,8 +87,8 @@ const Search = () => {
 				onFocus={() => setIsInputFocused(true)}
 				onBlur={() => setIsInputFocused(false)}
 			>
-				<label className='relative flex border-2 rounded-xl border-dark dark:border-blue bg-light dark:bg-dark dark:hover:border-light hover:border-blue focus-within:border-blue dark:focus-within:border-light overflow-hidden transition-colors'>
-					<div className='relative w-[20px] h-auto left-[10px]'>
+				<label className='lg:relative sm:absolute relative lg:-translate-y-0 sm:-translate-y-1/2 -translate-y-0 sm:right-0 right-auto flex border-2 rounded-xl border-dark dark:border-blue bg-light dark:bg-dark dark:hover:border-light hover:border-blue focus-within:border-blue dark:focus-within:border-light overflow-hidden transition-colors'>
+					<div className='relative w-[20px] h-auto mx-[10px]'>
 						<svg
 							viewBox='0 0 32 32'
 							xmlns='http://www.w3.org/2000/svg'
@@ -107,15 +107,19 @@ const Search = () => {
 						id='search'
 						value={searchText}
 						onChange={changeSearchText}
-						className={`text-ellipsis text-dark dark:text-light xsm:px-4 pl-5 px-2 xsm:py-1 py-0 bg-light dark:bg-dark transition-all outline-none xsm:text-left text-center ${
-							isInputFocused ? 'xl:w-[300px] sm:w-[200px]' : 'w-full lg:w-[200px] xsm:w-[200px]'
+						className={`grow text-base text-ellipsis text-dark dark:text-light py-[2px] pr-[5px] bg-light dark:bg-dark transition-all outline-none xl:w-[200px] lg:w-[120px] max-w-none min-w-0 ${
+							isInputFocused ? 'sm:w-[100px]' : 'sm:w-0 sm:pr-0'
 						}`}
 					/>
-					<div className='flex items-center gap-1 pr-2'>
+					<div
+						className={`flex items-center gap-1 lg:pr-2 lg:w-auto transition-all ${
+							isInputFocused ? 'sm:w-auto pr-2' : 'sm:w-0 sm:pr-0'
+						} pr-2`}
+					>
 						<button
 							type='button'
 							onClick={toggleSearchPropertyAndSearch}
-							className={`text-sm transition-[opacity] px-1 border border-dark dark:border-light rounded-md ${
+							className={`text-xs transition-[opacity] px-1 border border-dark dark:border-light rounded-md ${
 								searchProperty === SearchProperty.films
 									? 'opacity-100'
 									: 'opacity-50 hover:opacity-75'
@@ -126,7 +130,7 @@ const Search = () => {
 						<button
 							type='button'
 							onClick={toggleSearchPropertyAndSearch}
-							className={`text-sm transition-[opacity] px-1 border border-dark dark:border-light rounded-md ${
+							className={`text-xs transition-[opacity] px-1 border border-dark dark:border-light rounded-md ${
 								searchProperty === SearchProperty.persons
 									? 'opacity-100'
 									: 'opacity-50 hover:opacity-75'

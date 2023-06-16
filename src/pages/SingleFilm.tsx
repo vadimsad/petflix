@@ -10,7 +10,7 @@ import Similar from '../components/SingleFilm/Similar/Similar';
 import Reviews from '../components/SingleFilm/Reviews/Reviews';
 import Awards from '../components/SingleFilm/Awards/Awards';
 import Facts from '../components/SingleFilm/Facts/Facts';
-import { AppDispatch, AppThunkDispatch } from '../redux/store';
+import { AppThunkDispatch } from '../redux/store';
 import { Country, Genre } from '../redux/types';
 
 const SingleFilm: React.FC = () => {

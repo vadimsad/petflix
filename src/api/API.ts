@@ -31,6 +31,10 @@ export const api = {
 		const res = await axiosInstance.get('v1/persons', config);
 		return res.data;
 	},
+	async getPersonById(personId: number) {
+		const res = await axiosInstance.get(`v1/staff/${personId}`);
+		return res.data;
+	},
 	async getTop(type: FilmCollectionType, page: number) {
 		const config: IFetchConfig<FilmCollectionParams> = {
 			params: {

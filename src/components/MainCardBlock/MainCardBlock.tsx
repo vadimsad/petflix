@@ -23,7 +23,7 @@ const MainCardBlock = () => {
 	return (
 		<>
 			{status === 'success' ? (
-				<div className='h-auto w-full relative sm:mb-[20px] mb-[10px] lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden md:pb-[40%] pb-0'>
+				<div className='relative z-10 h-auto w-full relative sm:mb-[20px] mb-[10px] lg:rounded-[50px] xsm:rounded-[30px] rounded-[15px] overflow-hidden md:pb-[40%] pb-0'>
 					<Link to={`catalog/${mainFilm.kinopoiskId}`}>
 						<MainCard
 							name={(mainFilm.nameRu || mainFilm.nameEn || mainFilm.nameOriginal) as string}

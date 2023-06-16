@@ -7,14 +7,14 @@ import {
 	selectFilmId,
 } from '../../../redux/slices/singleFilmSlice';
 import { selectFilmAwards } from '../../../redux/slices/singleFilmSlice';
-import { AppDispatch } from '../../../redux/store';
+import { AppDispatch, AppThunkDispatch } from '../../../redux/store';
 import { FetchStatus } from '../../../redux/types';
 
 const Awards: React.FC = () => {
 	const filmId = useSelector(selectFilmId) as number;
 	const awards = useSelector(selectFilmAwards);
 	const awardsStatus = useSelector(selectFilmAwardsStatus);
-	const dispatch: AppDispatch = useDispatch();
+	const dispatch: AppThunkDispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchFilmAwards(filmId));

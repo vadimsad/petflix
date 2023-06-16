@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectSliderFilmsByType } from '../../../redux/slices/sliderFilmsSlice';
-import { FetchStatus, Genre } from '../../../redux/types';
+import { FetchStatus, Genre, SearchProperty } from '../../../redux/types';
 import QuickItem from '../../Search/QuickResult/QuickItem/QuickItem';
 import { Link } from 'react-router-dom';
 import QuickItemLoader from '../../Search/QuickResult/QuickItem/QuickItemLoader';
@@ -25,6 +25,7 @@ const RandomFilm: React.FC = () => {
 							genres={(randomFilm.genres as Genre[]).slice(0, 2)}
 							rating={randomFilm.rating as number}
 							invertColors={true}
+							itemType={SearchProperty.films}
 						/>
 					</Link>
 				) : status === FetchStatus.loading ? (

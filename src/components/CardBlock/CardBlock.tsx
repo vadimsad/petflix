@@ -11,7 +11,7 @@ import { selectSearch, setSearchQuery, setSearchText } from '../../redux/slices/
 import { fetchAllFilms } from '../../redux/slices/allFilmsSlice';
 import { selectFilters, setFilter } from '../../redux/slices/filterSlice';
 import { selectAllFilmsData } from '../../redux/slices/allFilmsSlice';
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch, AppThunkDispatch } from '../../redux/store';
 import { FilmParams, FilterOption, FilterTypes, IFetchConfig } from '../../redux/types';
 
 const CardBlock: React.FC = () => {
@@ -20,7 +20,7 @@ const CardBlock: React.FC = () => {
 	const { types: filters, activeFiltersCount } = useSelector(selectFilters);
 	const { selected: sort, options: sortOptions } = useSelector(selectSort);
 
-	const dispatch: AppDispatch = useDispatch();
+	const dispatch: AppThunkDispatch = useDispatch();
 	const navigate = useNavigate();
 	const isQueryParamsSet = useRef(false);
 	const componentDidMount = useRef(false);

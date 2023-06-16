@@ -11,7 +11,7 @@ import {
 } from '../../redux/slices/singleFilmSlice';
 import { FilmsInSlider } from '../types';
 import { FetchStatus, FilmCollectionType } from '../../redux/types';
-import { AppDispatch, AppThunkDispatch } from '../../redux/store';
+import { AppThunkDispatch } from '../../redux/store';
 
 const slidesPerView = window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 3 : 4) : 5;
 
