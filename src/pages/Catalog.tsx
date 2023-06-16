@@ -7,7 +7,7 @@ import { setCurrentPage } from '../redux/slices/allFilmsSlice';
 import FiltersBlock from '../components/FiltersBlock/FiltersBlock';
 import { selectAllFilmsData } from '../redux/slices/allFilmsSlice';
 
-const Catalog = () => {
+const Catalog: React.FC = () => {
 	const { currentPage, totalPages, status } = useSelector(selectAllFilmsData);
 	const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const Catalog = () => {
 			<div className='grid sm:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] sm:gap-6 gap-4 sm:p-5 sm:pt-0 sm:mb-0 mb-4'>
 				<CardBlock />
 			</div>
-			{currentPage < totalPages && (
+			{totalPages && currentPage < totalPages && (
 				<Button
 					useTheme={true}
 					classNames='md:w-auto w-[250px] md:h-auto xsm:h-[30px] h-auto mx-auto'

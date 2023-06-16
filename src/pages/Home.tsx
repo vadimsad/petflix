@@ -5,7 +5,7 @@ import MainCardBlock from '../components/MainCardBlock/MainCardBlock';
 import { FilmCollectionType } from '../redux/types';
 import { FilmsInSlider } from '../components/types';
 
-const Home = () => {
+const Home: React.FC = () => {
 	return (
 		<>
 			<div className='sm:p-5 sm:pt-0 p-0'>

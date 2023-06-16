@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectFavoriteFilms } from '../../../redux/slices/favoriteFilmsSlice';
 import QuickItem from '../../Search/QuickResult/QuickItem/QuickItem';
 import { Link } from 'react-router-dom';
+import { SearchProperty } from '../../../redux/types';
 
 const FavoriteFilms: React.FC = () => {
 	const films = useSelector(selectFavoriteFilms);
@@ -24,6 +25,7 @@ const FavoriteFilms: React.FC = () => {
 									genres={film.genres.slice(0, 3)}
 									rating={film.rating}
 									invertColors={true}
+									itemType={SearchProperty.films}
 								/>
 							</Link>
 						</li>

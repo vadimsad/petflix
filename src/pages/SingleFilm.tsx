@@ -10,35 +10,39 @@ import Similar from '../components/SingleFilm/Similar/Similar';
 import Reviews from '../components/SingleFilm/Reviews/Reviews';
 import Awards from '../components/SingleFilm/Awards/Awards';
 import Facts from '../components/SingleFilm/Facts/Facts';
+import { AppDispatch, AppThunkDispatch } from '../redux/store';
+import { Country, Genre } from '../redux/types';
 
-const SingleFilm = () => {
+const SingleFilm: React.FC = () => {
 	const { id } = useParams();
 	const { status, content: film } = useSelector(selectFilm);
-	const dispatch = useDispatch();
+	const dispatch: AppThunkDispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(fetchFilm(id));
+		if (id) {
+			dispatch(fetchFilm(+id));
+		}
 	}, [id]);
 
 	if (status !== 'success') {
 		return <div>Loading...</div>;
 	}
 
-	const genresShown = film.genres.slice(0, 3);
+	const genresShown = (film.genres as Genre[]).slice(0, 3);
 
 	return (
 		<>
 			<FilmHeader
-				id={film.kinopoiskId}
-				logoUrl={film.logourl}
-				name={film.nameRu || film.nameEn || film.nameOriginal}
-				rating={film.ratingKinopoisk}
-				year={film.year}
-				length={film.filmLength}
-				shortDescription={film.shortDescription}
-				countries={film.countries}
-				imageUrl={film.imageUrl}
-				posterUrl={film.posterUrl}
+				id={+film.kinopoiskId}
+				logoUrl={film.logourl as string}
+				name={(film.nameRu || film.nameEn || film.nameOriginal) as string}
+				rating={film.ratingKinopoisk as number}
+				year={film.year as number}
+				length={film.filmLength as number}
+				shortDescription={film.shortDescription as string}
+				countries={film.countries as Country[]}
+				imageUrl={film.imageUrl as string}
+				posterUrl={film.posterUrl as string}
 				genres={genresShown}
 			/>
 			<DescriptionWrapper>
