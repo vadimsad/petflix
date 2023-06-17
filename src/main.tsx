@@ -14,6 +14,7 @@ import New from './pages/New';
 
 import { store } from './redux/store';
 import SingleFilm from './pages/SingleFilm';
+import SinglePerson from './pages/SinglePerson';
 
 const router = createBrowserRouter([
 	{
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
 				element: <SingleFilm />,
 			},
 			{
+				path: 'person/:id',
+				element: <SinglePerson />,
+			},
+			{
 				path: 'new',
 				element: <New />,
 			},
@@ -44,7 +49,7 @@ const router = createBrowserRouter([
 	},
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
 	<Provider store={store}>
 		<RouterProvider router={router} />
 	</Provider>,

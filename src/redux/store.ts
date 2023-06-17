@@ -2,6 +2,7 @@ import { AnyAction, ThunkDispatch, configureStore, getDefaultMiddleware } from '
 
 import allFilms from './slices/allFilmsSlice';
 import singleFilm from './slices/singleFilmSlice';
+import singlePerson from './slices/singlePersonSlice';
 import mainFilm from './slices/mainFilmSlice';
 import sliderFilms from './slices/sliderFilmsSlice';
 import quickFilms from './slices/quickFilmsSlice';
@@ -24,6 +25,7 @@ export const store = configureStore({
 	reducer: {
 		allFilms,
 		singleFilm,
+		singlePerson,
 		mainFilm,
 		sliderFilms,
 		quickFilms,
