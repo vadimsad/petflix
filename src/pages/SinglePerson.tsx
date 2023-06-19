@@ -29,16 +29,16 @@ const SinglePerson = () => {
 
 	return (
 		<>
-			<div className='mt-5 p-5 bg-notsolight dark:bg-notsodark rounded-xl'>
-				<div className='flex gap-5'>
-					<div className='flex-[0_0_20%]'>
+			<section className='mt-5'>
+				<div className='relative z-20 grid p-5 grid-rows-1 md:grid-cols-[18%_1fr] xsm:grid-cols-[25%_1fr] grid-cols-[35%_1fr] lg:gap-5 gap-3 bg-notsolight dark:bg-notsodark rounded-xl'>
+					<div>
 						<img
-							className='w-100 h-auto rounded-xl'
+							className='w-full h-auto object-cover rounded-xl'
 							src={personData.posterUrl as string}
 							alt={(personData.nameRu || personData.nameEn) as string}
 						/>
 					</div>
-					<div className='grow'>
+					<div>
 						<MainInfo
 							name={(personData.nameRu || personData.nameEn) as string}
 							profession={personData.profession as string}
@@ -47,14 +47,18 @@ const SinglePerson = () => {
 							birthplace={personData.birthplace as string}
 							spouses={personData.spouses as DataObject[]}
 						/>
+					</div>
+					<div className='col-span-2'>
 						<Facts facts={personData.facts as DataObject[]} />
 					</div>
 				</div>
-			</div>
-			<div className='mt-7'>
-				<h2 className='font-serif lg:text-2xl text-xl lg:mb-3 mb-1'>Фильмы</h2>
+			</section>
+			<section className='mt-7 relative z-10 lg:mb-10 mb-8'>
+				<h2 className='relative z-10 font-serif lg:text-3xl text-2xl lg:mb-3 mb-1 px-5'>Фильмы</h2>
 				<SwiperBlock films={films} />
-			</div>
+				<div className='absolute z-0 top-0 right-0 shadow-none dark:shadow-[0_0_500px_200px_rgba(18,38,59,1)] w-[100px] rounded-full'></div>
+				<div className='absolute z-0 top-0 right-0 shadow-none dark:shadow-[0_0_500px_20px_rgba(220,234,240,1)] w-0 rounded-full'></div>
+			</section>
 		</>
 	);
 };

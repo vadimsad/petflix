@@ -21,11 +21,11 @@ const MainInfo: React.FC<MainInfoProps> = ({
 }) => {
 	return (
 		<>
-			<div className='mb-3'>
-				<h1 className='text-3xl font-serif'>{name}</h1>
-				<span className='opacity-70'>{profession}</span>
+			<div className='sm:mb-3 mb-1'>
+				<h1 className='xl:text-3xl lg:text-2xl xsm:text-xl text-md font-serif'>{name}</h1>
+				<span className='opacity-70 lg:mb-3 lg:text-base text-sm'>{profession}</span>
 			</div>
-			<ul className='mb-5'>
+			<ul className='sm:mb-5 mb-3 lg:mb-3 lg:text-base sm:text-sm text-xs'>
 				<li>Возраст: {age}</li>
 				<li>Рост: {growth}</li>
 				<li>Место рождения: {birthplace}</li>
