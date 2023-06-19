@@ -21,8 +21,8 @@ const QuickResult: React.FC<QuickResultProps> = ({ shown, type }) => {
 	return (
 		<ul
 			className={`${
-				shown ? 'visible opacity-100 mt-2' : 'invisible opacity-0 mt-10'
-			} absolute z-20 right-0 md:w-[30vw] xsm:w-[300px] w-full lg:max-h-[500px] max-h-[300px] py-2 rounded-xl overflow-auto border-2 border-dark dark:border-blue bg-light dark:bg-dark transition-[opacity_0.3s_ease]`}
+				shown ? 'visible opacity-100 sm:mt-5 mt-3' : 'invisible opacity-0 mt-10'
+			} absolute z-20 right-0 md:w-[30vw] sm:w-[300px] w-full lg:max-h-[500px] max-h-[300px] py-2 rounded-xl overflow-auto border-2 border-dark dark:border-blue bg-light dark:bg-dark transition-[opacity_0.3s_ease]`}
 		>
 			{status === 'success' && quickItems.length !== 0 ? (
 				quickItems.map((item) => {

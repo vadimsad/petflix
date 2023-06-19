@@ -11,7 +11,7 @@ import { SearchProperty } from '../../redux/types';
 import { fetchQuickPersons } from '../../redux/slices/quickPersonsSlice';
 
 const Search = () => {
-	const [isInputFocused, setIsInputFocused] = useState(false);
+	const [isInputFocused, setIsInputFocused] = useState(true);
 	const [searchProperty, setSearchProperty] = useState(SearchProperty.films);
 	const { searchText } = useSelector(selectSearch);
 	const dispatch: AppThunkDispatch = useDispatch();

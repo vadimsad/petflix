@@ -38,14 +38,14 @@ const QuickItem: React.FC<QuickItemProps> = ({
 					classNames='absolute m-1 bottom-0 right-0 scale-[0.7] opacity-0 group-hover:opacity-100 hover:scale-[0.75]'
 				/>
 			)}
-			<div className='flex-[1]'>
+			<div className='flex-[0_0_20%]'>
 				<img
 					className='w-full h-full object-cover rounded-md'
 					src={imageUrl}
 					alt={name + 'Постер'}
 				/>
 			</div>
-			<div className='flex-[2]'>
+			<div className='grow'>
 				<h4
 					className={`xsm:text-base text-sm font-serif border-b mb-2 ${
 						invertColors
