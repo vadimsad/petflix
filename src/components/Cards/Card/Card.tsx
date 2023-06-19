@@ -17,6 +17,10 @@ type CardProps = {
 const Card: React.FC<CardProps> = ({ id, imagesrc, alt, name, rating, year, genres }) => {
 	const hasOtherInfo = !!rating && !!year && !!genres;
 
+	if (!imagesrc) {
+		imagesrc = 'https://www.wolflair.com/wp-content/uploads/2017/02/placeholder.jpg?w=640';
+	}
+
 	return (
 		<div className='relative group'>
 			<figure className='flex flex-col h-full'>
