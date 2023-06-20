@@ -1,3 +1,3 @@
 # Movie streaming service
 
-**[Demo](https://dancing-unicorn-c8393e.netlify.app/)**
+**[View](https://tinysrc.me/go/FJNtWTu4g)**
