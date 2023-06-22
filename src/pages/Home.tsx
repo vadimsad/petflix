@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import FilmSlider from '../components/FilmSlider/FilmSlider';
 import MainCardBlock from '../components/MainCardBlock/MainCardBlock';
 import { FilmCollectionType } from '../redux/types';
 import { FilmsInSlider } from '../components/types';
+import { api } from '../api/API';
 
 const Home: React.FC = () => {
 	return (

@@ -16,6 +16,9 @@ import favoriteFilms, {
 	listenerMiddlewareDelFav,
 } from './slices/favoriteFilmsSlice';
 
+export type AppDispatch = typeof store.dispatch;
+export type AppThunkDispatch = ThunkDispatch<RootState, any, AnyAction>;
+
 const favoriteFilmsStoraged = Object.keys(localStorage).map((key) => JSON.parse(localStorage[key]));
 
 export const store = configureStore({
@@ -44,6 +47,3 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-
-export type AppDispatch = typeof store.dispatch;
-export type AppThunkDispatch = ThunkDispatch<RootState, any, AnyAction>;

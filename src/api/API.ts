@@ -12,6 +12,10 @@ import {
 ('mail: 290a29e5-6a38-41ae-a8bf-f1708456187d (0/500)');
 ('gmail: acf887b4-bdef-4246-a283-3737a6f89e96 (500/500)');
 
+const MAX_REQUESTS_COUNT = 6;
+const INTERVAL_MS = 10;
+let PENDING_REQUESTS = 0;
+
 const HEADERS = {
 	'X-API-KEY': '290a29e5-6a38-41ae-a8bf-f1708456187d',
 	'Content-Type': 'application/json',
@@ -21,6 +25,29 @@ const axiosInstance = axios.create({
 	baseURL: 'https://kinopoiskapiunofficial.tech/api/',
 	headers: HEADERS,
 });
+
+axiosInstance.interceptors.request.use((config) => {
+	return new Promise((resolve, reject) => {
+		let interval = setInterval(() => {
+			if (PENDING_REQUESTS < MAX_REQUESTS_COUNT) {
+				PENDING_REQUESTS++;
+				clearInterval(interval);
+				resolve(config);
+			}
+		}, INTERVAL_MS);
+	});
+});
+
+axiosInstance.interceptors.response.use(
+	(response) => {
+		PENDING_REQUESTS = Math.max(0, PENDING_REQUESTS - 1);
+		return Promise.resolve(response);
+	},
+	(error) => {
+		PENDING_REQUESTS = Math.max(0, PENDING_REQUESTS - 1);
+		return Promise.reject(error);
+	},
+);
 
 export const api = {
 	async getFilms(config: IFetchConfig<FilmParams>) {
