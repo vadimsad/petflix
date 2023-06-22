@@ -31,7 +31,7 @@ Petflix is a pet project developed on React, which is a web service for finding 
 
 ### Further plans:
 
-1. Fix a problem with a large number of parallel requests (429 status code)
+1. ✅Fix a problem with a large number of parallel requests (429 status code)
 2. Make a page with movie premieres by month
 3. Make sure that when you click on a genre or rating of a movie, it shows films of the same genre or rating
 4. Optimize performance and error handling.
