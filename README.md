@@ -27,7 +27,7 @@ Petflix is a pet project developed on React, which is a web service for finding 
 1. When requesting a list of movies from the API, some movies are duplicated, I contacted the developer, he promised to fix it, but for now I manually filter out duplicate elements.
 2. Faced a lot of problems due to the peculiarities of the css overflow property in the safari browser. As a result, I abandoned overflow, used a different approach to ensure cross-browser compatibility
 3. A large number of component redraws on the catalog page were solved by creating a separate activeFiltersCount variable and passing it as a dependency to useEffect, and not the entire object as a whole.
-4. Options for some filters come from the API, so it was decided to store such options in the GET parameters in the form in which they come from the API in order to be able to set the desired filter even before the response from the server arrives
+4. Options for some filters come from the API, so it was decided to store such options in the GET parameters in the form in which they come from the API in order to be able to set the desired filter even before the response from the server arrives on first loading
 
 ### Further plans:
 
