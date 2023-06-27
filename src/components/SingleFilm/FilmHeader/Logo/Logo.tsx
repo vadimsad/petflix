@@ -8,8 +8,8 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ logoUrl, name }) => {
 	if (logoUrl) {
 		return (
-			<div className='w-[300px] mb-3'>
-				<img src={logoUrl} alt={`${name} лого`} className='w-full h-full object-cover' />
+			<div className='max-w-[35%] mb-3'>
+				<img src={logoUrl} alt={`${name} лого`} className='w-full object-cover' />
 			</div>
 		);
 	}

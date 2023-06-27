@@ -42,7 +42,7 @@ const FilmHeader: React.FC<FilmHeaderProps> = ({
 				<div className='flex flex-wrap gap-2 lg:mb-2 mb-1 lg:text-base xsm:text-sm text-xs'>
 					<Info rating={rating} year={year} length={length} genres={genres} />
 				</div>
-				<div className='flex-1 lg:mb-2 mb-1'>
+				<div className='flex-1 mb-2'>
 					<ShortDescription shortDescription={shortDescription} country={country} />
 				</div>
 				<div className='flex gap-2'>

@@ -29,12 +29,11 @@ const SingleFilm: React.FC = () => {
 	}
 
 	const genresShown = (film.genres as Genre[]).slice(0, 3);
-
 	return (
 		<>
 			<FilmHeader
 				id={+film.kinopoiskId}
-				logoUrl={film.logourl as string}
+				logoUrl={film.logoUrl as string}
 				name={(film.nameRu || film.nameEn || film.nameOriginal) as string}
 				rating={film.ratingKinopoisk as number}
 				year={film.year as number}

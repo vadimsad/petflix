@@ -43,7 +43,9 @@ const AddToFavorite: React.FC<AddToFavProps> = ({
 
 	return (
 		<button type='button' className={`${classNames} transition-all`} onClick={handleCLick}>
-			<span className={`p-2 inline-block text-2xl bg-darkTransparent rounded-xl ${childClass}`}>
+			<span
+				className={`md:p-2 px-[8px] py-[4px] inline-block md:text-2xl sm:text-xl text-md bg-darkTransparent rounded-xl ${childClass}`}
+			>
 				{isFilmInFavorite ? '❤️' : '🖤'}
 			</span>
 		</button>
